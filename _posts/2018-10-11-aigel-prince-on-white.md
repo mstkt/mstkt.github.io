@@ -6,5 +6,5 @@ categories: ["2018"]
 tags: ["zhanna karabalayeva", "aigel"]
 video_type: "youtube"
 video_id: "V1-CTY65MRE"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/10/V1-CTY65MRE.jpg"
+thumbnail: "https://img.youtube.com/vi/V1-CTY65MRE/hqdefault.jpg"
 ---

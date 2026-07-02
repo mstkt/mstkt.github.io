@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["bromance records", "the blaze"]
 video_type: "youtube"
 video_id: "UivZrL2znh0"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/06/553164838.jpg"
+thumbnail: "https://img.youtube.com/vi/UivZrL2znh0/hqdefault.jpg"
 ---

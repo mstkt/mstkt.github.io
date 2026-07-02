@@ -6,5 +6,5 @@ categories: ["vfx"]
 tags: ["sarajevo", "fabrika", "salem kapić kantardžić", "dubioza kolektiv"]
 video_type: "youtube"
 video_id: "EuQLMXyGQOE"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/11/537822333.jpg"
+thumbnail: "https://img.youtube.com/vi/EuQLMXyGQOE/hqdefault.jpg"
 ---

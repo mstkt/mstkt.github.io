@@ -6,5 +6,5 @@ categories: ["2017"]
 tags: ["kendrick lamar", "nabil elderkin"]
 video_type: "youtube"
 video_id: "NLZRYQMLDW4"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/06/623049077.jpg"
+thumbnail: "https://img.youtube.com/vi/NLZRYQMLDW4/hqdefault.jpg"
 ---

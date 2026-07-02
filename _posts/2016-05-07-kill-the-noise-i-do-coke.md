@@ -6,5 +6,5 @@ categories: ["vfx", "2016"]
 tags: ["kill the noise", "anthem films", "brandon dermer"]
 video_type: "youtube"
 video_id: "oSPT27XyY1U"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/05/oSPT27XyY1U.jpg"
+thumbnail: "https://img.youtube.com/vi/oSPT27XyY1U/hqdefault.jpg"
 ---

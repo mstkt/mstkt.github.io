@@ -6,7 +6,7 @@ categories: ["vfx", "2018"]
 tags: ["head in the clouds", "christine yuan"]
 video_type: "youtube"
 video_id: "T-3oqrPHleQ"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/head-in-the-clouds-a-midsummer-night-s-dream-283748810.jpg"
+thumbnail: "https://img.youtube.com/vi/T-3oqrPHleQ/hqdefault.jpg"
 ---
 
 <a href="https://vimeo.com/283748810">Head in the Clouds: a midsummer night's dream</a> from <a href="https://vimeo.com/christineyuan">Christine Yuan</a> on <a href="https://vimeo.com/">Vimeo</a>.

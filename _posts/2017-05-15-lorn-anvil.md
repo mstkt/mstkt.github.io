@@ -6,5 +6,5 @@ categories: ["2016", "animation"]
 tags: ["geriko", "lorn", "antoine caëcke", "hélène jeudy"]
 video_type: "youtube"
 video_id: "CqaAs_3azSs"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/05/591852945.jpg"
+thumbnail: "https://img.youtube.com/vi/CqaAs_3azSs/hqdefault.jpg"
 ---

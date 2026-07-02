@@ -6,5 +6,5 @@ categories: ["vfx"]
 tags: ["seth ickerman", "carpenter brut"]
 video_type: "youtube"
 video_id: "er416Ad3R1g"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/03/557929577.jpg"
+thumbnail: "https://img.youtube.com/vi/er416Ad3R1g/hqdefault.jpg"
 ---

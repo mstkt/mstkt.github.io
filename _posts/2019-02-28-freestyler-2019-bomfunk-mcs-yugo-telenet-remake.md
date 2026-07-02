@@ -6,5 +6,5 @@ categories: ["vfx", "2019"]
 tags: ["tbwa", "commercial", "bomfunk mc's", "nadia marquard otzen"]
 video_type: "youtube"
 video_id: "wKA0Zdoj54s"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2019/02/wKA0Zdoj54s.jpg"
+thumbnail: "https://img.youtube.com/vi/wKA0Zdoj54s/hqdefault.jpg"
 ---

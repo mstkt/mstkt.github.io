@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["ben ommundson", "aaron mcdonald", "oh yeah wow", "slightly left of centre"]
 video_type: "youtube"
 video_id: "Wga5A6R9BJg"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/10/441465622.jpg"
+thumbnail: "https://img.youtube.com/vi/Wga5A6R9BJg/hqdefault.jpg"
 ---

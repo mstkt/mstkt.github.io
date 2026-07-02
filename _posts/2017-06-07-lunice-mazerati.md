@@ -6,5 +6,5 @@ categories: []
 tags: ["tnght", "lunice"]
 video_type: "youtube"
 video_id: "a_eL5cKv5TY"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/06/a_eL5cKv5TY.jpg"
+thumbnail: "https://img.youtube.com/vi/a_eL5cKv5TY/hqdefault.jpg"
 ---

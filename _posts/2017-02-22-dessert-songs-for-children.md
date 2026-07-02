@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["alex lill", "dessert"]
 video_type: "vimeo"
 video_id: "189365767"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/02/599701918.jpg"
+thumbnail: "https://vumbnail.com/189365767.jpg"
 ---

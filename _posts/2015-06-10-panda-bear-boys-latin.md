@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["experimental electronic", "Eran Hilleli", "isaıah Saxon &amp; Sean Hellfritsch"]
 video_type: "youtube"
 video_id: "prBaZzYmQrI"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/06/498927377.jpg"
+thumbnail: "https://img.youtube.com/vi/prBaZzYmQrI/hqdefault.jpg"
 ---

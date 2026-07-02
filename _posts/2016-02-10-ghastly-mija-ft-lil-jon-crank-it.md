@@ -6,5 +6,5 @@ categories: ["vfx"]
 tags: ["ghastly", "mija", "nick roney", "lil jon", "public instinct"]
 video_type: "youtube"
 video_id: "zwULXvvSKVI"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/02/maxresdefault.jpg"
+thumbnail: "https://img.youtube.com/vi/zwULXvvSKVI/hqdefault.jpg"
 ---

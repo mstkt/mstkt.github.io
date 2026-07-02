@@ -6,5 +6,5 @@ categories: ["2021"]
 tags: ["2021", "nowness", "Mirwais"]
 video_type: "youtube"
 video_id: "L-GjOoEuKyo"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2021/04/maxresdefault.jpg"
+thumbnail: "https://img.youtube.com/vi/L-GjOoEuKyo/hqdefault.jpg"
 ---

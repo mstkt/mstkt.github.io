@@ -6,7 +6,7 @@ categories: ["2019"]
 tags: ["fmt.jetlag", "maslo chernogo tmina", "lado kvataniya", "hype production"]
 video_type: "youtube"
 video_id: "U2jXkVSd5uo"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2019/11/maslo-chernogo-tmina-8211-the-untitled-372915380.jpg"
+thumbnail: "https://img.youtube.com/vi/U2jXkVSd5uo/hqdefault.jpg"
 ---
 
 https://vimeo.com/372915380

@@ -6,5 +6,5 @@ categories: ["2020"]
 tags: ["lil zey", "osman özel"]
 video_type: "youtube"
 video_id: "RHUNgsbkEps"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2021/02/maxresdefault-5.jpg"
+thumbnail: "https://img.youtube.com/vi/RHUNgsbkEps/hqdefault.jpg"
 ---

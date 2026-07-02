@@ -6,7 +6,7 @@ categories: ["2020"]
 tags: ["myriam raja", "riz ahmed"]
 video_type: "youtube"
 video_id: "BAS6vPUW8HU"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2020/12/once-kings-riz-ahmed-BAS6vPUW8HU.jpg"
+thumbnail: "https://img.youtube.com/vi/BAS6vPUW8HU/hqdefault.jpg"
 ---
 
 Riz Ahmed - Once Kings

@@ -6,5 +6,5 @@ categories: []
 tags: ["edward sharpe", "the mass"]
 video_type: "youtube"
 video_id: "7gwXpLpfb3Y"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/11/34782722.jpg"
+thumbnail: "https://img.youtube.com/vi/7gwXpLpfb3Y/hqdefault.jpg"
 ---

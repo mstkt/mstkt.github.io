@@ -6,5 +6,5 @@ categories: ["vfx", "animation"]
 tags: ["steve barron", "a-ha"]
 video_type: "youtube"
 video_id: "djV11Xbc914"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/11/djV11Xbc914.jpg"
+thumbnail: "https://img.youtube.com/vi/djV11Xbc914/hqdefault.jpg"
 ---

@@ -6,5 +6,5 @@ categories: ["2015", "animation"]
 tags: ["mattis dovier", "plurabelle", "stellar kinematics"]
 video_type: "youtube"
 video_id: "1zTr1Zn-h7I"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/03/598695202.jpg"
+thumbnail: "https://img.youtube.com/vi/1zTr1Zn-h7I/hqdefault.jpg"
 ---

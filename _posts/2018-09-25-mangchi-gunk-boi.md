@@ -6,5 +6,5 @@ categories: ["2017"]
 tags: ["david choe", "mangchi", "paco raterta"]
 video_type: "youtube"
 video_id: "MP7SF5dVp70"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/MP7SF5dVp70.jpg"
+thumbnail: "https://img.youtube.com/vi/MP7SF5dVp70/hqdefault.jpg"
 ---

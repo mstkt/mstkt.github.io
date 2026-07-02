@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["Mrzyk &amp; Moriceau", "jackson &amp; his computer band", "mathematic", "division"]
 video_type: "youtube"
 video_id: "12snj9HWcVk"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/09/454097525.jpg"
+thumbnail: "https://img.youtube.com/vi/12snj9HWcVk/hqdefault.jpg"
 ---

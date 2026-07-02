@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["Meriem Bennani", "gonjasufi", "The Ninth Inning EP", "Medial56"]
 video_type: "youtube"
 video_id: "Lpm7yq7TaUw"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/06/219641187.jpg"
+thumbnail: "https://img.youtube.com/vi/Lpm7yq7TaUw/hqdefault.jpg"
 ---

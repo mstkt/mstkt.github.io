@@ -6,5 +6,5 @@ categories: ["vfx"]
 tags: ["elijah wood", "david lewandowski", "flying lotus"]
 video_type: "youtube"
 video_id: "Fbi6pvFhXcE"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/06/377516992.jpg"
+thumbnail: "https://img.youtube.com/vi/Fbi6pvFhXcE/hqdefault.jpg"
 ---

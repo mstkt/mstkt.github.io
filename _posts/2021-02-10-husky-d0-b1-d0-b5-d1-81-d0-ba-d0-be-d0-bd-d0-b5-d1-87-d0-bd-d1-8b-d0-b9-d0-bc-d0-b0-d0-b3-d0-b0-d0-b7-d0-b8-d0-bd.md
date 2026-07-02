@@ -6,5 +6,5 @@ categories: ["2020"]
 tags: ["dima maseykin", "husky"]
 video_type: "youtube"
 video_id: "Oze5HvEktP0"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2021/02/maxresdefault.jpg"
+thumbnail: "https://img.youtube.com/vi/Oze5HvEktP0/hqdefault.jpg"
 ---

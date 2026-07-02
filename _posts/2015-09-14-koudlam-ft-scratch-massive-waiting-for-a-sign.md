@@ -6,5 +6,5 @@ categories: []
 tags: ["koudlam", "edouard salier", "roman pichon herrera", "scratch massive"]
 video_type: "youtube"
 video_id: "uQ52WfZfa5I"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/09/399277794.jpg"
+thumbnail: "https://img.youtube.com/vi/uQ52WfZfa5I/hqdefault.jpg"
 ---

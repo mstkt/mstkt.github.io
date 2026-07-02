@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["stink", "the avalanches", "greg brunkalla", "walter pictures"]
 video_type: "youtube"
 video_id: "eu0KsZ_MVBc"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/02/599405838.jpg"
+thumbnail: "https://img.youtube.com/vi/eu0KsZ_MVBc/hqdefault.jpg"
 ---

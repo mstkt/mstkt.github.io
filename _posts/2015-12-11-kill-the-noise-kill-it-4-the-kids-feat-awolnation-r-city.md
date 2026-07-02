@@ -6,5 +6,5 @@ categories: []
 tags: ["kill the noise", "chris ullens", "owsla"]
 video_type: "youtube"
 video_id: "imrDkegrY1o"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/12/imrDkegrY1o.jpg"
+thumbnail: "https://img.youtube.com/vi/imrDkegrY1o/hqdefault.jpg"
 ---

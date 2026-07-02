@@ -6,5 +6,5 @@ categories: []
 tags: ["tom gould", "travis mitchell", "action bronson"]
 video_type: "youtube"
 video_id: "58RSC7HO9aU"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/09/58RSC7HO9aU.jpg"
+thumbnail: "https://img.youtube.com/vi/58RSC7HO9aU/hqdefault.jpg"
 ---

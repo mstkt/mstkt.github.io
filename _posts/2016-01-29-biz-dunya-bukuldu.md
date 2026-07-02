@@ -6,5 +6,5 @@ categories: []
 tags: ["biz", "ali demirel"]
 video_type: "youtube"
 video_id: "mQH2BayT5GQ"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/01/757166512.jpg"
+thumbnail: "https://img.youtube.com/vi/mQH2BayT5GQ/hqdefault.jpg"
 ---

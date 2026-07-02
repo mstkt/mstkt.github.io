@@ -6,5 +6,5 @@ categories: ["2023"]
 tags: ["slowthai", "crowns &amp; owls", "pendulum", "2023"]
 video_type: "vimeo"
 video_id: "805124764"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2023/03/image_2023-03-17_230234268.png"
+thumbnail: "https://vumbnail.com/805124764.jpg"
 ---

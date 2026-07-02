@@ -6,5 +6,5 @@ categories: ["2018"]
 tags: ["rocketjump", "a made shop", "nathan johnson", "son lux"]
 video_type: "youtube"
 video_id: "H2CQwWbC5_E"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/03/H2CQwWbC5_E.jpg"
+thumbnail: "https://img.youtube.com/vi/H2CQwWbC5_E/hqdefault.jpg"
 ---

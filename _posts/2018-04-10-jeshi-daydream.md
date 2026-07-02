@@ -6,5 +6,5 @@ categories: ["2018"]
 tags: ["jeshi", "bafic"]
 video_type: "youtube"
 video_id: "TrAV5WcM6jo"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/04/TrAV5WcM6jo.jpg"
+thumbnail: "https://img.youtube.com/vi/TrAV5WcM6jo/hqdefault.jpg"
 ---

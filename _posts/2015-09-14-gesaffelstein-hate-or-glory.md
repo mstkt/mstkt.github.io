@@ -6,5 +6,5 @@ categories: ["vfx"]
 tags: ["fleur &amp; manu", "gesaffelstein", "mathematic", "division"]
 video_type: "youtube"
 video_id: "m7YSNbq2KcQ"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/09/451837502.jpg"
+thumbnail: "https://img.youtube.com/vi/m7YSNbq2KcQ/hqdefault.jpg"
 ---

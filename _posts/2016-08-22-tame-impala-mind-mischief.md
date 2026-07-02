@@ -6,5 +6,5 @@ categories: ["2012", "animation"]
 tags: ["jonathan harris", "tame impala", "david wilson"]
 video_type: "youtube"
 video_id: "BgK_Er7WZVg"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/08/402397607.jpg"
+thumbnail: "https://img.youtube.com/vi/BgK_Er7WZVg/hqdefault.jpg"
 ---

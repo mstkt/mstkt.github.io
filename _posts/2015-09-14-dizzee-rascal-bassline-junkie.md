@@ -6,5 +6,5 @@ categories: ["vfx"]
 tags: ["iconoclast", "dizzee rascal", "megaforce"]
 video_type: "youtube"
 video_id: "D1gl46hh3sQ"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/09/417373848.jpg"
+thumbnail: "https://img.youtube.com/vi/D1gl46hh3sQ/hqdefault.jpg"
 ---

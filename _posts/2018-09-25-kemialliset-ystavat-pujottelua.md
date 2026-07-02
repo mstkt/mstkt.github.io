@@ -6,5 +6,5 @@ categories: ["2018", "animation"]
 tags: ["jules guérin", "kemialliset ystävät", "jan anderzén"]
 video_type: "youtube"
 video_id: "zQMtQERWSUs"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/692993234.jpg"
+thumbnail: "https://img.youtube.com/vi/zQMtQERWSUs/hqdefault.jpg"
 ---

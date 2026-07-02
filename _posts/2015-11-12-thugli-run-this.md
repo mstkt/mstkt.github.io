@@ -6,5 +6,5 @@ categories: []
 tags: ["amos leblanc", "thugli"]
 video_type: "youtube"
 video_id: "B4TBRcVe4mY"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/11/490115046.jpg"
+thumbnail: "https://img.youtube.com/vi/B4TBRcVe4mY/hqdefault.jpg"
 ---

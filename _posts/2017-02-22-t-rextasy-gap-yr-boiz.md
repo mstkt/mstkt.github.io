@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["t-rextasy", "christian larrave"]
 video_type: "youtube"
 video_id: "NzyJvGuJfkk"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/02/590779032.jpg"
+thumbnail: "https://img.youtube.com/vi/NzyJvGuJfkk/hqdefault.jpg"
 ---

@@ -6,5 +6,5 @@ categories: ["2016", "animation"]
 tags: ["Mrzyk &amp; Moriceau", "mathematic", "division"]
 video_type: "youtube"
 video_id: "qLrnkK2YEcE"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/09/588841717.jpg"
+thumbnail: "https://img.youtube.com/vi/qLrnkK2YEcE/hqdefault.jpg"
 ---

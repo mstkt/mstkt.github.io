@@ -6,5 +6,5 @@ categories: ["vfx", "2018"]
 tags: ["lado kvataniya", "tim aminov", "hype production"]
 video_type: "youtube"
 video_id: "xWO0VgwyXVM"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/690891996.jpg"
+thumbnail: "https://img.youtube.com/vi/xWO0VgwyXVM/hqdefault.jpg"
 ---

@@ -6,5 +6,5 @@ categories: []
 tags: ["paolo nutini", "daniel wolfe"]
 video_type: "youtube"
 video_id: "WoCSeIY0xdo"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/11/484907474.jpg"
+thumbnail: "https://img.youtube.com/vi/WoCSeIY0xdo/hqdefault.jpg"
 ---

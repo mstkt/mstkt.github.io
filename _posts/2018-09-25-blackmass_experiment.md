@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["black mass", "alex popescu", "lavitate"]
 video_type: "youtube"
 video_id: "M0sLIY22404"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/701420083.jpg"
+thumbnail: "https://img.youtube.com/vi/M0sLIY22404/hqdefault.jpg"
 ---

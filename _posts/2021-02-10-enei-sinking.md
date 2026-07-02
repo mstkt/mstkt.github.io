@@ -6,5 +6,5 @@ categories: ["2019", "vfx"]
 tags: ["enei", "shutka"]
 video_type: "youtube"
 video_id: "PANDXT7fCQs"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2021/02/maxresdefault-4.jpg"
+thumbnail: "https://img.youtube.com/vi/PANDXT7fCQs/hqdefault.jpg"
 ---

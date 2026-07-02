@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["Tangerine Dream", "Vehicle by Inhalt", "simon landrein", "Michel Homm"]
 video_type: "youtube"
 video_id: "lbSOLBMUvIE"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/07/458391451.jpg"
+thumbnail: "https://img.youtube.com/vi/lbSOLBMUvIE/hqdefault.jpg"
 ---

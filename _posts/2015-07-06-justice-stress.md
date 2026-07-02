@@ -6,5 +6,5 @@ categories: []
 tags: ["romain gavras", "Justice"]
 video_type: "youtube"
 video_id: "QWaWsgBbFsA"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/07/589451994.jpg"
+thumbnail: "https://img.youtube.com/vi/QWaWsgBbFsA/hqdefault.jpg"
 ---

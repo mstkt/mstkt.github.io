@@ -6,7 +6,7 @@ categories: ["2018"]
 tags: ["damian lazarus &amp; the ancient moons", "jessy moussallem", "nowness", "heart of sky"]
 video_type: "youtube"
 video_id: "xj6jtsYty0I"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/12/heart-of-sky-short-by-jessy-moussallem-289494033.jpg"
+thumbnail: "https://img.youtube.com/vi/xj6jtsYty0I/hqdefault.jpg"
 ---
 
 https://vimeo.com/289494033

@@ -6,5 +6,5 @@ categories: ["vfx", "short film"]
 tags: ["art", "eddie alcazar", "flying lotus"]
 video_type: "youtube"
 video_id: "xoslm8aZOOM"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/03/554110377.jpg"
+thumbnail: "https://img.youtube.com/vi/xoslm8aZOOM/hqdefault.jpg"
 ---

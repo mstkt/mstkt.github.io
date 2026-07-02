@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["chelou", "andy baker"]
 video_type: "youtube"
 video_id: "BgP9tzt9_Z8"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/02/606860449.jpg"
+thumbnail: "https://img.youtube.com/vi/BgP9tzt9_Z8/hqdefault.jpg"
 ---

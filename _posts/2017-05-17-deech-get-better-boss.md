@@ -6,5 +6,5 @@ categories: ["2014"]
 tags: ["american painkillers", "deech", "henry kaplan"]
 video_type: "youtube"
 video_id: "C8CHXLIoFMs"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/05/482890479.jpg"
+thumbnail: "https://img.youtube.com/vi/C8CHXLIoFMs/hqdefault.jpg"
 ---

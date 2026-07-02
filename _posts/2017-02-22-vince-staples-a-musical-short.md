@@ -6,5 +6,5 @@ categories: ["2016", "short film"]
 tags: ["vince staples", "nabil elderkin"]
 video_type: "youtube"
 video_id: "8Un0nhTbzMk"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/02/588889501.jpg"
+thumbnail: "https://img.youtube.com/vi/8Un0nhTbzMk/hqdefault.jpg"
 ---

@@ -6,7 +6,7 @@ categories: []
 tags: ["psychedelic pop", "Daniel Brereton", "Phantasy Sound"]
 video_type: "youtube"
 video_id: "E7CaTJ2SvG8"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/06/E7CaTJ2SvG8.jpg"
+thumbnail: "https://img.youtube.com/vi/E7CaTJ2SvG8/hqdefault.jpg"
 ---
 
 <div style="clear: both; text-align: center;"></div><br />

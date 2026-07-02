@@ -6,5 +6,5 @@ categories: []
 tags: ["Anti-Ghost Moon Ray Records", "Last Gang Records", "Chris Turner"]
 video_type: "youtube"
 video_id: "NMiPD6EqbyQ"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/06/473817278.jpg"
+thumbnail: "https://img.youtube.com/vi/NMiPD6EqbyQ/hqdefault.jpg"
 ---

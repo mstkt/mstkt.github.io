@@ -6,5 +6,5 @@ categories: ["vfx"]
 tags: ["fleur &amp; manu", "gesaffelstein", "division"]
 video_type: "youtube"
 video_id: "oRSijEW_cDM"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/09/oRSijEW_cDM.jpg"
+thumbnail: "https://img.youtube.com/vi/oRSijEW_cDM/hqdefault.jpg"
 ---

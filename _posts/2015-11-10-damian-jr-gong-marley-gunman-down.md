@@ -6,5 +6,5 @@ categories: []
 tags: ["damian marley", "nabil elderkin"]
 video_type: "youtube"
 video_id: "0UG88eUrn-A"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/11/499900318.jpg"
+thumbnail: "https://img.youtube.com/vi/0UG88eUrn-A/hqdefault.jpg"
 ---

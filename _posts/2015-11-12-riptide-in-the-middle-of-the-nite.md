@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["crooked line", "riptide", "stefan glerum"]
 video_type: "youtube"
 video_id: "hLEhwxy_Hig"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/11/463957371.jpg"
+thumbnail: "https://img.youtube.com/vi/hLEhwxy_Hig/hqdefault.jpg"
 ---

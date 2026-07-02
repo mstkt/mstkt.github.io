@@ -6,5 +6,5 @@ categories: []
 tags: ["jackal", "danilo parr"]
 video_type: "youtube"
 video_id: "m6z5mo4VQ5M"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/10/539332764.jpg"
+thumbnail: "https://img.youtube.com/vi/m6z5mo4VQ5M/hqdefault.jpg"
 ---

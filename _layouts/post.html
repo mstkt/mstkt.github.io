@@ -44,6 +44,52 @@ layout: default
   </div>
   {% endif %}
 
+  {% assign rel_count = 0 %}
+  {% capture rel_cards %}
+    {% for post in site.posts %}
+      {% if rel_count >= 6 %}{% break %}{% endif %}
+      {% if post.url == page.url %}{% continue %}{% endif %}
+      {% assign rel_match = false %}
+      {% for tag in post.tags %}
+        {% if page.tags contains tag %}{% assign rel_match = true %}{% break %}{% endif %}
+      {% endfor %}
+      {% if rel_match %}
+        {% assign rel_count = rel_count | plus: 1 %}
+        <a class="related-card" href="{{ post.url | relative_url }}">
+          <span class="related-thumb">
+            {% if post.video_type == "youtube" %}<img src="https://img.youtube.com/vi/{{ post.video_id }}/mqdefault.jpg" alt="{{ post.title }}" loading="lazy">
+            {% elsif post.video_type == "vimeo" %}<img src="https://vumbnail.com/{{ post.video_id }}.jpg" alt="{{ post.title }}" loading="lazy">
+            {% else %}<span class="related-thumb--empty">&#9835;</span>{% endif %}
+          </span>
+          <span class="related-title">{{ post.title }}</span>
+        </a>
+      {% endif %}
+    {% endfor %}
+  {% endcapture %}
+
+  <section class="related-videos">
+    {% if rel_count > 0 %}
+      <h2>benzer videolar.</h2>
+      <div class="related-grid">{{ rel_cards }}</div>
+    {% else %}
+      <h2>son eklenenler.</h2>
+      <div class="related-grid">
+        {% for post in site.posts limit: 4 %}
+          {% unless post.url == page.url %}
+          <a class="related-card" href="{{ post.url | relative_url }}">
+            <span class="related-thumb">
+              {% if post.video_type == "youtube" %}<img src="https://img.youtube.com/vi/{{ post.video_id }}/mqdefault.jpg" alt="{{ post.title }}" loading="lazy">
+              {% elsif post.video_type == "vimeo" %}<img src="https://vumbnail.com/{{ post.video_id }}.jpg" alt="{{ post.title }}" loading="lazy">
+              {% else %}<span class="related-thumb--empty">&#9835;</span>{% endif %}
+            </span>
+            <span class="related-title">{{ post.title }}</span>
+          </a>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </section>
+
   <nav class="post-nav">
     {% if page.previous %}
       <a class="post-nav__prev" href="{{ page.previous.url | relative_url }}">&larr; {{ page.previous.title }}</a>

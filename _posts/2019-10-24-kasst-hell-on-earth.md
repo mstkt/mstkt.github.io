@@ -6,7 +6,7 @@ categories: ["2019"]
 tags: ["louis herbeuval", "studio jourdain", "kas:st"]
 video_type: "youtube"
 video_id: "Fwi1qgSaxZY"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2019/10/kas-st-8211-hell-on-earth-364325963.jpg"
+thumbnail: "https://img.youtube.com/vi/Fwi1qgSaxZY/hqdefault.jpg"
 ---
 
 https://vimeo.com/364325963

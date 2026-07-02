@@ -6,7 +6,7 @@ categories: ["2018"]
 tags: ["lucho parada", "andrea brown", "natalia escobar", "poison arrow"]
 video_type: "youtube"
 video_id: "-Qp0QoiRXug"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/12/poison-arrow-casa-show-Qp0QoiRXug.jpg"
+thumbnail: "https://img.youtube.com/vi/-Qp0QoiRXug/hqdefault.jpg"
 ---
 
 https://www.youtube.com/watch?v=-Qp0QoiRXug

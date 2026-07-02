@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["czar be", "wouter bouvijn", "warhaus"]
 video_type: "youtube"
 video_id: "Nz2MY2Ogf0U"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/05/Nz2MY2Ogf0U.jpg"
+thumbnail: "https://img.youtube.com/vi/Nz2MY2Ogf0U/hqdefault.jpg"
 ---

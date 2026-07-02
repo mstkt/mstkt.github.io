@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["airplan studio", "saverne"]
 video_type: "youtube"
 video_id: "uFQqf4wwc6M"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/03/560892808.jpg"
+thumbnail: "https://img.youtube.com/vi/uFQqf4wwc6M/hqdefault.jpg"
 ---

@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["leslie wai", "guy collins"]
 video_type: "youtube"
 video_id: "lIES3ii-IOg"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/02/lIES3ii-IOg.jpg"
+thumbnail: "https://img.youtube.com/vi/lIES3ii-IOg/hqdefault.jpg"
 ---

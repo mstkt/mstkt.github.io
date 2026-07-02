@@ -6,5 +6,5 @@ categories: ["2017"]
 tags: ["leningrad", "ilya naishuller", "fancyshot"]
 video_type: "youtube"
 video_id: "4v6a0z-f9dI"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/05/618602966.jpg"
+thumbnail: "https://img.youtube.com/vi/4v6a0z-f9dI/hqdefault.jpg"
 ---

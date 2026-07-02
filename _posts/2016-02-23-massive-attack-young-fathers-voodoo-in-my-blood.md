@@ -6,5 +6,5 @@ categories: ["vfx"]
 tags: ["wave studios", "ringan ledwidge"]
 video_type: "youtube"
 video_id: "ElvLZMsYXlo"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/02/ElvLZMsYXlo.jpg"
+thumbnail: "https://img.youtube.com/vi/ElvLZMsYXlo/hqdefault.jpg"
 ---

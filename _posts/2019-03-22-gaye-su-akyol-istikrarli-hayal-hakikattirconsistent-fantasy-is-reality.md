@@ -6,5 +6,5 @@ categories: ["vfx", "2019"]
 tags: ["fatih çilingir", "gaye su akyol", "sinan tuncay"]
 video_type: "youtube"
 video_id: "h80uU2eMRLk"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2019/03/h80uU2eMRLk.jpg"
+thumbnail: "https://img.youtube.com/vi/h80uU2eMRLk/hqdefault.jpg"
 ---

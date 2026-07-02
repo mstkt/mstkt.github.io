@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["kungs", "videodrome"]
 video_type: "youtube"
 video_id: "0SVk3adkchY"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/02/601162196.jpg"
+thumbnail: "https://img.youtube.com/vi/0SVk3adkchY/hqdefault.jpg"
 ---

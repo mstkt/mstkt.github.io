@@ -6,5 +6,5 @@ categories: ["2015"]
 tags: ["casper balslev", "alfons"]
 video_type: "youtube"
 video_id: "CpP1oYNsXwI"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/09/521252538.jpg"
+thumbnail: "https://img.youtube.com/vi/CpP1oYNsXwI/hqdefault.jpg"
 ---

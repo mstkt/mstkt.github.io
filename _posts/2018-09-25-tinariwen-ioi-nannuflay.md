@@ -6,7 +6,7 @@ categories: ["2018", "animation"]
 tags: ["pilule &amp; pigeon", "axel digoix", "tinariwen"]
 video_type: "youtube"
 video_id: "H1YIgwPsX5Q"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/tinariwen-io-i-8211-n-nnufl-y-260055409.jpg"
+thumbnail: "https://img.youtube.com/vi/H1YIgwPsX5Q/hqdefault.jpg"
 ---
 
 <a href="https://vimeo.com/260055409">Tinariwen (+IO:I) - Nànnuflày</a> from <a href="https://vimeo.com/user16120525">Pilule &amp; Pigeon</a> on <a href="https://vimeo.com/">Vimeo</a>.

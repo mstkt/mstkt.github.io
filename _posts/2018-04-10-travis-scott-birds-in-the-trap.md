@@ -6,5 +6,5 @@ categories: ["2017"]
 tags: ["travis scott", "division", "fleur fortuné"]
 video_type: "youtube"
 video_id: "Tcz3aN5gWcU"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/04/Tcz3aN5gWcU.jpg"
+thumbnail: "https://img.youtube.com/vi/Tcz3aN5gWcU/hqdefault.jpg"
 ---

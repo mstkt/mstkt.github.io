@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["lo xu-ming", "cri"]
 video_type: "youtube"
 video_id: "mB86kd42YzA"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/08/580979994.jpg"
+thumbnail: "https://img.youtube.com/vi/mB86kd42YzA/hqdefault.jpg"
 ---

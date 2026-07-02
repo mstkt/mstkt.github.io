@@ -6,5 +6,5 @@ categories: ["2014"]
 tags: ["sam pilling", "j.cole", "amber coffman &amp; cults"]
 video_type: "youtube"
 video_id: "jYdaQJzcAcw"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/09/868197489.jpg"
+thumbnail: "https://img.youtube.com/vi/jYdaQJzcAcw/hqdefault.jpg"
 ---

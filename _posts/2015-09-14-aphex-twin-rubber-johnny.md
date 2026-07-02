@@ -6,5 +6,5 @@ categories: ["vfx"]
 tags: ["aphex twin", "chris cunningham", "video art"]
 video_type: "youtube"
 video_id: "FW-ZPTW4_IU"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/09/FW-ZPTW4_IU.jpg"
+thumbnail: "https://img.youtube.com/vi/FW-ZPTW4_IU/hqdefault.jpg"
 ---

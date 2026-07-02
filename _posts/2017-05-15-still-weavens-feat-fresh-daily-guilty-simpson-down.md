@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["deezooit", "guilty simpson", "fresh daily", "still weavens"]
 video_type: "youtube"
 video_id: "uuEc2afEvC4"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/05/590207781.jpg"
+thumbnail: "https://img.youtube.com/vi/uuEc2afEvC4/hqdefault.jpg"
 ---

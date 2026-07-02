@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["alexander nemenkov", "katabasis", "vivalter"]
 video_type: "youtube"
 video_id: "RCh3Yor_7Q8"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/07/695333373.jpg"
+thumbnail: "https://img.youtube.com/vi/RCh3Yor_7Q8/hqdefault.jpg"
 ---

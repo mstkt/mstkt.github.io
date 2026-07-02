@@ -6,5 +6,5 @@ categories: ["2016", "animation"]
 tags: ["juggling wolf", "anthony francisco schepperd", "boots"]
 video_type: "youtube"
 video_id: "MPkLz2quNOw"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/05/571995201.jpg"
+thumbnail: "https://img.youtube.com/vi/MPkLz2quNOw/hqdefault.jpg"
 ---

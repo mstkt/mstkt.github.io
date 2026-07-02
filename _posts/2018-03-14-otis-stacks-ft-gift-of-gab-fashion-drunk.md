@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["otis stacks", "jean-pierre sastre", "gift of gab"]
 video_type: "youtube"
 video_id: "VjAKeduaURc"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/03/VjAKeduaURc.jpg"
+thumbnail: "https://img.youtube.com/vi/VjAKeduaURc/hqdefault.jpg"
 ---

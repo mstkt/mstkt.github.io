@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["karim huu do", "the shoes", "labelgum"]
 video_type: "youtube"
 video_id: "F3YyZlpxrok"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/05/maxresdefault.jpg"
+thumbnail: "https://img.youtube.com/vi/F3YyZlpxrok/hqdefault.jpg"
 ---

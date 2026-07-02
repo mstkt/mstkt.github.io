@@ -6,5 +6,5 @@ categories: ["2017"]
 tags: ["jil", "anton tammi"]
 video_type: "youtube"
 video_id: "Yj5MlgUpODo"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/06/627511679.jpg"
+thumbnail: "https://img.youtube.com/vi/Yj5MlgUpODo/hqdefault.jpg"
 ---

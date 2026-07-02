@@ -6,5 +6,5 @@ categories: ["2019"]
 tags: ["maslo chernogo tmina", "aisultan seitov"]
 video_type: "youtube"
 video_id: "VLdxe_YmTIY"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2019/11/VLdxe_YmTIY.jpg"
+thumbnail: "https://img.youtube.com/vi/VLdxe_YmTIY/hqdefault.jpg"
 ---

@@ -6,5 +6,5 @@ categories: ["vfx", "2016"]
 tags: ["ruslan pelykh", "fashion"]
 video_type: "youtube"
 video_id: "RgnXl7fz0Bc"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/05/588536013.jpg"
+thumbnail: "https://img.youtube.com/vi/RgnXl7fz0Bc/hqdefault.jpg"
 ---

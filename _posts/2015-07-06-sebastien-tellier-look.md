@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["Mrzyk &amp; Moriceau", "sebastien Tellier"]
 video_type: "youtube"
 video_id: "8jL0vy2YaDg"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/07/51561017.jpg"
+thumbnail: "https://img.youtube.com/vi/8jL0vy2YaDg/hqdefault.jpg"
 ---

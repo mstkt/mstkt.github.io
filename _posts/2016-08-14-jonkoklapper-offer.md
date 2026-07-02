@@ -6,5 +6,5 @@ categories: ["2016", "animation"]
 tags: ["jonkoklapper", "thomas de rijk"]
 video_type: "youtube"
 video_id: "wtw4CP-Gxaw"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/08/584784063.jpg"
+thumbnail: "https://img.youtube.com/vi/wtw4CP-Gxaw/hqdefault.jpg"
 ---

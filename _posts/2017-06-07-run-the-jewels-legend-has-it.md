@@ -6,5 +6,5 @@ categories: ["2017"]
 tags: ["smuggler", "brian beletic", "run the jewels"]
 video_type: "youtube"
 video_id: "vWaljXUiCaE"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/06/627552071.jpg"
+thumbnail: "https://img.youtube.com/vi/vWaljXUiCaE/hqdefault.jpg"
 ---

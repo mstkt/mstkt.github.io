@@ -6,5 +6,5 @@ categories: []
 tags: ["The Phenomenal Handclap Band", "Stephen Agnew"]
 video_type: "youtube"
 video_id: "aZfKMK3sw_g"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/07/aZfKMK3sw_g.jpg"
+thumbnail: "https://img.youtube.com/vi/aZfKMK3sw_g/hqdefault.jpg"
 ---

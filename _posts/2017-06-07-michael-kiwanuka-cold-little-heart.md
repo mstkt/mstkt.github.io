@@ -6,5 +6,5 @@ categories: ["2017"]
 tags: []
 video_type: "youtube"
 video_id: "nOubjLM9Cbc"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/06/875405167.jpg"
+thumbnail: "https://img.youtube.com/vi/nOubjLM9Cbc/hqdefault.jpg"
 ---

@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["simon cave studios", "claude vonstroke", "simon cave"]
 video_type: "youtube"
 video_id: "kWNHvIt9ryk"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/02/799076267.jpg"
+thumbnail: "https://img.youtube.com/vi/kWNHvIt9ryk/hqdefault.jpg"
 ---

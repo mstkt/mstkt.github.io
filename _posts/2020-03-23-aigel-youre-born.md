@@ -6,5 +6,5 @@ categories: ["2020"]
 tags: ["takeshot filmls", "andzej gavriss", "aigel"]
 video_type: "youtube"
 video_id: "6vkYvZpTHng"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2020/03/aigel-8211-you-8217-re-born-6vkYvZpTHng.jpg"
+thumbnail: "https://img.youtube.com/vi/6vkYvZpTHng/hqdefault.jpg"
 ---

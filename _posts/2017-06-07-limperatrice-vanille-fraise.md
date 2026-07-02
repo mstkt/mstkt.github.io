@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["jérémie boeglin", "melocoton films", "alizée ayrault"]
 video_type: "youtube"
 video_id: "iZAqaykiS70"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/06/554354866.jpg"
+thumbnail: "https://img.youtube.com/vi/iZAqaykiS70/hqdefault.jpg"
 ---

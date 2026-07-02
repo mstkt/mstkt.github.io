@@ -6,5 +6,5 @@ categories: ["2018"]
 tags: ["cyprien clement-delmas", "thylacine"]
 video_type: "youtube"
 video_id: "iU1ZFLKnlMk"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/704650493.jpg"
+thumbnail: "https://img.youtube.com/vi/iU1ZFLKnlMk/hqdefault.jpg"
 ---

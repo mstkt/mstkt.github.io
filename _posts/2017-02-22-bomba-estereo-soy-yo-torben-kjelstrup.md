@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["hobby film", "torben kjelstrup"]
 video_type: "youtube"
 video_id: "NCEQX46L3KU"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/02/630921021.jpg"
+thumbnail: "https://img.youtube.com/vi/NCEQX46L3KU/hqdefault.jpg"
 ---

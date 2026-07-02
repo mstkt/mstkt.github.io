@@ -6,7 +6,7 @@ categories: ["2018"]
 tags: ["society", "fleet foxes", "sean pecknold"]
 video_type: "youtube"
 video_id: "N5-HmSF9vtQ"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/fleet-foxes-8211-i-am-all-that-i-need-arroyo-seco-thumbprint-scar-288253462.jpg"
+thumbnail: "https://img.youtube.com/vi/N5-HmSF9vtQ/hqdefault.jpg"
 ---
 
 <a href="https://vimeo.com/288253462">Fleet Foxes - I Am All That I Need / Arroyo Seco / Thumbprint Scar</a> from <a href="https://vimeo.com/seanpecknold">Sean Pecknold</a> on <a href="https://vimeo.com/">Vimeo</a>.

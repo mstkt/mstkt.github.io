@@ -6,5 +6,5 @@ categories: []
 tags: ["documentary", "amos leblanc", "keys n krates"]
 video_type: "youtube"
 video_id: "eDshx6Rg9Hs"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/11/eDshx6Rg9Hs.jpg"
+thumbnail: "https://img.youtube.com/vi/eDshx6Rg9Hs/hqdefault.jpg"
 ---

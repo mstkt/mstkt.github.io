@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["pulse films", "simon cahn", "fono"]
 video_type: "youtube"
 video_id: "7kZtrPB3AX8"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/05/sddefault.jpg"
+thumbnail: "https://img.youtube.com/vi/7kZtrPB3AX8/hqdefault.jpg"
 ---

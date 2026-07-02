@@ -6,5 +6,5 @@ categories: ["vfx"]
 tags: ["getter", "liam underwood", "owsla"]
 video_type: "youtube"
 video_id: "2YllipGl2Is"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/12/2YllipGl2Is.jpg"
+thumbnail: "https://img.youtube.com/vi/2YllipGl2Is/hqdefault.jpg"
 ---

@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["thomas pons"]
 video_type: "youtube"
 video_id: "NYz8xs163YU"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/03/541368262.jpg"
+thumbnail: "https://img.youtube.com/vi/NYz8xs163YU/hqdefault.jpg"
 ---

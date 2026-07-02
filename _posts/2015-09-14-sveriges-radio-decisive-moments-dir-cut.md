@@ -6,5 +6,5 @@ categories: []
 tags: ["philippe tempelman", "advertise", "Sveriges Radio", "indio"]
 video_type: "youtube"
 video_id: "MslDnwerQRA"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/09/531511676.jpg"
+thumbnail: "https://img.youtube.com/vi/MslDnwerQRA/hqdefault.jpg"
 ---

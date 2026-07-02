@@ -6,5 +6,5 @@ categories: ["2020", "animation"]
 tags: ["king gizzard &amp; the lizard wizard"]
 video_type: "youtube"
 video_id: "ntbNRUycbD4"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2021/02/maxresdefault-3.jpg"
+thumbnail: "https://img.youtube.com/vi/ntbNRUycbD4/hqdefault.jpg"
 ---

@@ -6,7 +6,7 @@ categories: ["2017"]
 tags: ["profilm", "aigel", "ilya soloview"]
 video_type: "youtube"
 video_id: "yQR_NLeXKtw"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/10/658241149.jpg"
+thumbnail: "https://img.youtube.com/vi/yQR_NLeXKtw/hqdefault.jpg"
 ---
 
 <a href="https://vimeo.com/234820489">Tatarin // AIGEL</a> from <a href="https://vimeo.com/silaboli">Ilya Soloview</a> on <a href="https://vimeo.com/">Vimeo</a>.

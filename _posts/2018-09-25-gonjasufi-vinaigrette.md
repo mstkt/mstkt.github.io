@@ -6,7 +6,7 @@ categories: []
 tags: ["Uncategorized"]
 video_type: "youtube"
 video_id: "MIzsc_t_V0Y"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/583737787.jpg"
+thumbnail: "https://img.youtube.com/vi/MIzsc_t_V0Y/hqdefault.jpg"
 ---
 
 GONJASUFI “VINAIGRETTE”

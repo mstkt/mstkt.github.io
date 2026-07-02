@@ -6,5 +6,5 @@ categories: ["2019"]
 tags: ["business club royale", "vedran rupic", "salvatore ganacci", "owsla"]
 video_type: "youtube"
 video_id: "NkRkuI0ZgX0"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2019/04/NkRkuI0ZgX0.jpg"
+thumbnail: "https://img.youtube.com/vi/NkRkuI0ZgX0/hqdefault.jpg"
 ---

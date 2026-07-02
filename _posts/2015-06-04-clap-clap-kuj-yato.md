@@ -6,7 +6,7 @@ categories: []
 tags: ["experimental electronic", "THUMP", "Wilou Dsainbayonne"]
 video_type: "youtube"
 video_id: "v4sDiCKdZ4M"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/06/v4sDiCKdZ4M.jpg"
+thumbnail: "https://img.youtube.com/vi/v4sDiCKdZ4M/hqdefault.jpg"
 ---
 
 <div style="clear: both; text-align: center;"></div><br />

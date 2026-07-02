@@ -6,5 +6,5 @@ categories: []
 tags: ["alban coret", "haute"]
 video_type: "youtube"
 video_id: "rzABLtFjNss"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/976399252.jpg"
+thumbnail: "https://img.youtube.com/vi/rzABLtFjNss/hqdefault.jpg"
 ---

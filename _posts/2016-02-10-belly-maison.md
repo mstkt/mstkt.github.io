@@ -6,5 +6,5 @@ categories: ["vfx"]
 tags: ["belly", "nick roney", "luis soto", "public instinct"]
 video_type: "youtube"
 video_id: "ZUdQwB0mHa8"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/02/545868603.jpg"
+thumbnail: "https://img.youtube.com/vi/ZUdQwB0mHa8/hqdefault.jpg"
 ---

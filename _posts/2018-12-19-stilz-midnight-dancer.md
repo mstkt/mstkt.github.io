@@ -6,5 +6,5 @@ categories: ["2018"]
 tags: ["stilz", "dan przygoda"]
 video_type: "youtube"
 video_id: "azF-nUKXKYA"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/12/azF-nUKXKYA.jpg"
+thumbnail: "https://img.youtube.com/vi/azF-nUKXKYA/hqdefault.jpg"
 ---

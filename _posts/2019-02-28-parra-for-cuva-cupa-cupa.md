@@ -6,5 +6,5 @@ categories: ["2018"]
 tags: ["sam goldwater", "canto agency", "parra for cuva"]
 video_type: "youtube"
 video_id: "te_6PUpgzTg"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2019/02/te_6PUpgzTg.jpg"
+thumbnail: "https://img.youtube.com/vi/te_6PUpgzTg/hqdefault.jpg"
 ---

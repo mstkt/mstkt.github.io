@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["iconoclast", "matt lambert", "woodkid", "mykki blanco"]
 video_type: "youtube"
 video_id: "cNGR4ciDmTA"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/05/571182856.jpg"
+thumbnail: "https://img.youtube.com/vi/cNGR4ciDmTA/hqdefault.jpg"
 ---

@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["emma louise", "dylan duclos"]
 video_type: "youtube"
 video_id: "ZVZ7ZsTjXv0"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/08/601219614.jpg"
+thumbnail: "https://img.youtube.com/vi/ZVZ7ZsTjXv0/hqdefault.jpg"
 ---

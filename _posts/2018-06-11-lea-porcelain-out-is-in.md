@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["ren", "lea porcelain", "ethan graham"]
 video_type: "youtube"
 video_id: "z2TY7itRXeI"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/06/z2TY7itRXeI.jpg"
+thumbnail: "https://img.youtube.com/vi/z2TY7itRXeI/hqdefault.jpg"
 ---

@@ -6,5 +6,5 @@ categories: []
 tags: ["daniel wolfe", "the shoes"]
 video_type: "youtube"
 video_id: "pt9wnawn7xQ"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/11/278095789.jpg"
+thumbnail: "https://img.youtube.com/vi/pt9wnawn7xQ/hqdefault.jpg"
 ---

@@ -6,5 +6,5 @@ categories: []
 tags: ["fleur &amp; manu", "skrillex", "division"]
 video_type: "youtube"
 video_id: "7eodQplrKrU"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/09/534292460.jpg"
+thumbnail: "https://img.youtube.com/vi/7eodQplrKrU/hqdefault.jpg"
 ---

@@ -6,5 +6,5 @@ categories: []
 tags: ["indie video", "Jeppe Kolstrup", "the good the bad"]
 video_type: "youtube"
 video_id: "jKcSatYPSx8"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/07/449623281.jpg"
+thumbnail: "https://img.youtube.com/vi/jKcSatYPSx8/hqdefault.jpg"
 ---

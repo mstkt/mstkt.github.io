@@ -6,5 +6,5 @@ categories: ["vfx"]
 tags: ["asap rocky", "lsd", "dexter navy"]
 video_type: "youtube"
 video_id: "yEG2VTHS9yg"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/07/yEG2VTHS9yg.jpg"
+thumbnail: "https://img.youtube.com/vi/yEG2VTHS9yg/hqdefault.jpg"
 ---

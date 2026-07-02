@@ -6,5 +6,5 @@ categories: []
 tags: ["david bowie", "johan renck"]
 video_type: "youtube"
 video_id: "kszLwBaC4Sw"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/11/kszLwBaC4Sw.jpg"
+thumbnail: "https://img.youtube.com/vi/kszLwBaC4Sw/hqdefault.jpg"
 ---

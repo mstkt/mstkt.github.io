@@ -6,7 +6,7 @@ categories: ["animation"]
 tags: ["leftfield", "riffrafffilms", "casey&amp;ewan"]
 video_type: "youtube"
 video_id: "oJVyEELSlM8"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/12/leftfield-head-and-shoulders-134281027.jpg"
+thumbnail: "https://img.youtube.com/vi/oJVyEELSlM8/hqdefault.jpg"
 ---
 
 https://vimeo.com/134281027

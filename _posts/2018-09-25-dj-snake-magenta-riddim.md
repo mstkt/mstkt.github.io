@@ -6,5 +6,5 @@ categories: ["vfx", "2018"]
 tags: ["iconoclast", "dj snake", "vania heymann", "gal muggia"]
 video_type: "youtube"
 video_id: "op4B9sNGi0k"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/694532899.jpg"
+thumbnail: "https://img.youtube.com/vi/op4B9sNGi0k/hqdefault.jpg"
 ---

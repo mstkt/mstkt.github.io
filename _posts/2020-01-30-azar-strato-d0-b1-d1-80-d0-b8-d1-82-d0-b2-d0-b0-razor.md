@@ -6,5 +6,5 @@ categories: ["2019"]
 tags: ["azar strato"]
 video_type: "youtube"
 video_id: "WlJgYDSGxdg"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2020/01/WlJgYDSGxdg.jpg"
+thumbnail: "https://img.youtube.com/vi/WlJgYDSGxdg/hqdefault.jpg"
 ---

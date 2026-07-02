@@ -6,5 +6,5 @@ categories: ["2020", "vfx"]
 tags: ["maslo chernogo tmina", "aisultan seitov"]
 video_type: "youtube"
 video_id: "mgslSnbkF-c"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2021/02/maxresdefault-2.jpg"
+thumbnail: "https://img.youtube.com/vi/mgslSnbkF-c/hqdefault.jpg"
 ---

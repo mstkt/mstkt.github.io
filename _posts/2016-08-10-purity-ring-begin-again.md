@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["alex takacs", "young replicant", "purity ring"]
 video_type: "youtube"
 video_id: "IIPMzeNWAtk"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/08/649415097.jpg"
+thumbnail: "https://img.youtube.com/vi/IIPMzeNWAtk/hqdefault.jpg"
 ---

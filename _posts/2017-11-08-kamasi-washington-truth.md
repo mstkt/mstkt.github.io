@@ -6,7 +6,7 @@ categories: []
 tags: ["kamasi washington", "ag rojas"]
 video_type: "youtube"
 video_id: "rtW1S5EbHgU"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/11/kamasi-washington-8211-truth-rtW1S5EbHgU.jpg"
+thumbnail: "https://img.youtube.com/vi/rtW1S5EbHgU/hqdefault.jpg"
 ---
 
 https://www.youtube.com/watch?v=rtW1S5EbHgU

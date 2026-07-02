@@ -6,5 +6,5 @@ categories: ["2019", "animation"]
 tags: ["jojo hissa", "ilhan ersahin"]
 video_type: "youtube"
 video_id: "WGFHjH0KIJw"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2019/02/WGFHjH0KIJw.jpg"
+thumbnail: "https://img.youtube.com/vi/WGFHjH0KIJw/hqdefault.jpg"
 ---

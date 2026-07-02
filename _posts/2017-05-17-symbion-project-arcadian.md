@@ -6,5 +6,5 @@ categories: ["2017"]
 tags: ["sherif alabede", "sra", "symbion project", "paranoiia prductions"]
 video_type: "youtube"
 video_id: "ftJpgvgUD5s"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/05/616920602.jpg"
+thumbnail: "https://img.youtube.com/vi/ftJpgvgUD5s/hqdefault.jpg"
 ---

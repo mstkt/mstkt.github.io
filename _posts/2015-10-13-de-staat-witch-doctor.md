@@ -6,5 +6,5 @@ categories: ["vfx"]
 tags: ["floris kaayk &amp; torre florim", "de staad", "studio smack"]
 video_type: "youtube"
 video_id: "0ttGgIQpAUc"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/10/536402003.jpg"
+thumbnail: "https://img.youtube.com/vi/0ttGgIQpAUc/hqdefault.jpg"
 ---

@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["leon else", "jordan bahat"]
 video_type: "youtube"
 video_id: "8YsB_V-0aMY"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/05/591823825.jpg"
+thumbnail: "https://img.youtube.com/vi/8YsB_V-0aMY/hqdefault.jpg"
 ---

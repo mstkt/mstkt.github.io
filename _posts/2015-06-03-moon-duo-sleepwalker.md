@@ -6,5 +6,5 @@ categories: ["2014"]
 tags: ["cult", "hylas film", "neo-psychedelia", "king khan", "sleepwalker"]
 video_type: "youtube"
 video_id: "AjwAn-GioWw"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/06/AjwAn-GioWw.jpg"
+thumbnail: "https://img.youtube.com/vi/AjwAn-GioWw/hqdefault.jpg"
 ---

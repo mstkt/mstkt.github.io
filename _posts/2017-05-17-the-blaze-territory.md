@@ -6,5 +6,5 @@ categories: ["2017"]
 tags: ["iconoclast", "2horloges", "the blaze"]
 video_type: "youtube"
 video_id: "54fea7wuV6s"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/05/641032194.jpg"
+thumbnail: "https://img.youtube.com/vi/54fea7wuV6s/hqdefault.jpg"
 ---

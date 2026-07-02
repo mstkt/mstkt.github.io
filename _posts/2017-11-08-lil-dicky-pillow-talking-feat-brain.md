@@ -6,5 +6,5 @@ categories: ["vfx", "2017"]
 tags: ["tony yacenda", "lil dicky"]
 video_type: "youtube"
 video_id: "NWWeQlXfSa0"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/11/maxresdefault.jpg"
+thumbnail: "https://img.youtube.com/vi/NWWeQlXfSa0/hqdefault.jpg"
 ---

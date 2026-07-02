@@ -6,5 +6,5 @@ categories: ["2020"]
 tags: ["husky", "evgeeni bakirov", "2020"]
 video_type: "youtube"
 video_id: "4C_NEIzqLPM"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2021/01/974221224.jpg"
+thumbnail: "https://img.youtube.com/vi/4C_NEIzqLPM/hqdefault.jpg"
 ---

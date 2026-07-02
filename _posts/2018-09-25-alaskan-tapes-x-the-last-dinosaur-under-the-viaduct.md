@@ -6,7 +6,7 @@ categories: ["2018"]
 tags: ["csc", "norm li", "the last dinosaur", "alaskan tapes"]
 video_type: "youtube"
 video_id: "k-M2MkuTFgE"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/alaskan-tapes-x-the-last-dinosaur-under-the-viaduct-273138943.jpg"
+thumbnail: "https://img.youtube.com/vi/k-M2MkuTFgE/hqdefault.jpg"
 ---
 
 <a href="https://vimeo.com/273138943">ALASKAN TAPES x THE LAST DINOSAUR // UNDER THE VIADUCT Music Video</a> from <a href="https://vimeo.com/normli">Norm Li, csc</a> on <a href="https://vimeo.com/">Vimeo</a>.

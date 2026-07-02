@@ -6,5 +6,5 @@ categories: ["2018"]
 tags: ["francisco canton", "anonymous content", "handsome paris", "tseheque", "pato martinez", "pantera"]
 video_type: "youtube"
 video_id: "yC91GYRqwH0"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/704413056.jpg"
+thumbnail: "https://img.youtube.com/vi/yC91GYRqwH0/hqdefault.jpg"
 ---

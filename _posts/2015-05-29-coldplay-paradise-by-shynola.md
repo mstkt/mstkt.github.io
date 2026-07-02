@@ -6,5 +6,5 @@ categories: []
 tags: ["black dog films limited", "coldplay", "shynola"]
 video_type: "youtube"
 video_id: "myV_7Ib22ow"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/05/myV_7Ib22ow.jpg"
+thumbnail: "https://img.youtube.com/vi/myV_7Ib22ow/hqdefault.jpg"
 ---

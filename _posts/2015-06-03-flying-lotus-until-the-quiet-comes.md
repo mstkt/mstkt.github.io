@@ -6,6 +6,6 @@ categories: ["short film"]
 tags: ["kahlil joseph", "what matters most", "flying lotus"]
 video_type: "youtube"
 video_id: "vF1T-AEH2GA"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/06/428780956.jpg"
+thumbnail: "https://img.youtube.com/vi/vF1T-AEH2GA/hqdefault.jpg"
 ---
 

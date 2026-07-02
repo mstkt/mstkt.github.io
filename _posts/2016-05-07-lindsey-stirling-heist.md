@@ -6,5 +6,5 @@ categories: ["vfx", "2016"]
 tags: ["djay brawner", "anthem films", "lindsey stirling", "tanner merrill"]
 video_type: "youtube"
 video_id: "NVqVwk0rJ64"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/05/NVqVwk0rJ64.jpg"
+thumbnail: "https://img.youtube.com/vi/NVqVwk0rJ64/hqdefault.jpg"
 ---

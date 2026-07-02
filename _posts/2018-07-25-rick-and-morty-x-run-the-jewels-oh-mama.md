@@ -6,5 +6,5 @@ categories: ["2018", "animation"]
 tags: ["juan meza-leon", "adultswim", "run the jewels"]
 video_type: "youtube"
 video_id: "EBYsx1QWF9A"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/07/EBYsx1QWF9A.jpg"
+thumbnail: "https://img.youtube.com/vi/EBYsx1QWF9A/hqdefault.jpg"
 ---

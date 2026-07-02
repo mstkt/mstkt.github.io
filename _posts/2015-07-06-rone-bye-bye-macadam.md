@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["rone", "Dimitri Stankowicz", "Tohu Bohu"]
 video_type: "youtube"
 video_id: "kfoJUeyMsOE"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/07/391619848.jpg"
+thumbnail: "https://img.youtube.com/vi/kfoJUeyMsOE/hqdefault.jpg"
 ---

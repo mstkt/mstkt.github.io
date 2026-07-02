@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["birdy nam nam", "willy sweeney"]
 video_type: "youtube"
 video_id: "3JJsq0GbpPg"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/12/3JJsq0GbpPg.jpg"
+thumbnail: "https://img.youtube.com/vi/3JJsq0GbpPg/hqdefault.jpg"
 ---

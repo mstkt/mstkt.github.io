@@ -6,5 +6,5 @@ categories: ["short film"]
 tags: ["Kuma Recordings", "Al Charrière"]
 video_type: "youtube"
 video_id: "ZYMnYNd7baw"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/06/508888960.jpg"
+thumbnail: "https://img.youtube.com/vi/ZYMnYNd7baw/hqdefault.jpg"
 ---

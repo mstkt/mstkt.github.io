@@ -6,5 +6,5 @@ categories: []
 tags: ["the flaming lips", "dolecreative"]
 video_type: "youtube"
 video_id: "FxfWTvJD1q8"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/11/91532312.jpg"
+thumbnail: "https://img.youtube.com/vi/FxfWTvJD1q8/hqdefault.jpg"
 ---

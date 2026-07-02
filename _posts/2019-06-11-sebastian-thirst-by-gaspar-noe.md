@@ -6,5 +6,5 @@ categories: ["2019"]
 tags: ["sebastian", "phantasm", "saint laurent", "gaspar noé"]
 video_type: "youtube"
 video_id: "-kyAucCCiRI"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2019/06/kyAucCCiRI.jpg"
+thumbnail: "https://img.youtube.com/vi/-kyAucCCiRI/hqdefault.jpg"
 ---

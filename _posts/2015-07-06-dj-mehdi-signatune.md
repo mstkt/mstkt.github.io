@@ -6,5 +6,5 @@ categories: []
 tags: ["romain gavras", "DJ Mehdi"]
 video_type: "youtube"
 video_id: "bOyU_OzRXnM"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/07/589302228.jpg"
+thumbnail: "https://img.youtube.com/vi/bOyU_OzRXnM/hqdefault.jpg"
 ---

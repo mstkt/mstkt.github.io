@@ -6,5 +6,5 @@ categories: []
 tags: ["Uncategorized"]
 video_type: "youtube"
 video_id: "V3tx435a_84"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/05/641720377.jpg"
+thumbnail: "https://img.youtube.com/vi/V3tx435a_84/hqdefault.jpg"
 ---

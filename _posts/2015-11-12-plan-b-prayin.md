@@ -6,5 +6,5 @@ categories: ["2010"]
 tags: ["daniel wolfe", "plan b"]
 video_type: "youtube"
 video_id: "axfD-IqmTZg"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/11/263932542.jpg"
+thumbnail: "https://img.youtube.com/vi/axfD-IqmTZg/hqdefault.jpg"
 ---

@@ -6,5 +6,5 @@ categories: ["vfx"]
 tags: ["Dr. Sepian", "Juana Molina"]
 video_type: "youtube"
 video_id: "UC2lFttTOIM"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/06/sddefault.jpg"
+thumbnail: "https://img.youtube.com/vi/UC2lFttTOIM/hqdefault.jpg"
 ---

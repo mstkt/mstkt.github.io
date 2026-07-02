@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["allen &amp; smithee", "alexandre chatelard", "soldats"]
 video_type: "youtube"
 video_id: "YGDOVjz1F60"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/08/585747473.jpg"
+thumbnail: "https://img.youtube.com/vi/YGDOVjz1F60/hqdefault.jpg"
 ---

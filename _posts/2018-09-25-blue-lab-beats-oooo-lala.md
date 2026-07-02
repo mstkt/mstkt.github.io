@@ -6,5 +6,5 @@ categories: ["2018"]
 tags: ["john e price", "black sheep studios", "blue lab beats"]
 video_type: "youtube"
 video_id: "zgRqpvGan0k"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/696259611.jpg"
+thumbnail: "https://img.youtube.com/vi/zgRqpvGan0k/hqdefault.jpg"
 ---

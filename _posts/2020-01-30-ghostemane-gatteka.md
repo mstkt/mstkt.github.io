@@ -6,5 +6,5 @@ categories: ["2019"]
 tags: ["blackmage", "ghostmane", "stop motion", "thomas j yagodinski"]
 video_type: "youtube"
 video_id: "Ao7ogneCa2E"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2020/01/Ao7ogneCa2E.jpg"
+thumbnail: "https://img.youtube.com/vi/Ao7ogneCa2E/hqdefault.jpg"
 ---

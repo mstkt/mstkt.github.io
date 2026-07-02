@@ -6,5 +6,5 @@ categories: ["2020"]
 tags: ["maslo chernogo tmina", "aisultan seitov"]
 video_type: "youtube"
 video_id: "eBX99ylGbck"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2021/02/maxresdefault-1.jpg"
+thumbnail: "https://img.youtube.com/vi/eBX99ylGbck/hqdefault.jpg"
 ---

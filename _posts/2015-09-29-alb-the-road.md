@@ -6,5 +6,5 @@ categories: ["animation"]
 tags: ["shoobAKA", "bérengère morel", "julien lassort", "abel reverter", "loïs de cornulier", "alb", "phong luong"]
 video_type: "youtube"
 video_id: "vZHtjv4oJw8"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/09/518719893.jpg"
+thumbnail: "https://img.youtube.com/vi/vZHtjv4oJw8/hqdefault.jpg"
 ---

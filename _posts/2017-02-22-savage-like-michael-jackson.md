@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["james chappell", "savage"]
 video_type: "youtube"
 video_id: "t1pqi8vjTLY"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/02/522997459.jpg"
+thumbnail: "https://img.youtube.com/vi/t1pqi8vjTLY/hqdefault.jpg"
 ---

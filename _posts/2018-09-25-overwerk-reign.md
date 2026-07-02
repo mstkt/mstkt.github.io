@@ -6,5 +6,5 @@ categories: ["2018"]
 tags: ["lasse noer", "overwerk", "lasse tvilum toft"]
 video_type: "youtube"
 video_id: "N-sDbJSXnYc"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/697148702.jpg"
+thumbnail: "https://img.youtube.com/vi/N-sDbJSXnYc/hqdefault.jpg"
 ---

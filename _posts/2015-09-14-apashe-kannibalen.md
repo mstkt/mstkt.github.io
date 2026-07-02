@@ -6,5 +6,5 @@ categories: []
 tags: ["jean alexandre luciani", "apashe", "yellowmoon films", "jerome de gerlache"]
 video_type: "youtube"
 video_id: "SxdXhJAeGZo"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/09/621126134.jpg"
+thumbnail: "https://img.youtube.com/vi/SxdXhJAeGZo/hqdefault.jpg"
 ---

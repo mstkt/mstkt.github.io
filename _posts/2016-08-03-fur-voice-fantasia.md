@@ -6,5 +6,5 @@ categories: ["2015", "vfx"]
 tags: ["limón estudios", "pablo maestres", "fur voice"]
 video_type: "youtube"
 video_id: "nibdoW2tQlg"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/08/954151594.jpg"
+thumbnail: "https://img.youtube.com/vi/nibdoW2tQlg/hqdefault.jpg"
 ---

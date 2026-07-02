@@ -6,5 +6,5 @@ categories: ["2018"]
 tags: ["alynda mariposa segarra", "babypanther", "kristian mercado figueroa"]
 video_type: "youtube"
 video_id: "LilVDjLaZSE"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/803246468.jpg"
+thumbnail: "https://img.youtube.com/vi/LilVDjLaZSE/hqdefault.jpg"
 ---

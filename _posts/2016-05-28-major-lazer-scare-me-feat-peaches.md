@@ -6,5 +6,5 @@ categories: ["vfx", "2016"]
 tags: ["anthem films", "major lazer", "david karlak", "brandon dermer"]
 video_type: "youtube"
 video_id: "6EiBJPMIn8M"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2016/05/6EiBJPMIn8M.jpg"
+thumbnail: "https://img.youtube.com/vi/6EiBJPMIn8M/hqdefault.jpg"
 ---

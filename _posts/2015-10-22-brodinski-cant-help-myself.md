@@ -6,5 +6,5 @@ categories: ["vfx"]
 tags: ["brodinsky", "megaforce"]
 video_type: "youtube"
 video_id: "VQu-rJEoYQY"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2015/10/497355564.jpg"
+thumbnail: "https://img.youtube.com/vi/VQu-rJEoYQY/hqdefault.jpg"
 ---

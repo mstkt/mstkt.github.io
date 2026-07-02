@@ -6,5 +6,5 @@ categories: ["2010"]
 tags: ["arnold de parscau", "david lynch"]
 video_type: "youtube"
 video_id: "IugOfDBWcGc"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/07/133926956.jpg"
+thumbnail: "https://img.youtube.com/vi/IugOfDBWcGc/hqdefault.jpg"
 ---

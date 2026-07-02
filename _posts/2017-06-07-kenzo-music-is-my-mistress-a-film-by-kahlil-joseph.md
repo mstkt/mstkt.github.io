@@ -6,5 +6,5 @@ categories: ["2017", "short film"]
 tags: ["kenzo", "kahlil joseph"]
 video_type: "youtube"
 video_id: "MgP9GhalOKA"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/06/645728902.jpg"
+thumbnail: "https://img.youtube.com/vi/MgP9GhalOKA/hqdefault.jpg"
 ---

@@ -6,5 +6,5 @@ categories: ["2018"]
 tags: ["christopher ripley", "stam goody", "aqsent"]
 video_type: "youtube"
 video_id: "6osFCIdDCas"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2018/09/704774948.jpg"
+thumbnail: "https://img.youtube.com/vi/6osFCIdDCas/hqdefault.jpg"
 ---

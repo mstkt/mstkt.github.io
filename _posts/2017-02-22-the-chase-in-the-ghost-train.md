@@ -6,5 +6,5 @@ categories: ["2016"]
 tags: ["yann konowicz", "hugo ramirez"]
 video_type: "youtube"
 video_id: "JavoV2RjkjU"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2017/02/591255790.jpg"
+thumbnail: "https://img.youtube.com/vi/JavoV2RjkjU/hqdefault.jpg"
 ---

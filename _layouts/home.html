@@ -24,8 +24,11 @@ layout: default
           </a>
         </div>
       {% elsif post.video_type == "vimeo" %}
-        <div class="post-thumb post-thumb--novideo">
-          <a href="{{ post.url | relative_url }}"><span class="play-icon">▶</span></a>
+        <div class="post-thumb">
+          <a href="{{ post.url | relative_url }}">
+            <img src="https://vumbnail.com/{{ post.video_id }}.jpg"
+                 alt="{{ post.title }}" loading="lazy">
+          </a>
         </div>
       {% elsif post.thumbnail %}
         <div class="post-thumb">

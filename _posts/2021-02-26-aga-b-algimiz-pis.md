@@ -6,5 +6,5 @@ categories: ["2019"]
 tags: ["aga b", "göksel altül"]
 video_type: "youtube"
 video_id: "Xy6l4rnusaY"
-thumbnail: "https://odyofilm.com/wp-content/uploads/2021/02/maxresdefault-6.jpg"
+thumbnail: "https://img.youtube.com/vi/Xy6l4rnusaY/hqdefault.jpg"
 ---
