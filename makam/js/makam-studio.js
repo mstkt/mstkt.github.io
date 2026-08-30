@@ -1646,33 +1646,187 @@
             window.addEventListener('mouseup', () => this.onMouseUp());
             this.canvas.addEventListener('dblclick', (e) => this.onDoubleClick(e));
 
-            // Native Touch Listeners for Mobile
+            // Advanced Mobile Touch Gestures & Panning Engine
+            this.touchState = {
+                isTwoFinger: false,
+                dist0: 0,
+                center0: { x: 0, y: 0 },
+                scroll0: { x: 0, y: 0 },
+                ppb0: 60,
+                start: { x: 0, y: 0, clientX: 0, clientY: 0, scrollX: 0, scrollY: 0, time: 0 },
+                isPanning: false,
+                potentialPan: false,
+                isNoteAction: false
+            };
+
             this.canvas.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 2) {
+                    e.preventDefault();
+                    this.touchState.isTwoFinger = true;
+                    this.touchState.potentialPan = false;
+                    this.touchState.isPanning = false;
+                    this.isDragging = false;
+                    this.isResizing = false;
+
+                    const t1 = e.touches[0];
+                    const t2 = e.touches[1];
+                    this.touchState.dist0 = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+                    this.touchState.center0 = { x: (t1.clientX + t2.clientX) / 2, y: (t1.clientY + t2.clientY) / 2 };
+                    this.touchState.scroll0 = { x: this.scrollX, y: this.scrollY };
+                    this.touchState.ppb0 = this.pixelsPerBeat;
+                    return;
+                }
+
                 if (e.touches.length === 1) {
                     const t = e.touches[0];
-                    const mouseEvent = {
+                    const rect = this.canvas.getBoundingClientRect();
+                    const x = t.clientX - rect.left;
+                    const y = t.clientY - rect.top;
+
+                    this.touchState.isTwoFinger = false;
+                    this.touchState.start = {
                         clientX: t.clientX,
                         clientY: t.clientY,
-                        button: (this.toolMode === 'erase') ? 2 : 0,
-                        shiftKey: (this.toolMode === 'select'),
-                        preventDefault: () => {}
+                        canvasX: x,
+                        canvasY: y,
+                        scrollX: this.scrollX,
+                        scrollY: this.scrollY,
+                        time: Date.now()
                     };
-                    this.onMouseDown(mouseEvent);
+
+                    // Pan tool mode -> immediate direct panning
+                    if (this.toolMode === 'pan') {
+                        e.preventDefault();
+                        this.touchState.isPanning = true;
+                        this.touchState.potentialPan = false;
+                        return;
+                    }
+
+                    // Keyboard column drag (left) or Ruler header drag (top) -> direct scroll
+                    if (x < this.keyboardWidth || y < this.headerHeight) {
+                        e.preventDefault();
+                        this.touchState.isPanning = true;
+                        this.touchState.potentialPan = false;
+                        // Audition note if on keyboard
+                        if (x < this.keyboardWidth && y >= this.headerHeight) {
+                            const pitch = this.yToPitch(y);
+                            if (this.currentLayer === 'drums') {
+                                if (this.onAuditionDrum) this.onAuditionDrum(getClosestDrumPitch(pitch));
+                            } else if (this.onAuditionNote) {
+                                this.onAuditionNote(pitch, 0);
+                            }
+                        } else if (y < this.headerHeight && x >= this.keyboardWidth) {
+                            // Tap on measure header selects the measure
+                            const clickBeat = Math.max(0, this.xToBeat(x));
+                            const cycleBeats = getUsulBeats(this.usul);
+                            const measureIndex = Math.floor(clickBeat / cycleBeats);
+                            const mStart = measureIndex * cycleBeats;
+                            const mEnd = mStart + cycleBeats;
+                            this.selectedNotes.clear();
+                            for (const n of this.getActiveNotes()) {
+                                if (n.startBeat >= mStart - 1e-4 && n.startBeat < mEnd - 1e-4) {
+                                    this.selectedNotes.add(n);
+                                }
+                            }
+                            this.notifySelection();
+                            if (this.onSeek) this.onSeek(mStart);
+                            this.render();
+                        }
+                        return;
+                    }
+
+                    // If touching an existing note -> start note drag / erase
+                    const note = this.findNoteAt(x, y);
+                    if (note || this.toolMode === 'erase') {
+                        this.touchState.isNoteAction = true;
+                        this.touchState.potentialPan = false;
+                        this.touchState.isPanning = false;
+                        const mouseEvent = {
+                            clientX: t.clientX,
+                            clientY: t.clientY,
+                            button: (this.toolMode === 'erase') ? 2 : 0,
+                            shiftKey: false,
+                            preventDefault: () => {}
+                        };
+                        this.onMouseDown(mouseEvent);
+                    } else {
+                        // Empty grid space: allow drag-to-pan or tap-to-draw
+                        this.touchState.isNoteAction = false;
+                        this.touchState.potentialPan = true;
+                        this.touchState.isPanning = false;
+                    }
                 }
             }, { passive: false });
 
             this.canvas.addEventListener('touchmove', (e) => {
+                if (this.touchState.isTwoFinger && e.touches.length === 2) {
+                    e.preventDefault();
+                    const t1 = e.touches[0];
+                    const t2 = e.touches[1];
+                    const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+                    const center = { x: (t1.clientX + t2.clientX) / 2, y: (t1.clientY + t2.clientY) / 2 };
+
+                    // Pinch zoom
+                    if (this.touchState.dist0 > 10) {
+                        const scale = dist / this.touchState.dist0;
+                        this.pixelsPerBeat = Math.max(25, Math.min(180, this.touchState.ppb0 * scale));
+                    }
+
+                    // 2-Finger Pan
+                    const dx = center.x - this.touchState.center0.x;
+                    const dy = center.y - this.touchState.center0.y;
+                    this.scrollX = Math.max(0, this.touchState.scroll0.x - dx);
+                    this.scrollY = Math.max(0, this.touchState.scroll0.y - dy);
+                    this.render();
+                    return;
+                }
+
                 if (e.touches.length === 1) {
                     const t = e.touches[0];
-                    const mouseEvent = {
-                        clientX: t.clientX,
-                        clientY: t.clientY
-                    };
-                    this.onMouseMove(mouseEvent);
+                    const dx = t.clientX - this.touchState.start.clientX;
+                    const dy = t.clientY - this.touchState.start.clientY;
+                    const distMoved = Math.hypot(dx, dy);
+
+                    if (this.touchState.isPanning || (this.touchState.potentialPan && distMoved > 6)) {
+                        e.preventDefault();
+                        this.touchState.potentialPan = false;
+                        this.touchState.isPanning = true;
+
+                        this.scrollX = Math.max(0, this.touchState.start.scrollX - dx);
+                        const maxScrollY = Math.max(0, (this.maxMidi - this.minMidi + 1) * this.rowHeight - (this.canvas.clientHeight - this.headerHeight));
+                        this.scrollY = Math.max(0, Math.min(maxScrollY, this.touchState.start.scrollY - dy));
+                        this.render();
+                        return;
+                    }
+
+                    if (this.touchState.isNoteAction) {
+                        e.preventDefault();
+                        this.onMouseMove({ clientX: t.clientX, clientY: t.clientY });
+                    }
                 }
             }, { passive: false });
 
-            this.canvas.addEventListener('touchend', () => {
+            this.canvas.addEventListener('touchend', (e) => {
+                if (this.touchState.isTwoFinger) {
+                    if (e.touches.length < 2) this.touchState.isTwoFinger = false;
+                    return;
+                }
+
+                // If user tapped on empty grid without dragging -> place/toggle note!
+                if (this.touchState.potentialPan && !this.touchState.isPanning) {
+                    const mouseEvent = {
+                        clientX: this.touchState.start.clientX,
+                        clientY: this.touchState.start.clientY,
+                        button: (this.toolMode === 'erase') ? 2 : 0,
+                        shiftKey: false,
+                        preventDefault: () => {}
+                    };
+                    this.onMouseDown(mouseEvent);
+                }
+
+                this.touchState.isPanning = false;
+                this.touchState.potentialPan = false;
+                this.touchState.isNoteAction = false;
                 this.onMouseUp();
             });
 
