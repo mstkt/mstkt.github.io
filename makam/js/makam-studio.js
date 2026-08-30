@@ -1507,7 +1507,7 @@
             this.pixelsPerBeat = 65.0;
             this.rowHeight = 22.0;
             this.headerHeight = 28.0;
-            this.keyboardWidth = 120.0;
+            this.updateKeyboardWidth();
             this.scrollX = 0;
             this.scrollY = 0;
             this.minMidi = 48;
@@ -1532,10 +1532,20 @@
             this.resize();
         }
 
+        updateKeyboardWidth() {
+            const isMobile = (window.innerWidth <= 768);
+            if (this.currentLayer === 'drums') {
+                this.keyboardWidth = isMobile ? 74 : 110;
+            } else {
+                this.keyboardWidth = isMobile ? 42 : 54;
+            }
+        }
+
         setMakam(m, d) { this.makam = m; this.durakMidi = d || this.durakMidi; this.render(); }
         setUsul(u) { this.usul = u; this.render(); }
         setLayer(l) {
             this.currentLayer = l;
+            this.updateKeyboardWidth();
             this.selectedNotes.clear();
             if (l === 'drums') {
                 this.minMidi = 34;
@@ -2071,6 +2081,7 @@
         }
 
         render() {
+            this.updateKeyboardWidth();
             const w = this.canvas.width / (window.devicePixelRatio || 1);
             const h = this.canvas.height / (window.devicePixelRatio || 1);
             this.ctx.clearRect(0, 0, w, h);
@@ -2105,108 +2116,122 @@
                 this.ctx.stroke();
             }
 
-            // Beat Vertical Grid
-            const cycle16 = this.usul ? this.usul.cycleSixteenths : 16;
-            const cycleBeats = cycle16 / 4.0;
+            // Usul Beat Grid Lines & Measure Bar Numbers
+            const cycleBeats = getUsulBeats(this.usul);
 
             for (let b = 0; b <= this.totalBeats + 4; b += 0.25) {
                 const x = this.beatToX(b);
                 if (x < this.keyboardWidth || x > w) continue;
-                const isCycle = Math.abs(b % cycleBeats) < 1e-4;
-                const isQuarter = Math.abs(b % 1.0) < 1e-4;
+
+                const isBar = Math.abs(b % cycleBeats) < 1e-4;
+                const isBeat = Math.abs(b % 1.0) < 1e-4;
+
+                this.ctx.strokeStyle = isBar ? '#b8860b' : (isBeat ? '#d8cbb0' : '#ece4d0');
+                this.ctx.lineWidth = isBar ? 2 : (isBeat ? 1 : 0.5);
 
                 this.ctx.beginPath();
                 this.ctx.moveTo(x, this.headerHeight);
                 this.ctx.lineTo(x, h);
-                this.ctx.strokeStyle = isCycle ? '#b8860b' : (isQuarter ? '#d8cbb0' : '#ece4d2');
-                this.ctx.lineWidth = isCycle ? 1.5 : (isQuarter ? 1 : 0.5);
                 this.ctx.stroke();
             }
 
-            // Notes
+            // Draw Notes on Active Layer
             const notes = this.getActiveNotes();
             for (const n of notes) {
                 const x = this.beatToX(n.startBeat);
                 const y = this.pitchToY(n.pitch);
-                const nw = Math.max(8, n.lengthBeats * this.pixelsPerBeat);
+                const nw = Math.max(12, n.lengthBeats * this.pixelsPerBeat - 2);
                 const nh = this.rowHeight - 2;
 
                 if (x + nw < this.keyboardWidth || y < this.headerHeight - nh) continue;
 
-                const isSelected = this.selectedNotes.has(n);
-                const grad = this.ctx.createLinearGradient(x, y, x, y + nh);
-                if (this.currentLayer === 'melody') {
-                    // Deep Imperial Ottoman Turquoise Notes with Gold Border
-                    grad.addColorStop(0, isSelected ? '#1c6d67' : '#0b2b2c');
-                    grad.addColorStop(1, isSelected ? '#124e52' : '#143d3b');
-                } else if (this.currentLayer === 'bass') {
-                    // Deep Ottoman Burgundy Notes
-                    grad.addColorStop(0, isSelected ? '#782e30' : '#4a1015');
-                    grad.addColorStop(1, isSelected ? '#5b181b' : '#33080c');
+                const isSel = this.selectedNotes.has(n);
+                const isHover = (this.hoveredNote === n);
+
+                if (this.currentLayer === 'drums') {
+                    this.ctx.fillStyle = isSel ? '#d4af37' : '#8c2428';
+                    this.ctx.strokeStyle = isHover ? '#fff' : (isSel ? '#fff' : '#4a1015');
+                    this.ctx.lineWidth = isSel ? 2 : 1;
+                    this.ctx.beginPath();
+                    this.ctx.roundRect(x, y + 1, nw, nh, 3);
+                    this.ctx.fill();
+                    this.ctx.stroke();
+
+                    this.ctx.fillStyle = '#ffffff';
+                    this.ctx.font = 'bold 9.5px sans-serif';
+                    this.ctx.fillText(n.stroke || 'Düm', x + 3, y + this.rowHeight - 7);
                 } else {
-                    // Percussion / Drum Hits (Burnished Gold & Amber)
-                    grad.addColorStop(0, isSelected ? '#f3e5ab' : '#d4af37');
-                    grad.addColorStop(1, isSelected ? '#d4af37' : '#b8860b');
-                }
-
-                this.ctx.fillStyle = grad;
-                this.ctx.beginPath();
-                this.ctx.roundRect(x + 1, y + 1, nw - 2, nh, 3);
-                this.ctx.fill();
-
-                this.ctx.strokeStyle = isSelected ? '#ffffff' : (this.currentLayer === 'drums' ? '#4a1015' : '#b8860b');
-                this.ctx.lineWidth = isSelected ? 2 : 1;
-                this.ctx.stroke();
-
-                if (nw > 14) {
-                    this.ctx.fillStyle = this.currentLayer === 'drums' ? '#2b1b05' : '#f8f1e3';
-                    this.ctx.font = 'bold 10px "Hanken Grotesk", sans-serif';
-                    let lbl = '';
-                    if (this.currentLayer === 'drums') {
-                        lbl = n.stroke || DRUM_LANES.find(l => l.pitch === n.pitch)?.stroke || 'Hit';
+                    const isDurak = (n.pitch === this.durakMidi);
+                    const grad = this.ctx.createLinearGradient(x, y, x, y + nh);
+                    if (isSel) {
+                        grad.addColorStop(0, '#f9d976');
+                        grad.addColorStop(1, '#e9a425');
+                    } else if (isDurak) {
+                        grad.addColorStop(0, '#1a5c61');
+                        grad.addColorStop(1, '#0b2b2c');
                     } else {
-                        if (n.ornament) {
-                            if (n.ornament === 'grace') lbl += '✨';
-                            if (n.ornament === 'mordent') lbl += '〰️';
-                            if (n.ornament === 'turn') lbl += '🔄';
-                            if (n.ornament === 'slide') lbl += '🎢';
-                        }
-                        if (n.detuneCents && Math.abs(n.detuneCents) > 1) {
-                            lbl += ` ${n.detuneCents > 0 ? '+' : ''}${Math.round(n.detuneCents)}c`;
-                        }
-                        if (n.locked) lbl = `🔒 ${lbl}`;
+                        grad.addColorStop(0, '#1e6d73');
+                        grad.addColorStop(1, '#124e52');
                     }
-                    if (lbl) this.ctx.fillText(lbl, x + 4, y + nh - 5);
+
+                    this.ctx.fillStyle = grad;
+                    this.ctx.strokeStyle = isHover ? '#ffffff' : (isSel ? '#ffffff' : '#071f20');
+                    this.ctx.lineWidth = isSel ? 2 : 1;
+                    this.ctx.beginPath();
+                    this.ctx.roundRect(x, y + 1, nw, nh, 3);
+                    this.ctx.fill();
+                    this.ctx.stroke();
+
+                    if (n.detuneCents !== 0 && Math.abs(n.detuneCents) >= 1) {
+                        this.ctx.fillStyle = isSel ? '#1a0f02' : '#f3e5ab';
+                        this.ctx.font = 'bold 9px sans-serif';
+                        const sign = n.detuneCents > 0 ? '+' : '';
+                        this.ctx.fillText(`${sign}${Math.round(n.detuneCents)}c`, x + 3, y + this.rowHeight - 7);
+                    }
+
+                    if (n.ornament) {
+                        this.ctx.fillStyle = '#ffdf78';
+                        this.ctx.font = 'bold 9px sans-serif';
+                        const ornIcon = { grace: '✨', mordent: '〰️', turn: '🔄', slide: '🎢' }[n.ornament] || '✦';
+                        this.ctx.fillText(ornIcon, x + nw - 13, y + 11);
+                    }
                 }
             }
 
-            // Marquee selection box
+            // Marquee Selection Box
             if (this.isMarqueeSelecting) {
                 const minX = Math.min(this.marqueeBox.x1, this.marqueeBox.x2);
                 const maxX = Math.max(this.marqueeBox.x1, this.marqueeBox.x2);
                 const minY = Math.min(this.marqueeBox.y1, this.marqueeBox.y2);
                 const maxY = Math.max(this.marqueeBox.y1, this.marqueeBox.y2);
 
-                this.ctx.fillStyle = 'rgba(212, 175, 55, 0.20)';
-                this.ctx.fillRect(minX, minY, maxX - minX, maxY - minY);
-                this.ctx.strokeStyle = '#b8860b';
+                this.ctx.fillStyle = 'rgba(0, 210, 255, 0.15)';
+                this.ctx.strokeStyle = '#00d2ff';
                 this.ctx.lineWidth = 1;
+                this.ctx.fillRect(minX, minY, maxX - minX, maxY - minY);
                 this.ctx.strokeRect(minX, minY, maxX - minX, maxY - minY);
             }
 
-            // Playhead
+            // Playhead Line
             const phX = this.beatToX(this.playheadBeat);
             if (phX >= this.keyboardWidth) {
-                this.ctx.strokeStyle = '#c0262b';
+                this.ctx.strokeStyle = '#e74c3c';
                 this.ctx.lineWidth = 2;
                 this.ctx.beginPath();
                 this.ctx.moveTo(phX, 0);
                 this.ctx.lineTo(phX, h);
                 this.ctx.stroke();
+
+                this.ctx.fillStyle = '#e74c3c';
+                this.ctx.beginPath();
+                this.ctx.moveTo(phX - 5, this.headerHeight);
+                this.ctx.lineTo(phX + 5, this.headerHeight);
+                this.ctx.lineTo(phX, this.headerHeight + 7);
+                this.ctx.fill();
             }
 
-            // Header timeline
-            this.ctx.fillStyle = '#e8dfc5';
+            // Top Header Measure Ruler Bar
+            this.ctx.fillStyle = '#f5eedb';
             this.ctx.fillRect(0, 0, w, this.headerHeight);
             this.ctx.strokeStyle = '#b8860b';
             this.ctx.strokeRect(0, 0, w, this.headerHeight);
@@ -2241,8 +2266,9 @@
                     this.ctx.fillRect(0, y + 1, this.keyboardWidth - 2, this.rowHeight - 2);
 
                     this.ctx.fillStyle = lane ? '#0b2b2c' : '#7d745c';
-                    this.ctx.font = lane ? 'bold 11px "Libre Caslon Text", serif' : '10px sans-serif';
-                    this.ctx.fillText(lane ? `🥁 ${lane.name}` : `(Boş)`, 6, y + this.rowHeight - 6);
+                    this.ctx.font = lane ? (this.keyboardWidth < 80 ? 'bold 9.5px sans-serif' : 'bold 11px "Libre Caslon Text", serif') : '10px sans-serif';
+                    let dText = lane ? (this.keyboardWidth < 80 ? `${lane.stroke} (${lane.pitch})` : `🥁 ${lane.name}`) : `(Boş)`;
+                    this.ctx.fillText(dText, 3, y + this.rowHeight - 6);
                 } else {
                     const isBlack = [1, 3, 6, 8, 10].includes(p % 12);
                     const isDurak = (p === this.durakMidi);
@@ -2251,11 +2277,11 @@
                     this.ctx.fillRect(0, y + 1, this.keyboardWidth - 2, this.rowHeight - 2);
 
                     this.ctx.fillStyle = isDurak ? '#d4af37' : '#4a1015';
-                    this.ctx.font = isDurak ? 'bold 11px "Libre Caslon Text", serif' : '10.5px "Libre Caslon Text", serif';
+                    this.ctx.font = isDurak ? (this.keyboardWidth < 50 ? 'bold 9.5px sans-serif' : 'bold 10px "Libre Caslon Text", serif') : (this.keyboardWidth < 50 ? '9px sans-serif' : '9.5px "Libre Caslon Text", serif');
                     const noteNames = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'];
                     let lbl = `${noteNames[p % 12]}${Math.floor(p / 12) - 1}`;
-                    if (isDurak) lbl += ' ★ Durak';
-                    this.ctx.fillText(lbl, 8, y + this.rowHeight - 6);
+                    if (isDurak) lbl += (this.keyboardWidth < 50 ? ' ★' : ' ★ Durak');
+                    this.ctx.fillText(lbl, 3, y + this.rowHeight - 6);
                 }
             }
         }
