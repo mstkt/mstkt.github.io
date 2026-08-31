@@ -13,6 +13,7 @@
 
 export const INSTRUMENTS = {
     NEY: 'ney',
+    CLARINET: 'clarinet',
     TANBUR: 'tanbur',
     UD: 'ud',
     STRINGS: 'strings',

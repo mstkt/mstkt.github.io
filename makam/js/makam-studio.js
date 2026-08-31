@@ -1309,6 +1309,69 @@
                 osc.start(startTime);
                 osc.stop(startTime + dur + 0.2);
 
+            } else if (inst === 'clarinet') {
+                // ==========================================================
+                // SOL KLARNET (G Clarinet - Trakya & Roman Tavrı)
+                // Tek kamışlı silindirik boru rezonansı (Tekil harmonikler + sıcak boğaz rezonansı)
+                // ==========================================================
+                const osc = this.ctx.createOscillator();
+                const osc3rd = this.ctx.createOscillator();
+                const filter = this.ctx.createBiquadFilter();
+                const gain = this.ctx.createGain();
+
+                osc.type = 'square';
+                osc3rd.type = 'sine';
+
+                if (ornament === 'slide') {
+                    osc.frequency.setValueAtTime(freq * Math.pow(2, -250 / 1200), startTime);
+                    osc.frequency.exponentialRampToValueAtTime(freq, startTime + 0.11);
+                    osc3rd.frequency.setValueAtTime(freq * 3 * Math.pow(2, -250 / 1200), startTime);
+                    osc3rd.frequency.exponentialRampToValueAtTime(freq * 3, startTime + 0.11);
+                } else {
+                    osc.frequency.setValueAtTime(freq, startTime);
+                    osc3rd.frequency.setValueAtTime(freq * 3, startTime);
+                }
+
+                if (ornament === 'mordent') {
+                    osc.frequency.setValueAtTime(freq, startTime);
+                    osc.frequency.setValueAtTime(freq * Math.pow(2, 23 / 1200), startTime + 0.05);
+                    osc.frequency.setValueAtTime(freq, startTime + 0.10);
+                }
+
+                if (ornament === 'turn') {
+                    osc.frequency.setValueAtTime(freq * Math.pow(2, 23 / 1200), startTime);
+                    osc.frequency.setValueAtTime(freq, startTime + 0.04);
+                    osc.frequency.setValueAtTime(freq * Math.pow(2, -23 / 1200), startTime + 0.08);
+                    osc.frequency.setValueAtTime(freq, startTime + 0.12);
+                }
+
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(Math.min(3800, freq * 3.8 + 800), startTime);
+                filter.Q.value = 1.4;
+
+                const mainGain = this.ctx.createGain();
+                mainGain.gain.value = 0.22;
+                osc.connect(filter);
+                filter.connect(mainGain);
+
+                const hGain = this.ctx.createGain();
+                hGain.gain.value = 0.08;
+                osc3rd.connect(hGain);
+
+                mainGain.connect(gain);
+                hGain.connect(gain);
+
+                gain.gain.setValueAtTime(0.001, startTime);
+                gain.gain.linearRampToValueAtTime(vel * 0.42, startTime + 0.025);
+                gain.gain.exponentialRampToValueAtTime(0.0001, startTime + dur + 0.12);
+
+                gain.connect(this.dest);
+
+                osc.start(startTime);
+                osc3rd.start(startTime);
+                osc.stop(startTime + dur + 0.2);
+                osc3rd.stop(startTime + dur + 0.2);
+
             } else {
                 // ==========================================================
                 // NEY: Mistik nefesli, hava hışırtısı ve kamış rezonansı
@@ -3049,6 +3112,7 @@
                             <div class="channel-controls">
                                 <select class="form-select inst-sel" data-ch="melody">
                                     <option value="ney" selected>Ney (Mistik)</option>
+                                    <option value="clarinet">Klarnet (Sol Klarnet / Trakya)</option>
                                     <option value="ud">Ud (Akustik)</option>
                                     <option value="kanun">Kanun (Parlak)</option>
                                     <option value="tanbur">Tanbur (Tel)</option>
