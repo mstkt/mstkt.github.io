@@ -3089,11 +3089,11 @@
                 <div class="mixer-container">
                     <div class="mixer-header">
                         <h4>Mikser & Reverb</h4>
-                        <div style="display: flex; gap: 10px; align-items: center;">
+                        <div class="mixer-header-controls">
                             <div class="ahenk-selector-group">
-                                <label for="reverbSelect">Mekan Akustiği:</label>
+                                <label for="reverbSelect">Mekan:</label>
                                 <select id="reverbSelect" class="form-select">
-                                    <option value="cami" selected>Tarihi Cami / Külliye</option>
+                                    <option value="cami" selected>Tarihi Cami</option>
                                     <option value="mesk">Meşk Odası</option>
                                     <option value="dry">Kuru (Dry)</option>
                                 </select>

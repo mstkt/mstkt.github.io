@@ -751,9 +751,9 @@ input[type="range"]::-moz-range-thumb {
     }
 
     .mixer-wrapper {
-        height: 78px;
-        min-height: 78px;
-        max-height: 78px;
+        height: 94px;
+        min-height: 94px;
+        max-height: 94px;
         flex-shrink: 0;
     }
 
