@@ -3264,6 +3264,71 @@
                 };
             }
 
+            // Developer & About Modal
+            const logoBtn = document.getElementById('logoBtn');
+            const aboutModal = document.getElementById('aboutModal');
+            const modalCloseBtn = document.getElementById('modalCloseBtn');
+            const modalOkBtn = document.getElementById('modalOkBtn');
+            const btnCopyEmail = document.getElementById('btnCopyEmail');
+            const copyText = document.getElementById('copyText');
+
+            const openAboutModal = () => {
+                if (aboutModal) {
+                    aboutModal.classList.add('active');
+                    aboutModal.setAttribute('aria-hidden', 'false');
+                }
+            };
+
+            const closeAboutModal = () => {
+                if (aboutModal) {
+                    aboutModal.classList.remove('active');
+                    aboutModal.setAttribute('aria-hidden', 'true');
+                }
+            };
+
+            if (logoBtn) {
+                logoBtn.onclick = openAboutModal;
+                logoBtn.onkeydown = (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openAboutModal();
+                    }
+                };
+            }
+
+            if (modalCloseBtn) modalCloseBtn.onclick = closeAboutModal;
+            if (modalOkBtn) modalOkBtn.onclick = closeAboutModal;
+            if (aboutModal) {
+                aboutModal.onclick = (e) => {
+                    if (e.target === aboutModal) closeAboutModal();
+                };
+            }
+
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && aboutModal && aboutModal.classList.contains('active')) {
+                    closeAboutModal();
+                }
+            });
+
+            if (btnCopyEmail) {
+                btnCopyEmail.onclick = async (e) => {
+                    e.preventDefault();
+                    try {
+                        await navigator.clipboard.writeText('mustafawuzun@gmail.com');
+                        if (copyText) copyText.textContent = 'Kopyalandı! ✓';
+                        btnCopyEmail.style.background = 'var(--gold-primary)';
+                        btnCopyEmail.style.color = '#1a0f02';
+                        setTimeout(() => {
+                            if (copyText) copyText.textContent = 'Kopyala';
+                            btnCopyEmail.style.background = '';
+                            btnCopyEmail.style.color = '';
+                        }, 2000);
+                    } catch (err) {
+                        if (copyText) copyText.textContent = 'mustafawuzun@gmail.com';
+                    }
+                };
+            }
+
             const btnToggle = document.getElementById('btnToggleSidebar');
             const sidebar = document.getElementById('workspaceSidebar');
             if (btnToggle && sidebar) {

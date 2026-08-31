@@ -15,7 +15,7 @@
 <body>
     <!-- Top Header Navigation -->
     <header class="app-header">
-        <div class="logo-group">
+        <div class="logo-group" id="logoBtn" role="button" tabindex="0" title="Mustafa Uzun / Makam Studio Hakkında">
             <span class="app-logo-badge">MAKAM</span>
             <span class="app-title">Studio</span>
             <span class="app-subtitle">53-EDO Türk Musikisi & Usul Asistanı</span>
@@ -176,6 +176,57 @@
             <span>Dem & Eşlik</span>
         </button>
     </nav>
+
+    <!-- Developer & Project Info Modal -->
+    <div id="aboutModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button id="modalCloseBtn" class="modal-close-btn" aria-label="Kapat">&times;</button>
+            <div class="modal-header">
+                <div class="modal-crest">🏛️</div>
+                <h2 id="modalTitle" class="modal-title">MAKAM Studio</h2>
+                <div class="modal-badge">53-EDO Türk Musikisi & Usul Asistanı</div>
+            </div>
+            
+            <div class="modal-body">
+                <div class="developer-card">
+                    <div class="dev-avatar">MU</div>
+                    <div class="dev-info">
+                        <div class="dev-label">Geliştirici & Tasarım</div>
+                        <div class="dev-name">Mustafa Uzun</div>
+                        <div class="dev-contact">
+                            <a href="mailto:mustafawuzun@gmail.com" class="dev-email-link" title="E-Posta Gönder">
+                                <svg class="icon-mail" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                                <span>mustafawuzun@gmail.com</span>
+                            </a>
+                            <button id="btnCopyEmail" class="btn-copy" title="E-postayı Kopyala">
+                                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
+                                    <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                                </svg>
+                                <span id="copyText">Kopyala</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-features">
+                    <h4>Makam Studio Mimarisi</h4>
+                    <ul>
+                        <li><strong>53-EDO Mikrotonal Teori:</strong> Türk musikisi perdelerini ve koma aralıklarını tam matematiksel hassasiyetle hesaplar.</li>
+                        <li><strong>Akıllı Seyir & Form Motoru:</strong> Çıkıcı, inici ve inici-çıkıcı geleneksel makam seyirlerini canlı denetler ve besteler.</li>
+                        <li><strong>Otantik Enstrüman Motoru:</strong> Sol Klarnet, Ney, Kanun, Ud, Tanbûr, Çello ve Kudüm/Bendir sentezi.</li>
+                        <li><strong>DAW & MIDI Entegrasyonu:</strong> 53-EDO pitch-bend dışa aktarımı ile tüm DAW'lara (Ableton, FL, Logic vb.) uyumludur.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a href="mailto:mustafawuzun@gmail.com" class="btn btn-primary" style="text-decoration: none;">✉️ İletişime Geç</a>
+                <button id="modalOkBtn" class="btn btn-secondary">Kapat</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Standalone Script (Zero CORS) -->
     <script src="js/makam-studio.js"></script>
