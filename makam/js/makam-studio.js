@@ -488,17 +488,23 @@
             // Generate slots: Parlando-Rubato for Uzun Hava vs Usul-metered slots for classical
             const slots = [];
             if (isUzunHava) {
-                // Uzun Hava: Expansive, expressive free rhythm with breath points
-                const rubatoPoints = [0, 4, 7, 10, 13];
-                for (const pt of rubatoPoints) {
-                    if (rng.unit() < (density * 1.3 + 0.25)) {
-                        slots.push(pt);
-                    }
+                // Uzun Hava: pick sparse structural anchor points so notes have long natural sustain without colliding
+                const rubatoPatterns = [
+                    [0, 6, 12],
+                    [0, 8],
+                    [0, 5, 10],
+                    [0, 7, 13],
+                    [0, 4, 8, 12]
+                ];
+                const pattern = rubatoPatterns[Math.floor(rng.unit() * rubatoPatterns.length)];
+                for (const pt of pattern) {
+                    slots.push(pt);
                 }
-                // Fast ornamental passing notes
-                if (rng.unit() < 0.6) slots.push(1);
-                if (rng.unit() < 0.6) slots.push(5);
-                if (rng.unit() < 0.5) slots.push(8);
+                // Optional fast passing ornament
+                if (density > 0.40 && rng.unit() < 0.35) {
+                    const passSlot = (rng.unit() < 0.5) ? 2 : 11;
+                    if (!slots.includes(passSlot)) slots.push(passSlot);
+                }
                 slots.sort((a, b) => a - b);
             } else {
                 for (let i = 0; i < cycle16; ++i) {
@@ -595,16 +601,11 @@
                 let lengthBeats = until - (pos / 4.0);
                 if (lengthBeats <= 0.0) continue;
 
-                // Uzun Hava expressive fermatas and rests
-                if (isUzunHava) {
-                    if (s === 0 || s === n - 1) {
-                        // Elongated fermata on opening nida or section cadence
-                        lengthBeats = Math.min(cycleBeats * 0.8, lengthBeats * 1.8);
-                    } else if (lengthBeats > 0.5 && rng.unit() < 0.5) {
-                        lengthBeats = Math.max(0.35, lengthBeats * 0.65);
-                    }
-                } else if (!phrase.isFinal && s === n - 1 && lengthBeats > 0.5 && rng.unit() < 0.45) {
-                    lengthBeats = Math.max(0.25, lengthBeats - 0.25);
+                // Natural phrase breathing: slight musical pause on weak beat phrase ends or breath marks
+                if (!phrase.isFinal && s === n - 1 && lengthBeats > 0.75 && rng.unit() < 0.50) {
+                    lengthBeats = Math.max(0.5, lengthBeats - 0.25);
+                } else if (isUzunHava && lengthBeats > 1.0 && rng.unit() < 0.30) {
+                    lengthBeats = Math.max(0.75, lengthBeats - 0.25);
                 }
 
                 const restsHere = usul.strong && usul.strong.includes(pos);
@@ -649,6 +650,19 @@
 
             if (p === 0) previousMotifSteps = currentMotifSteps;
         }
+
+        // Strict Monophonic Safety Pass: Ensure no two notes in the melody layer ever overlap in time
+        out.sort((a, b) => a.startBeat - b.startBeat);
+        for (let i = 0; i < out.length; ++i) {
+            if (i < out.length - 1) {
+                const nextStart = out[i + 1].startBeat;
+                const maxAllowed = nextStart - out[i].startBeat;
+                if (out[i].lengthBeats > maxAllowed) {
+                    out[i].lengthBeats = Math.max(0.25, maxAllowed);
+                }
+            }
+        }
+
         return out;
     }
 
