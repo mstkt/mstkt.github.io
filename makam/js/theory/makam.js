@@ -78,8 +78,8 @@ export const MAKAMS = [
         upperIsPentachord: false,
         guclu: KOMMA.FIFTH, // 31 commas (Nevâ)
         seyir: SEYIR.ASCENDING,
-        approachFrom: 9, // Rast karar inişi (+9 koma üstten)
-        character: 'Türk musikisinin temel makamı - ne majör ne minör, asil ve kararlı.',
+        approachFrom: 9,
+        character: 'Türk musikisinin temel makamı - ne majör ne minör, asil, neşeli ve kararlı.',
         history: 'Geleneksel olarak gün doğumu vakti ve neşe duygusuyla özdeşleştirilir.'
     },
     {
@@ -91,9 +91,22 @@ export const MAKAMS = [
         upperIsPentachord: true,
         guclu: KOMMA.FOURTH, // 22 commas (Nevâ)
         seyir: SEYIR.ASCENDING,
-        approachFrom: 7, // 1 koma bemollü Segah perdesinden iniş
+        approachFrom: 7,
         character: 'En yaygın halk ve klasik makamlardan biri; hüzünlü ve içten.',
         history: 'Aşk ve samimiyet duygusunu yansıtır; ikindi vaktine atfedilir.'
+    },
+    {
+        id: 'bayati',
+        name: 'Bayatî',
+        lower: 'Uşşak',
+        lowerIsPentachord: false,
+        upper: 'Bûselik',
+        upperIsPentachord: true,
+        guclu: KOMMA.FOURTH, // 22 commas (Nevâ)
+        seyir: SEYIR.FROM_ABOVE,
+        approachFrom: 7,
+        character: 'Uşşak seslerinde İnici-Çıkıcı asil seyir; Nevâ perdesinde asılı kalan derin hüzün.',
+        history: 'Klasik ayin ve peşrevlerde çok sık başvurulan asil bir makamdır.'
     },
     {
         id: 'hicaz',
@@ -103,10 +116,49 @@ export const MAKAMS = [
         upper: 'Rast',
         upperIsPentachord: true,
         guclu: KOMMA.FOURTH, // 22 commas (Nevâ)
-        seyir: SEYIR.FROM_ABOVE, // Neva güçlüsünden başlar
-        approachFrom: 5, // Nim Hicaz'dan veya Neva'dan iniş
+        seyir: SEYIR.FROM_ABOVE,
+        approachFrom: 5,
         character: 'Geniş artık ikili adımı - yakıcı, hasret dolu ve mistik.',
         history: 'Çölün enginliğini, özlemi ve tevazuyu simgeler.'
+    },
+    {
+        id: 'humayun',
+        name: 'Hümâyûn',
+        lower: 'Hicaz',
+        lowerIsPentachord: false,
+        upper: 'Bûselik',
+        upperIsPentachord: true,
+        guclu: KOMMA.FOURTH, // 22 commas (Nevâ)
+        seyir: SEYIR.FROM_ABOVE,
+        approachFrom: 5,
+        character: 'Acem perdesiyle duru minör hissi veren, Hicaz ailesinin en lirik ve dramatik makamı.',
+        history: 'Dramatik ve asil duyguları yansıtır.'
+    },
+    {
+        id: 'uzzal',
+        name: 'Uzzâl',
+        lower: 'Hicaz',
+        lowerIsPentachord: true,
+        upper: 'Uşşak',
+        upperIsPentachord: false,
+        guclu: KOMMA.FOURTH, // 22 commas (Nevâ)
+        seyir: SEYIR.FROM_ABOVE,
+        approachFrom: 5,
+        character: 'Eviç perdesinin kattığı sıcaklık ile halk ve sanat müziğinin en sevilen içten Hicaz türü.',
+        history: 'Halk türkülerinde ve klasik şarkılarda en yaygın Hicaz türüdür.'
+    },
+    {
+        id: 'zirgulelihicaz',
+        name: 'Zirgüleli Hicaz',
+        lower: 'Hicaz',
+        lowerIsPentachord: true,
+        upper: 'Hicaz',
+        upperIsPentachord: false,
+        guclu: KOMMA.FIFTH, // 31 commas (Hüseyni)
+        seyir: SEYIR.FROM_ABOVE,
+        approachFrom: 5,
+        character: 'Hem pestte hem tizlerde artık ikili taşıyan, gösterişli ve mistik saray makamı.',
+        history: 'Klasik kâr ve bestelerde gösterişli bir tını sunar.'
     },
     {
         id: 'kurdi',
@@ -122,6 +174,32 @@ export const MAKAMS = [
         history: 'Gece vakti ve derin düşüncelerle bağdaştırılır.'
     },
     {
+        id: 'kurdilihicazkar',
+        name: 'Kürdîli Hicazkâr',
+        lower: 'Kürdî',
+        lowerIsPentachord: false,
+        upper: 'Bûselik',
+        upperIsPentachord: true,
+        guclu: KOMMA.FOURTH, // 22 commas
+        seyir: SEYIR.FROM_ABOVE,
+        approachFrom: 4,
+        character: 'Rast perdesinde Kürdî dizisi; Türk Sanat Müziğinin en akıcı, coşkulu ve popüler şarkı makamı.',
+        history: 'Hacı Ârif Bey tarafından popülerleştirilmiş en sevilen şarkı makamıdır.'
+    },
+    {
+        id: 'hicazkar',
+        name: 'Hicazkâr',
+        lower: 'Hicaz',
+        lowerIsPentachord: true,
+        upper: 'Hicaz',
+        upperIsPentachord: false,
+        guclu: KOMMA.FIFTH, // 31 commas
+        seyir: SEYIR.DESCENDING,
+        approachFrom: 5,
+        character: 'Rast perdesinde Zirgüleli Hicaz şeddi; oryantal, parlak ve büyüleyici tını.',
+        history: 'Parlak ve görkemli meclis şarkılarında sıkça kullanılır.'
+    },
+    {
         id: 'buselik',
         name: 'Bûselik',
         lower: 'Bûselik',
@@ -130,7 +208,7 @@ export const MAKAMS = [
         upperIsPentachord: false,
         guclu: KOMMA.FIFTH, // 31 commas (Hüseyni)
         seyir: SEYIR.ASCENDING,
-        approachFrom: -5, // Yeden alttan (Aşağıdan gelen lider nota)
+        approachFrom: -5,
         character: 'Koma sapması olmayan duru minör tını - güçlü ve kararlı.',
         history: 'Kuvvet ve cesaret hissi uyandırır.'
     },
@@ -141,11 +219,11 @@ export const MAKAMS = [
         lowerIsPentachord: true,
         upper: 'Kürdî',
         upperIsPentachord: false,
-        guclu: KOMMA.FIFTH, // 31 commas (Hüseyni)
-        seyir: SEYIR.DESCENDING, // Tizden girer!
+        guclu: KOMMA.FIFTH, // 31 commas (Nevâ)
+        seyir: SEYIR.DESCENDING,
         approachFrom: -5,
-        character: 'Bûselik ile aynı sesleri içerir ancak İNİCİ seyriyle tamamen farklı bir his verir.',
-        history: 'Romantizm, dinginlik ve zarafet makamı.'
+        character: 'Bûselik seslerinin İNİCİ seyriyle oluşan, zengin ve hüzünlü tını.',
+        history: 'Hüzün ve huzuru harmanlar; akşam üzeri vakitlerine atfedilir.'
     },
     {
         id: 'huseyni',
@@ -154,11 +232,37 @@ export const MAKAMS = [
         lowerIsPentachord: true,
         upper: 'Uşşak',
         upperIsPentachord: false,
-        guclu: KOMMA.FIFTH, // 31 commas (Hüseyni)
+        guclu: KOMMA.FIFTH, // 31 commas (Hüseynî)
         seyir: SEYIR.FROM_ABOVE,
         approachFrom: 7,
         character: 'Yükseklerde yaşayan, parlak ve yiğit halk türküsü tınısı.',
-        history: 'Geniş Anadolu ezgilerinin ve kahramanlık türkülerinin vazgeçilmez makamı.'
+        history: 'Bozkırın ve Anadolu halk edebiyatının baş tacı makamıdır.'
+    },
+    {
+        id: 'muhayyer',
+        name: 'Muhayyer',
+        lower: 'Hüseynî',
+        lowerIsPentachord: true,
+        upper: 'Uşşak',
+        upperIsPentachord: false,
+        guclu: 53, // Tiz durak (Muhayyer)
+        seyir: SEYIR.DESCENDING,
+        approachFrom: 7,
+        character: 'Tiz duraktan süzülen, yiğit ve hasret dolu muazzam bir İnici klasik makam.',
+        history: 'İnleyen nağmeler ve hasret temalarında en üst seviye makamdır.'
+    },
+    {
+        id: 'tahir',
+        name: 'Tâhir',
+        lower: 'Uşşak',
+        lowerIsPentachord: false,
+        upper: 'Rast',
+        upperIsPentachord: true,
+        guclu: KOMMA.FIFTH, // 31 commas
+        seyir: SEYIR.DESCENDING,
+        approachFrom: 7,
+        character: 'Muhayyer perdesinden başlayıp Gerdâniye ve Nevâ üzerinden Uşşak durağına inen duru makam.',
+        history: 'Temiz ve saf anlamına gelen, klasik repertuvarda çok sevilen bir makamdır.'
     },
     {
         id: 'karcigar',
@@ -171,7 +275,7 @@ export const MAKAMS = [
         seyir: SEYIR.FROM_ABOVE,
         approachFrom: 7,
         character: 'Pestte Uşşak hüznü, tizlerde Hicaz ateşi - büyüleyici kontrast.',
-        history: 'Duygu zenginliği ve dramatik geçişler barındırır.'
+        history: 'Tutku ve coşkuyu bir arada barındırır.'
     },
     {
         id: 'nikriz',
@@ -180,11 +284,11 @@ export const MAKAMS = [
         lowerIsPentachord: true,
         upper: 'Rast',
         upperIsPentachord: false,
-        guclu: KOMMA.FIFTH, // 31 commas
+        guclu: KOMMA.FIFTH, // 31 commas (Nevâ)
         seyir: SEYIR.FROM_ABOVE,
         approachFrom: 9,
         character: 'Önce tam ton, sonra Hicaz adımı - canlı, kıvrak ve hareketli.',
-        history: 'Oyun havaları ve hareketli saz eserlerinde sıkça kullanılır.'
+        history: 'Kıvrak sirto ve oyun havalarının gözde makamıdır.'
     },
     {
         id: 'suzinak',
@@ -193,7 +297,7 @@ export const MAKAMS = [
         lowerIsPentachord: true,
         upper: 'Hicaz',
         upperIsPentachord: false,
-        guclu: KOMMA.FIFTH, // 31 commas (Nevâ üzerinde Hicaz)
+        guclu: KOMMA.FIFTH, // 31 commas (Nevâ)
         seyir: SEYIR.FROM_ABOVE,
         approachFrom: 9,
         character: 'Pestte Rast zarafeti, tizlerde Hicaz sıcaklığı.',
@@ -211,6 +315,45 @@ export const MAKAMS = [
         approachFrom: -4,
         character: 'Teorik ana makam (Do Majör dizisi) - aydınlık ve sert.',
         history: 'Kahramanlık ve uyanış temalarını taşır.'
+    },
+    {
+        id: 'mahur',
+        name: 'Mâhur',
+        lower: 'Çargâh',
+        lowerIsPentachord: true,
+        upper: 'Çargâh',
+        upperIsPentachord: false,
+        guclu: KOMMA.FIFTH,
+        seyir: SEYIR.FROM_ABOVE,
+        approachFrom: 9,
+        character: 'Rast perdesinde Çargâh dizisi; berrak, asil, neşeli ve saray meclislerine layık bir şed makam.',
+        history: 'Neşeli ve ferah meclislerin baş tacı şed makamıdır.'
+    },
+    {
+        id: 'acemasiran',
+        name: 'Acem Aşiran',
+        lower: 'Çargâh',
+        lowerIsPentachord: true,
+        upper: 'Çargâh',
+        upperIsPentachord: false,
+        guclu: KOMMA.FIFTH,
+        seyir: SEYIR.ASCENDING,
+        approachFrom: 9,
+        character: 'Pest Acem Aşiran perdesinde karar kılan, son derece dingin, huzurlu ve oturaklı makam.',
+        history: 'Pestlerde dingin ve derin bir huzur hissi verir.'
+    },
+    {
+        id: 'gerdaniye',
+        name: 'Gerdâniye',
+        lower: 'Rast',
+        lowerIsPentachord: true,
+        upper: 'Rast',
+        upperIsPentachord: false,
+        guclu: 53,
+        seyir: SEYIR.DESCENDING,
+        approachFrom: 9,
+        character: 'Rast dizisinin tiz Sol (Gerdâniye) perdesinden başlayan coşkulu ve ferahlatıcı İnici hali.',
+        history: 'Rast makamının tizlerden inen asil varyantıdır.'
     },
     {
         id: 'saba',
@@ -235,8 +378,21 @@ export const MAKAMS = [
         guclu: 23, // Nevâ perdesi
         seyir: SEYIR.ASCENDING,
         approachFrom: 5,
-        character: 'Türk musikisinin en karakteristik ve mistik makamı - koma bemollü Segâh perdesinde derin huzur ve teslimiyet.',
+        character: 'Türk musikisinin en karakteristik ve mistik makamı - koma bemollü Segâh perdesinde derin huzur.',
         history: 'Yatsı vaktine ve tasavvufi tefekküre atfedilen en köklü makamlardan biridir.'
+    },
+    {
+        id: 'huzzam',
+        name: 'Hüzzâm',
+        lower: 'Segâh',
+        lowerIsPentachord: true,
+        upper: 'Hicaz',
+        upperIsPentachord: false,
+        guclu: 23, // Nevâ perdesi
+        seyir: SEYIR.FROM_ABOVE,
+        approachFrom: 5,
+        character: 'Yerinde Segâh ve Eviç üzerinde Hicaz lezzeti; Türk musikisinin en çok dinlenen ve en içli şaheser makamı.',
+        history: 'Türk Sanat Müziğinde en çok bestelenen ve sevilen şaheser makamlardandır.'
     },
     {
         id: 'gulizar',
@@ -276,6 +432,32 @@ export const MAKAMS = [
         approachFrom: 5,
         character: 'Tizlerde Eviç perdesinden süzülen, Segâh ve Hicaz çeşnileriyle bezeli asil, vakur ve derin klasik makam.',
         history: 'Gün batımı ve akşamın asil hüznüyle özdeşleştirilir.'
+    },
+    {
+        id: 'ferahfeza',
+        name: 'Ferahfezâ',
+        lower: 'Bûselik',
+        lowerIsPentachord: true,
+        upper: 'Kürdî',
+        upperIsPentachord: false,
+        guclu: KOMMA.FIFTH,
+        seyir: SEYIR.FROM_ABOVE,
+        approachFrom: 9,
+        character: 'Gönlü ferahlatan anlamına gelen; Yegâh perdesinde derin, lirik ve asil klasik makam.',
+        history: 'III. Selim ve Dede Efendi devrinin en zarif şaheser makamlarındandır.'
+    },
+    {
+        id: 'acemkurdi',
+        name: 'Acem Kürdî',
+        lower: 'Kürdî',
+        lowerIsPentachord: false,
+        upper: 'Çargâh',
+        upperIsPentachord: true,
+        guclu: KOMMA.FOURTH,
+        seyir: SEYIR.FROM_ABOVE,
+        approachFrom: 4,
+        character: 'Kürdî hüznü ile Acem perdesinin asil parlaklığını birleştiren çok sevilen klasik makam.',
+        history: 'Kürdî ailesinin en aydınlık ve zengin çeşitlerindendir.'
     }
 ];
 
