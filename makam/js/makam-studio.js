@@ -370,36 +370,36 @@
                 switch (effectiveContour) {
                     // --- UZUN HAVA TÜRLERİ ---
                     case 'bozlak':
-                        // Tizden feryatla açılır, meyan gezintisi yapar, basamak basamak karar verir
-                        if (i === 0) { target = top; section = 'Nida (Feryat)'; }
-                        else if (i === 1) { target = (rng.unit() < 0.6) ? stepUpper : top; section = 'Meyan Şahlanışı'; }
-                        else if (i === count - 2) { target = guclu; section = 'Asma Karar'; }
-                        else { target = (rng.unit() < 0.5) ? guclu : step3; section = 'İniş Gezintisi'; }
+                        // Kırşehir / Keskin / Toroslar: Tizden nida ile patlar, acem/kürdi meyanında feryat eder, asma kararda inler, durağa basamak basamak çöker
+                        if (i === 0) { target = top; section = 'Nida (Açılış Feryadı)'; }
+                        else if (i === 1) { target = (rng.unit() < 0.65) ? stepUpper : top; section = 'Meyan (Acemli Feryat)'; }
+                        else if (i === count - 2) { target = (rng.unit() < 0.6) ? guclu : step2; section = 'Asma Karar (İnleme)'; }
+                        else { target = (rng.unit() < 0.5) ? step3 : step2; section = 'Ağıt İnişi'; }
                         break;
                     case 'barak':
-                        // Güçlü veya tizden kırık hançere (sekileme), meyan ve iniş
+                        // Gaziantep / Nizip: Kırık hançere (sekileme), güçlüden tiz meyanına şahlanış ve karara iniş
                         if (i === 0) { target = guclu; section = 'Açış (Sekileme)'; }
                         else if (i === 1) { target = stepUpper; section = 'Barak Meyanı'; }
-                        else if (i === count - 2) { target = step3; section = 'Ara Karar'; }
+                        else if (i === count - 2) { target = step2; section = 'Ara İniş'; }
                         else { target = guclu; section = 'Gövde'; }
                         break;
                     case 'hoyrat':
-                        // Keskin mani girişi, tiz vuruşlar, geniş aralıklar
+                        // Kerkük / Urfa / Harput: Keskin mani girişi, tiz vuruşlar, geniş aralıklar
                         if (i === 0) { target = top; section = 'Mani Nidası'; }
                         else if (i === 1) { target = guclu; section = 'Zemin Hecelemesi'; }
                         else if (i === count - 2) { target = (rng.unit() < 0.6) ? stepUpper : step2; section = 'Meyan Haykırışı'; }
                         else { target = (rng.unit() < 0.5) ? top : guclu; section = 'Cinaslı Seyir'; }
                         break;
                     case 'maya':
-                        // Ağırbaşlı, lirik, durak ve güçlü etrafında hüzünlü dalgalanış
-                        if (i === 0) { target = step3; section = 'Lirik Zemin'; }
-                        else if (i === 1) { target = guclu; section = 'Asma Karar'; }
-                        else if (i === count - 2) { target = stepUpper; section = 'Hüzünlü Meyan'; }
-                        else { target = step2; section = 'Ağıt Gezintisi'; }
+                        // Harput / Elazığ / Doğu: En derin, ağırbaşlı ve karanlık ağıt formu. Düşük perdelerde hüzünlü inleme.
+                        if (i === 0) { target = step2; section = 'Karanlık Zemin'; }
+                        else if (i === 1) { target = guclu; section = 'Ağıt Düğümü'; }
+                        else if (i === count - 2) { target = (rng.unit() < 0.6) ? stepUpper : guclu; section = 'Hüzünlü Meyan'; }
+                        else { target = step2; section = 'İniltili İniş'; }
                         break;
                     case 'gurbet':
-                        // Sipsi / Kaval kıvraklığıyla tizden süzülen sıla hasreti
-                        if (i === 0) { target = stepUpper; section = 'Sipsi Açışı'; }
+                        // Teke Yöresi: Sipsi / Kaval ile tizden süzülen yanık sıla hasreti
+                        if (i === 0) { target = stepUpper; section = 'Sipsi Nidası'; }
                         else if (i === 1) { target = guclu; section = 'Dalgalı Süzülüş'; }
                         else if (i === count - 2) { target = step2; section = 'Sıla Hasreti'; }
                         else { target = guclu; section = 'Gurbet Gövdesi'; }
@@ -488,22 +488,18 @@
             // Generate slots: Parlando-Rubato for Uzun Hava vs Usul-metered slots for classical
             const slots = [];
             if (isUzunHava) {
-                // Uzun Hava: pick sparse structural anchor points so notes have long natural sustain without colliding
+                // Uzun Hava: Expansive crying rubato rhythm with dramatic breath pauses
+                // Anchor at beat 0 (holds 2.0 to 2.5 beats), followed by 2-3 sobbing descending steps, leaving 0.75 - 1.0 beat breath rest!
                 const rubatoPatterns = [
-                    [0, 6, 12],
-                    [0, 8],
-                    [0, 5, 10],
-                    [0, 7, 13],
-                    [0, 4, 8, 12]
+                    [0, 8, 11, 13],    // Note 1 holds 2.0 beats, then 3 descending fast notes, then breath rest
+                    [0, 9, 12],        // Note 1 holds 2.25 beats, note 2 holds 0.75 beat, note 3 holds 1.0 beat
+                    [0, 6, 10, 13],    // Note 1 holds 1.5 beats, note 2 holds 1.0 beat, note 3 holds 0.75 beat
+                    [0, 8, 12],        // Note 1 holds 2.0 beats, note 2 holds 1.0 beat, note 3 holds 1.0 beat
+                    [0, 7, 11, 14]     // Note 1 holds 1.75 beats, then expressive descending weeping tail
                 ];
                 const pattern = rubatoPatterns[Math.floor(rng.unit() * rubatoPatterns.length)];
                 for (const pt of pattern) {
                     slots.push(pt);
-                }
-                // Optional fast passing ornament
-                if (density > 0.40 && rng.unit() < 0.35) {
-                    const passSlot = (rng.unit() < 0.5) ? 2 : 11;
-                    if (!slots.includes(passSlot)) slots.push(passSlot);
                 }
                 slots.sort((a, b) => a - b);
             } else {
@@ -623,13 +619,15 @@
                 let ornament = null;
                 if (!phrase.isFinal && lengthBeats >= 0.35) {
                     const ornRoll = rng.unit();
-                    const ornThreshold = (isUzunHava ? 0.32 : 0.08) + (freedom * 0.38);
+                    const ornThreshold = (isUzunHava ? 0.48 : 0.08) + (freedom * 0.38);
                     if (ornRoll < ornThreshold) {
                         let types = ['grace', 'mordent', 'slide', 'turn'];
-                        if (isUzunHava && (phrase.contour === 'bozlak' || phrase.contour === 'gurbet')) {
-                            types = ['slide', 'slide', 'mordent', 'turn'];
-                        } else if (isUzunHava && phrase.contour === 'barak') {
-                            types = ['mordent', 'mordent', 'slide', 'grace'];
+                        if (isUzunHava) {
+                            if (phrase.contour === 'bozlak' || phrase.contour === 'gurbet' || phrase.contour === 'maya') {
+                                types = ['slide', 'slide', 'slide', 'mordent', 'turn'];
+                            } else if (phrase.contour === 'barak') {
+                                types = ['mordent', 'mordent', 'slide', 'turn'];
+                            }
                         }
                         ornament = types[Math.floor(rng.unit() * types.length)];
                     }
@@ -1410,10 +1408,90 @@
                 osc.start(startTime);
                 osc.stop(startTime + dur + 0.2);
 
+            } else if (inst === 'mey') {
+                // ==========================================================
+                // MEY / BALABAN (Ufak Kamış / Duduk - Yanık & Boğaz Rezonanslı Çift Kamış)
+                // Zengin çift kamış vızıltısı (Sawtooth + Triangle sub-harmonic) + Çift Formant + Derin Hançere Titremesi
+                // ==========================================================
+                const osc1 = this.ctx.createOscillator();
+                const osc2 = this.ctx.createOscillator();
+                const f1 = this.ctx.createBiquadFilter();
+                const f2 = this.ctx.createBiquadFilter();
+                const gain = this.ctx.createGain();
+
+                osc1.type = 'sawtooth';
+                osc2.type = 'triangle';
+
+                if (ornament === 'slide') {
+                    osc1.frequency.setValueAtTime(freq * Math.pow(2, -300 / 1200), startTime);
+                    osc1.frequency.exponentialRampToValueAtTime(freq, startTime + 0.16);
+                    osc2.frequency.setValueAtTime((freq * 0.5) * Math.pow(2, -300 / 1200), startTime);
+                    osc2.frequency.exponentialRampToValueAtTime(freq * 0.5, startTime + 0.16);
+                } else {
+                    osc1.frequency.setValueAtTime(freq, startTime);
+                    osc2.frequency.setValueAtTime(freq * 0.5, startTime);
+                }
+
+                if (ornament === 'mordent') {
+                    osc1.frequency.setValueAtTime(freq, startTime);
+                    osc1.frequency.setValueAtTime(freq * Math.pow(2, 23 / 1200), startTime + 0.06);
+                    osc1.frequency.setValueAtTime(freq, startTime + 0.12);
+                }
+
+                if (ornament === 'turn') {
+                    osc1.frequency.setValueAtTime(freq * Math.pow(2, 23 / 1200), startTime);
+                    osc1.frequency.setValueAtTime(freq, startTime + 0.05);
+                    osc1.frequency.setValueAtTime(freq * Math.pow(2, -23 / 1200), startTime + 0.09);
+                    osc1.frequency.setValueAtTime(freq, startTime + 0.14);
+                }
+
+                // Guttural sobbing vibrato on Mey
+                if (dur > 0.5) {
+                    const lfo = this.ctx.createOscillator();
+                    const lfoGain = this.ctx.createGain();
+                    lfo.frequency.value = 4.8;
+                    lfoGain.gain.setValueAtTime(0, startTime);
+                    lfoGain.gain.setValueAtTime(0, startTime + 0.28);
+                    lfoGain.gain.linearRampToValueAtTime(freq * 0.016, startTime + 0.75);
+                    lfo.connect(lfoGain);
+                    lfoGain.connect(osc1.frequency);
+                    lfo.start(startTime + 0.28);
+                    lfo.stop(startTime + dur + 0.25);
+                }
+
+                f1.type = 'bandpass';
+                f1.frequency.setValueAtTime(Math.min(2200, freq * 1.8 + 450), startTime);
+                f1.Q.value = 2.4;
+
+                f2.type = 'lowpass';
+                f2.frequency.setValueAtTime(Math.min(2800, freq * 2.8 + 700), startTime);
+                f2.Q.value = 1.8;
+
+                const g1 = this.ctx.createGain(); g1.gain.value = 0.24;
+                const g2 = this.ctx.createGain(); g2.gain.value = 0.18;
+
+                osc1.connect(f1); f1.connect(g1);
+                osc2.connect(f2); f2.connect(g2);
+                g1.connect(gain); g2.connect(gain);
+
+                const attack = 0.045;
+                const release = 0.12;
+                const sustainEnd = Math.max(startTime + attack, startTime + dur - release);
+
+                gain.gain.setValueAtTime(0.0001, startTime);
+                gain.gain.linearRampToValueAtTime(vel * 0.48, startTime + attack);
+                gain.gain.setValueAtTime(vel * 0.44, sustainEnd);
+                gain.gain.exponentialRampToValueAtTime(0.0001, startTime + dur + release);
+
+                gain.connect(this.dest);
+
+                osc1.start(startTime); osc2.start(startTime);
+                osc1.stop(startTime + dur + release + 0.1); osc2.stop(startTime + dur + release + 0.1);
+
             } else if (inst === 'clarinet') {
                 // ==========================================================
-                // SOL KLARNET (G Clarinet - Trakya & Roman Tavrı)
-                // Tek kamışlı silindirik boru rezonansı (Tekil harmonikler + sıcak boğaz rezonansı)
+                // SOL KLARNET (G Clarinet - Trakya & Ege Tavrı)
+                // Tek kamışlı silindirik boru rezonansı (Tekil harmonikler + tam sustain + vibrato)
                 // ==========================================================
                 const osc = this.ctx.createOscillator();
                 const osc3rd = this.ctx.createOscillator();
@@ -1425,9 +1503,9 @@
 
                 if (ornament === 'slide') {
                     osc.frequency.setValueAtTime(freq * Math.pow(2, -250 / 1200), startTime);
-                    osc.frequency.exponentialRampToValueAtTime(freq, startTime + 0.11);
+                    osc.frequency.exponentialRampToValueAtTime(freq, startTime + 0.12);
                     osc3rd.frequency.setValueAtTime(freq * 3 * Math.pow(2, -250 / 1200), startTime);
-                    osc3rd.frequency.exponentialRampToValueAtTime(freq * 3, startTime + 0.11);
+                    osc3rd.frequency.exponentialRampToValueAtTime(freq * 3, startTime + 0.12);
                 } else {
                     osc.frequency.setValueAtTime(freq, startTime);
                     osc3rd.frequency.setValueAtTime(freq * 3, startTime);
@@ -1446,45 +1524,114 @@
                     osc.frequency.setValueAtTime(freq, startTime + 0.12);
                 }
 
+                if (dur > 0.6) {
+                    const lfo = this.ctx.createOscillator();
+                    const lfoGain = this.ctx.createGain();
+                    lfo.frequency.value = 5.2;
+                    lfoGain.gain.setValueAtTime(0, startTime);
+                    lfoGain.gain.setValueAtTime(0, startTime + 0.35);
+                    lfoGain.gain.linearRampToValueAtTime(freq * 0.012, startTime + 0.85);
+                    lfo.connect(lfoGain);
+                    lfoGain.connect(osc.frequency);
+                    lfo.start(startTime + 0.35);
+                    lfo.stop(startTime + dur + 0.25);
+                }
+
                 filter.type = 'lowpass';
-                filter.frequency.setValueAtTime(Math.min(3800, freq * 3.8 + 800), startTime);
-                filter.Q.value = 1.4;
+                filter.frequency.setValueAtTime(Math.min(3600, freq * 3.6 + 750), startTime);
+                filter.Q.value = 1.6;
 
-                const mainGain = this.ctx.createGain();
-                mainGain.gain.value = 0.22;
-                osc.connect(filter);
-                filter.connect(mainGain);
+                const mainGain = this.ctx.createGain(); mainGain.gain.value = 0.24;
+                const hGain = this.ctx.createGain(); hGain.gain.value = 0.09;
 
-                const hGain = this.ctx.createGain();
-                hGain.gain.value = 0.08;
+                osc.connect(filter); filter.connect(mainGain);
                 osc3rd.connect(hGain);
+                mainGain.connect(gain); hGain.connect(gain);
 
-                mainGain.connect(gain);
-                hGain.connect(gain);
+                const attack = 0.035;
+                const release = 0.09;
+                const sustainEnd = Math.max(startTime + attack, startTime + dur - release);
 
-                gain.gain.setValueAtTime(0.001, startTime);
-                gain.gain.linearRampToValueAtTime(vel * 0.42, startTime + 0.025);
-                gain.gain.exponentialRampToValueAtTime(0.0001, startTime + dur + 0.12);
+                gain.gain.setValueAtTime(0.0001, startTime);
+                gain.gain.linearRampToValueAtTime(vel * 0.44, startTime + attack);
+                gain.gain.setValueAtTime(vel * 0.40, sustainEnd); // HOLDS full volume!
+                gain.gain.exponentialRampToValueAtTime(0.0001, startTime + dur + release);
 
                 gain.connect(this.dest);
 
-                osc.start(startTime);
-                osc3rd.start(startTime);
-                osc.stop(startTime + dur + 0.2);
-                osc3rd.stop(startTime + dur + 0.2);
+                osc.start(startTime); osc3rd.start(startTime);
+                osc.stop(startTime + dur + release + 0.1); osc3rd.stop(startTime + dur + release + 0.1);
+
+            } else if (inst === 'kaval') {
+                // ==========================================================
+                // KAVAL / SİPSİ (Yanık Çoban Kavalı & Yörük Sipsisi)
+                // ==========================================================
+                const osc = this.ctx.createOscillator();
+                const oscOct = this.ctx.createOscillator();
+                const filter = this.ctx.createBiquadFilter();
+                const gain = this.ctx.createGain();
+
+                osc.type = 'triangle';
+                oscOct.type = 'sine';
+
+                if (ornament === 'slide') {
+                    osc.frequency.setValueAtTime(freq * Math.pow(2, -220 / 1200), startTime);
+                    osc.frequency.exponentialRampToValueAtTime(freq, startTime + 0.10);
+                    oscOct.frequency.setValueAtTime(freq * 2 * Math.pow(2, -220 / 1200), startTime);
+                    oscOct.frequency.exponentialRampToValueAtTime(freq * 2, startTime + 0.10);
+                } else {
+                    osc.frequency.setValueAtTime(freq, startTime);
+                    oscOct.frequency.setValueAtTime(freq * 2, startTime);
+                }
+
+                if (ornament === 'mordent') {
+                    osc.frequency.setValueAtTime(freq, startTime);
+                    osc.frequency.setValueAtTime(freq * Math.pow(2, 23 / 1200), startTime + 0.04);
+                    osc.frequency.setValueAtTime(freq, startTime + 0.08);
+                }
+
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(Math.min(4200, freq * 4.2), startTime);
+                filter.Q.value = 1.2;
+
+                const gMain = this.ctx.createGain(); gMain.gain.value = 0.28;
+                const gOct = this.ctx.createGain(); gOct.gain.value = 0.10;
+
+                osc.connect(filter); filter.connect(gMain);
+                oscOct.connect(gOct);
+                gMain.connect(gain); gOct.connect(gain);
+
+                const attack = 0.04;
+                const release = 0.10;
+                const sustainEnd = Math.max(startTime + attack, startTime + dur - release);
+
+                gain.gain.setValueAtTime(0.0001, startTime);
+                gain.gain.linearRampToValueAtTime(vel * 0.42, startTime + attack);
+                gain.gain.setValueAtTime(vel * 0.38, sustainEnd);
+                gain.gain.exponentialRampToValueAtTime(0.0001, startTime + dur + release);
+
+                gain.connect(this.dest);
+
+                osc.start(startTime); oscOct.start(startTime);
+                osc.stop(startTime + dur + release + 0.1); oscOct.stop(startTime + dur + release + 0.1);
 
             } else {
                 // ==========================================================
                 // NEY: Mistik nefesli, hava hışırtısı ve kamış rezonansı
                 // ==========================================================
                 const osc = this.ctx.createOscillator();
+                const osc2 = this.ctx.createOscillator();
+                const filter = this.ctx.createBiquadFilter();
                 const gain = this.ctx.createGain();
 
                 if (ornament === 'slide') {
                     osc.frequency.setValueAtTime(freq * Math.pow(2, -200 / 1200), startTime);
                     osc.frequency.exponentialRampToValueAtTime(freq, startTime + 0.12);
+                    osc2.frequency.setValueAtTime((freq * 2) * Math.pow(2, -200 / 1200), startTime);
+                    osc2.frequency.exponentialRampToValueAtTime(freq * 2, startTime + 0.12);
                 } else {
                     osc.frequency.setValueAtTime(freq, startTime);
+                    osc2.frequency.setValueAtTime(freq * 2, startTime);
                 }
 
                 if (ornament === 'mordent') {
@@ -1501,15 +1648,31 @@
                 }
 
                 osc.type = 'sine';
-                gain.gain.setValueAtTime(0.001, startTime);
-                gain.gain.linearRampToValueAtTime(vel * 0.38, startTime + 0.04);
-                gain.gain.exponentialRampToValueAtTime(0.0001, startTime + dur + 0.08);
+                osc2.type = 'triangle';
 
-                osc.connect(gain);
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(Math.min(4500, freq * 4), startTime);
+
+                const g1 = this.ctx.createGain(); g1.gain.value = 0.32;
+                const g2 = this.ctx.createGain(); g2.gain.value = 0.08;
+
+                osc.connect(filter); filter.connect(g1);
+                osc2.connect(g2);
+                g1.connect(gain); g2.connect(gain);
+
+                const attack = 0.045;
+                const release = 0.10;
+                const sustainEnd = Math.max(startTime + attack, startTime + dur - release);
+
+                gain.gain.setValueAtTime(0.001, startTime);
+                gain.gain.linearRampToValueAtTime(vel * 0.40, startTime + attack);
+                gain.gain.setValueAtTime(vel * 0.36, sustainEnd);
+                gain.gain.exponentialRampToValueAtTime(0.0001, startTime + dur + release);
+
                 gain.connect(this.dest);
 
-                osc.start(startTime);
-                osc.stop(startTime + dur + 0.2);
+                osc.start(startTime); osc2.start(startTime);
+                osc.stop(startTime + dur + release + 0.1); osc2.stop(startTime + dur + release + 0.1);
             }
         }
     }
@@ -3222,8 +3385,10 @@
                             <div class="channel-label">Melodi</div>
                             <div class="channel-controls">
                                 <select class="form-select inst-sel" data-ch="melody">
-                                    <option value="ney" selected>Ney (Mistik)</option>
+                                    <option value="mey">Mey / Balaban (Ufak Kamış)</option>
                                     <option value="clarinet">Klarnet (Sol Klarnet / Trakya)</option>
+                                    <option value="kaval">Kaval / Sipsi (Nefesli)</option>
+                                    <option value="ney" selected>Ney (Mistik)</option>
                                     <option value="ud">Ud (Akustik)</option>
                                     <option value="kanun">Kanun (Parlak)</option>
                                     <option value="tanbur">Tanbur (Tel)</option>

@@ -160,15 +160,15 @@ export function phrasePlan(makam, phraseCount = 4, formType = 'standard', contou
             switch (effectiveContour) {
                 // --- UZUN HAVA TÜRLERİ ---
                 case 'bozlak':
-                    if (i === 0) { target = top; section = 'Nida (Feryat)'; }
-                    else if (i === 1) { target = (rng.unit() < 0.6) ? stepUpper : top; section = 'Meyan Şahlanışı'; }
-                    else if (i === count - 2) { target = guclu; section = 'Asma Karar'; }
-                    else { target = (rng.unit() < 0.5) ? guclu : step3; section = 'İniş Gezintisi'; }
+                    if (i === 0) { target = top; section = 'Nida (Açılış Feryadı)'; }
+                    else if (i === 1) { target = (rng.unit() < 0.65) ? stepUpper : top; section = 'Meyan (Acemli Feryat)'; }
+                    else if (i === count - 2) { target = (rng.unit() < 0.6) ? guclu : step2; section = 'Asma Karar (İnleme)'; }
+                    else { target = (rng.unit() < 0.5) ? step3 : step2; section = 'Ağıt İnişi'; }
                     break;
                 case 'barak':
                     if (i === 0) { target = guclu; section = 'Açış (Sekileme)'; }
                     else if (i === 1) { target = stepUpper; section = 'Barak Meyanı'; }
-                    else if (i === count - 2) { target = step3; section = 'Ara Karar'; }
+                    else if (i === count - 2) { target = step2; section = 'Ara İniş'; }
                     else { target = guclu; section = 'Gövde'; }
                     break;
                 case 'hoyrat':
@@ -178,13 +178,13 @@ export function phrasePlan(makam, phraseCount = 4, formType = 'standard', contou
                     else { target = (rng.unit() < 0.5) ? top : guclu; section = 'Cinaslı Seyir'; }
                     break;
                 case 'maya':
-                    if (i === 0) { target = step3; section = 'Lirik Zemin'; }
-                    else if (i === 1) { target = guclu; section = 'Asma Karar'; }
-                    else if (i === count - 2) { target = stepUpper; section = 'Hüzünlü Meyan'; }
-                    else { target = step2; section = 'Ağıt Gezintisi'; }
+                    if (i === 0) { target = step2; section = 'Karanlık Zemin'; }
+                    else if (i === 1) { target = guclu; section = 'Ağıt Düğümü'; }
+                    else if (i === count - 2) { target = (rng.unit() < 0.6) ? stepUpper : guclu; section = 'Hüzünlü Meyan'; }
+                    else { target = step2; section = 'İniltili İniş'; }
                     break;
                 case 'gurbet':
-                    if (i === 0) { target = stepUpper; section = 'Sipsi Açışı'; }
+                    if (i === 0) { target = stepUpper; section = 'Sipsi Nidası'; }
                     else if (i === 1) { target = guclu; section = 'Dalgalı Süzülüş'; }
                     else if (i === count - 2) { target = step2; section = 'Sıla Hasreti'; }
                     else { target = guclu; section = 'Gurbet Gövdesi'; }
@@ -271,19 +271,15 @@ export function generateMakamMelody(options = {}) {
         const slots = [];
         if (isUzunHava) {
             const rubatoPatterns = [
-                [0, 6, 12],
-                [0, 8],
-                [0, 5, 10],
-                [0, 7, 13],
-                [0, 4, 8, 12]
+                [0, 8, 11, 13],
+                [0, 9, 12],
+                [0, 6, 10, 13],
+                [0, 8, 12],
+                [0, 7, 11, 14]
             ];
             const pattern = rubatoPatterns[Math.floor(rng.unit() * rubatoPatterns.length)];
             for (const pt of pattern) {
                 slots.push(pt);
-            }
-            if (density > 0.40 && rng.unit() < 0.35) {
-                const passSlot = (rng.unit() < 0.5) ? 2 : 11;
-                if (!slots.includes(passSlot)) slots.push(passSlot);
             }
             slots.sort((a, b) => a - b);
         } else {
@@ -398,13 +394,15 @@ export function generateMakamMelody(options = {}) {
             let ornament = null;
             if (!phrase.isFinal && lengthBeats >= 0.35) {
                 const ornRoll = rng.unit();
-                const ornThreshold = (isUzunHava ? 0.32 : 0.08) + (freedom * 0.38);
+                const ornThreshold = (isUzunHava ? 0.48 : 0.08) + (freedom * 0.38);
                 if (ornRoll < ornThreshold) {
                     let types = ['grace', 'mordent', 'slide', 'turn'];
-                    if (isUzunHava && (phrase.contour === 'bozlak' || phrase.contour === 'gurbet')) {
-                        types = ['slide', 'slide', 'mordent', 'turn'];
-                    } else if (isUzunHava && phrase.contour === 'barak') {
-                        types = ['mordent', 'mordent', 'slide', 'grace'];
+                    if (isUzunHava) {
+                        if (phrase.contour === 'bozlak' || phrase.contour === 'gurbet' || phrase.contour === 'maya') {
+                            types = ['slide', 'slide', 'slide', 'mordent', 'turn'];
+                        } else if (phrase.contour === 'barak') {
+                            types = ['mordent', 'mordent', 'slide', 'turn'];
+                        }
                     }
                     ornament = types[Math.floor(rng.unit() * types.length)];
                 }
@@ -439,4 +437,3 @@ export function generateMakamMelody(options = {}) {
 
     return out;
 }
-

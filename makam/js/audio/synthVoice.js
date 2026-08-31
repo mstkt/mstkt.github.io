@@ -13,7 +13,9 @@
 
 export const INSTRUMENTS = {
     NEY: 'ney',
+    MEY: 'mey',
     CLARINET: 'clarinet',
+    KAVAL: 'kaval',
     TANBUR: 'tanbur',
     UD: 'ud',
     STRINGS: 'strings',
@@ -56,6 +58,15 @@ export class SynthVoice {
             case INSTRUMENTS.NEY:
                 this.playNey(freq, startTime, dur, vel);
                 break;
+            case INSTRUMENTS.MEY:
+                this.playMey(freq, startTime, dur, vel);
+                break;
+            case INSTRUMENTS.CLARINET:
+                this.playClarinet(freq, startTime, dur, vel);
+                break;
+            case INSTRUMENTS.KAVAL:
+                this.playKaval(freq, startTime, dur, vel);
+                break;
             case INSTRUMENTS.TANBUR:
                 this.playTanbur(freq, startTime, dur, vel);
                 break;
@@ -91,19 +102,19 @@ export class SynthVoice {
         osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, time);
 
-        // 2nd harmonic (octave overtone typical of ney overblowing)
         osc2.type = 'triangle';
         osc2.frequency.setValueAtTime(freq * 2, time);
 
         filter.type = 'lowpass';
         filter.frequency.setValueAtTime(Math.min(4500, freq * 4), time);
 
-        const attack = 0.045; // Smooth breath onset
-        const release = 0.08;
+        const attack = 0.045;
+        const release = 0.10;
+        const sustainEnd = Math.max(time + attack, time + dur - release);
 
         gain.gain.setValueAtTime(0.001, time);
-        gain.gain.linearRampToValueAtTime(vel * 0.38, time + attack);
-        gain.gain.setValueAtTime(vel * 0.35, Math.max(time + attack, time + dur - release));
+        gain.gain.linearRampToValueAtTime(vel * 0.40, time + attack);
+        gain.gain.setValueAtTime(vel * 0.36, sustainEnd);
         gain.gain.exponentialRampToValueAtTime(0.0001, time + dur + release);
 
         osc.connect(filter);
@@ -115,6 +126,154 @@ export class SynthVoice {
         osc2.start(time);
         osc.stop(time + dur + release + 0.05);
         osc2.stop(time + dur + release + 0.05);
+    }
+
+    /** Mey / Balaban: Yanık, buğulu, boğaz rezonanslı otantik çift kamış sesi */
+    playMey(freq, time, dur, vel) {
+        const osc1 = this.ctx.createOscillator();
+        const osc2 = this.ctx.createOscillator();
+        const f1 = this.ctx.createBiquadFilter();
+        const f2 = this.ctx.createBiquadFilter();
+        const gain = this.ctx.createGain();
+
+        osc1.type = 'sawtooth';
+        osc1.frequency.setValueAtTime(freq, time);
+
+        osc2.type = 'triangle';
+        osc2.frequency.setValueAtTime(freq * 0.5, time);
+
+        if (dur > 0.5) {
+            const lfo = this.ctx.createOscillator();
+            const lfoGain = this.ctx.createGain();
+            lfo.frequency.value = 4.8;
+            lfoGain.gain.setValueAtTime(0, time);
+            lfoGain.gain.setValueAtTime(0, time + 0.28);
+            lfoGain.gain.linearRampToValueAtTime(freq * 0.016, time + 0.75);
+            lfo.connect(lfoGain);
+            lfoGain.connect(osc1.frequency);
+            lfo.start(time + 0.28);
+            lfo.stop(time + dur + 0.25);
+        }
+
+        f1.type = 'bandpass';
+        f1.frequency.setValueAtTime(Math.min(2200, freq * 1.8 + 450), time);
+        f1.Q.value = 2.4;
+
+        f2.type = 'lowpass';
+        f2.frequency.setValueAtTime(Math.min(2800, freq * 2.8 + 700), time);
+        f2.Q.value = 1.8;
+
+        const g1 = this.ctx.createGain(); g1.gain.value = 0.24;
+        const g2 = this.ctx.createGain(); g2.gain.value = 0.18;
+
+        osc1.connect(f1); f1.connect(g1);
+        osc2.connect(f2); f2.connect(g2);
+        g1.connect(gain); g2.connect(gain);
+
+        const attack = 0.045;
+        const release = 0.12;
+        const sustainEnd = Math.max(time + attack, time + dur - release);
+
+        gain.gain.setValueAtTime(0.0001, time);
+        gain.gain.linearRampToValueAtTime(vel * 0.48, time + attack);
+        gain.gain.setValueAtTime(vel * 0.44, sustainEnd);
+        gain.gain.exponentialRampToValueAtTime(0.0001, time + dur + release);
+
+        gain.connect(this.dest);
+
+        osc1.start(time); osc2.start(time);
+        osc1.stop(time + dur + release + 0.05); osc2.stop(time + dur + release + 0.05);
+    }
+
+    /** Sol Klarnet: Trakya & Ege tavrı tek kamışlı rezonans ve tam sustain */
+    playClarinet(freq, time, dur, vel) {
+        const osc = this.ctx.createOscillator();
+        const osc3rd = this.ctx.createOscillator();
+        const filter = this.ctx.createBiquadFilter();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(freq, time);
+
+        osc3rd.type = 'sine';
+        osc3rd.frequency.setValueAtTime(freq * 3, time);
+
+        if (dur > 0.6) {
+            const lfo = this.ctx.createOscillator();
+            const lfoGain = this.ctx.createGain();
+            lfo.frequency.value = 5.2;
+            lfoGain.gain.setValueAtTime(0, time);
+            lfoGain.gain.setValueAtTime(0, time + 0.35);
+            lfoGain.gain.linearRampToValueAtTime(freq * 0.012, time + 0.85);
+            lfo.connect(lfoGain);
+            lfoGain.connect(osc.frequency);
+            lfo.start(time + 0.35);
+            lfo.stop(time + dur + 0.25);
+        }
+
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(Math.min(3600, freq * 3.6 + 750), time);
+        filter.Q.value = 1.6;
+
+        const mainGain = this.ctx.createGain(); mainGain.gain.value = 0.24;
+        const hGain = this.ctx.createGain(); hGain.gain.value = 0.09;
+
+        osc.connect(filter); filter.connect(mainGain);
+        osc3rd.connect(hGain);
+        mainGain.connect(gain); hGain.connect(gain);
+
+        const attack = 0.035;
+        const release = 0.09;
+        const sustainEnd = Math.max(time + attack, time + dur - release);
+
+        gain.gain.setValueAtTime(0.0001, time);
+        gain.gain.linearRampToValueAtTime(vel * 0.44, time + attack);
+        gain.gain.setValueAtTime(vel * 0.40, sustainEnd);
+        gain.gain.exponentialRampToValueAtTime(0.0001, time + dur + release);
+
+        gain.connect(this.dest);
+
+        osc.start(time); osc3rd.start(time);
+        osc.stop(time + dur + release + 0.05); osc3rd.stop(time + dur + release + 0.05);
+    }
+
+    /** Kaval / Sipsi: Yanık çoban kavalı ve teke sipsisi */
+    playKaval(freq, time, dur, vel) {
+        const osc = this.ctx.createOscillator();
+        const oscOct = this.ctx.createOscillator();
+        const filter = this.ctx.createBiquadFilter();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, time);
+
+        oscOct.type = 'sine';
+        oscOct.frequency.setValueAtTime(freq * 2, time);
+
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(Math.min(4200, freq * 4.2), time);
+        filter.Q.value = 1.2;
+
+        const gMain = this.ctx.createGain(); gMain.gain.value = 0.28;
+        const gOct = this.ctx.createGain(); gOct.gain.value = 0.10;
+
+        osc.connect(filter); filter.connect(gMain);
+        oscOct.connect(gOct);
+        gMain.connect(gain); gOct.connect(gain);
+
+        const attack = 0.04;
+        const release = 0.10;
+        const sustainEnd = Math.max(time + attack, time + dur - release);
+
+        gain.gain.setValueAtTime(0.0001, time);
+        gain.gain.linearRampToValueAtTime(vel * 0.42, time + attack);
+        gain.gain.setValueAtTime(vel * 0.38, sustainEnd);
+        gain.gain.exponentialRampToValueAtTime(0.0001, time + dur + release);
+
+        gain.connect(this.dest);
+
+        osc.start(time); oscOct.start(time);
+        osc.stop(time + dur + release + 0.05); oscOct.stop(time + dur + release + 0.05);
     }
 
     /** Tanbur / Bağlama: Bright plucked attack, rich string resonance */

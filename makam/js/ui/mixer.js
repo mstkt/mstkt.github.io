@@ -38,8 +38,10 @@ export class Mixer {
                     <div class="channel-strip" data-channel="melody">
                         <div class="channel-label">🎼 Melodi</div>
                         <select class="inst-select form-select" data-channel="melody">
-                            <option value="${INSTRUMENTS.NEY}" selected>Ney (Nefesli)</option>
+                            <option value="${INSTRUMENTS.MEY}">Mey / Balaban (Ufak Kamış)</option>
                             <option value="${INSTRUMENTS.CLARINET}">Klarnet (Sol Klarnet / Trakya)</option>
+                            <option value="${INSTRUMENTS.KAVAL}">Kaval / Sipsi (Nefesli)</option>
+                            <option value="${INSTRUMENTS.NEY}" selected>Ney (Nefesli)</option>
                             <option value="${INSTRUMENTS.TANBUR}">Tanbur / Bağlama</option>
                             <option value="${INSTRUMENTS.UD}">Ud / Kanun</option>
                             <option value="${INSTRUMENTS.STRINGS}">Yaylılar / Keman</option>
