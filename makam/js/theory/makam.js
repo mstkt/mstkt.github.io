@@ -44,7 +44,8 @@ export const TETRACHORDS = [
     { name: 'Rast', steps: [9, 8, 5], character: 'Segahlı 8 komalık 3. derece - Doğu renginin kalbi' },
     { name: 'Uşşak', steps: [8, 5, 9], character: '1 koma pes ikinci derece - hüzünlü ve çok yaygın' },
     { name: 'Hicaz', steps: [5, 12, 5], character: '12 komalık artık ikili - derin hasret ve mistik etki' },
-    { name: 'Sabâ', steps: [8, 5, 5], character: 'Eksik dörtlü (18 koma) - kendine has içe dokunan tavır' }
+    { name: 'Sabâ', steps: [8, 5, 5], character: 'Eksik dörtlü (18 koma) - kendine has içe dokunan tavır' },
+    { name: 'Segâh', steps: [5, 9, 9], character: '1 koma bemollü Segâh perdesi ve tam ton adımları' }
 ];
 
 /** Standard Pentachords (Beşliler) */
@@ -55,7 +56,8 @@ export const PENTACHORDS = [
     { name: 'Rast', steps: [9, 8, 5, 9], character: 'Rast renginin 5. dereceye (Neva) kadar taşınışı' },
     { name: 'Hüseynî', steps: [8, 9, 5, 9], character: 'Uşşak gibi başlar, 3. derecesi açık ve tiz' },
     { name: 'Hicaz', steps: [5, 12, 5, 9], character: 'Hicaz artık ikilisi ile 5. dereceye uzanan yapı' },
-    { name: 'Nikriz', steps: [9, 5, 12, 5], character: 'Tam ton ardından gelen Hicaz artık ikilisi' }
+    { name: 'Nikriz', steps: [9, 5, 12, 5], character: 'Tam ton ardından gelen Hicaz artık ikilisi' },
+    { name: 'Segâh', steps: [5, 9, 9, 8], character: 'Segâh perdesinden 5. dereceye uzanan geleneksel beşli' }
 ];
 
 export function findCesni(name, isPentachord = false) {
@@ -222,6 +224,58 @@ export const MAKAMS = [
         approachFrom: 8,
         character: 'Eksik dörtlüsüyle tanımsız bir derinlik; içe işleyen eşsiz tasavvufi lezzet.',
         history: 'Sabah ezanı ve mistik derinlikle özdeşleşmiştir.'
+    },
+    {
+        id: 'segah',
+        name: 'Segâh',
+        lower: 'Segâh',
+        lowerIsPentachord: true,
+        upper: 'Rast',
+        upperIsPentachord: false,
+        guclu: 23, // Nevâ perdesi
+        seyir: SEYIR.ASCENDING,
+        approachFrom: 5,
+        character: 'Türk musikisinin en karakteristik ve mistik makamı - koma bemollü Segâh perdesinde derin huzur ve teslimiyet.',
+        history: 'Yatsı vaktine ve tasavvufi tefekküre atfedilen en köklü makamlardan biridir.'
+    },
+    {
+        id: 'gulizar',
+        name: 'Gülizâr',
+        lower: 'Hüseynî',
+        lowerIsPentachord: true,
+        upper: 'Rast',
+        upperIsPentachord: false,
+        guclu: KOMMA.FOURTH, // 22 commas (Nevâ)
+        seyir: SEYIR.FROM_ABOVE,
+        approachFrom: 8,
+        character: 'Uşşak, Hüseynî ve Rast çeşnilerinin harmanlandığı, gül bahçesi zarafetinde klasik mürekkep makam.',
+        history: 'Klasik Türk Musikisinde çiçeklerin zarafetini ve bahar neşesini simgeler.'
+    },
+    {
+        id: 'zavil',
+        name: 'Zavil',
+        lower: 'Rast',
+        lowerIsPentachord: true,
+        upper: 'Çargâh',
+        upperIsPentachord: false,
+        guclu: KOMMA.FIFTH, // 31 commas (Nevâ)
+        seyir: SEYIR.FROM_ABOVE,
+        approachFrom: 9,
+        character: 'Rast makamının asil neşesi ile Çargâhın berrak aydınlığını birleştiren, coşkulu ve ferah makam.',
+        history: 'Rast ailesinin en aydınlık ve ferahlatıcı klasik makamlarındandır.'
+    },
+    {
+        id: 'evic',
+        name: 'Eviç',
+        lower: 'Segâh',
+        lowerIsPentachord: true,
+        upper: 'Hicaz',
+        upperIsPentachord: false,
+        guclu: KOMMA.FIFTH, // 31 commas (Muhayyer)
+        seyir: SEYIR.DESCENDING,
+        approachFrom: 5,
+        character: 'Tizlerde Eviç perdesinden süzülen, Segâh ve Hicaz çeşnileriyle bezeli asil, vakur ve derin klasik makam.',
+        history: 'Gün batımı ve akşamın asil hüznüyle özdeşleştirilir.'
     }
 ];
 

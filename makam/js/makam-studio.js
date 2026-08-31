@@ -150,7 +150,8 @@
         { name: 'Rast', steps: [9, 8, 5], character: 'Segahlı 8 komalık 3. derece - Doğu renginin kalbi' },
         { name: 'Uşşak', steps: [8, 5, 9], character: '1 koma pes ikinci derece - hüzünlü ve çok yaygın' },
         { name: 'Hicaz', steps: [5, 12, 5], character: '12 komalık artık ikili - derin hasret ve mistik etki' },
-        { name: 'Sabâ', steps: [8, 5, 5], character: 'Eksik dörtlü (18 koma) - kendine has içe dokunan tavır' }
+        { name: 'Sabâ', steps: [8, 5, 5], character: 'Eksik dörtlü (18 koma) - kendine has içe dokunan tavır' },
+        { name: 'Segâh', steps: [5, 9, 9], character: '1 koma bemollü Segâh perdesi ve tam ton adımları' }
     ];
 
     const PENTACHORDS = [
@@ -160,7 +161,8 @@
         { name: 'Rast', steps: [9, 8, 5, 9], character: 'Rast renginin 5. dereceye (Neva) kadar taşınışı' },
         { name: 'Hüseynî', steps: [8, 9, 5, 9], character: 'Uşşak gibi başlar, 3. derecesi açık ve tiz' },
         { name: 'Hicaz', steps: [5, 12, 5, 9], character: 'Hicaz artık ikilisi ile 5. dereceye uzanan yapı' },
-        { name: 'Nikriz', steps: [9, 5, 12, 5], character: 'Tam ton ardından gelen Hicaz artık ikilisi' }
+        { name: 'Nikriz', steps: [9, 5, 12, 5], character: 'Tam ton ardından gelen Hicaz artık ikilisi' },
+        { name: 'Segâh', steps: [5, 9, 9, 8], character: 'Segâh perdesinden 5. dereceye uzanan geleneksel beşli' }
     ];
 
     function findCesni(name, isPentachord = false) {
@@ -174,13 +176,17 @@
         { id: 'hicaz', name: 'Hicaz', lower: 'Hicaz', lowerIsPentachord: false, upper: 'Rast', upperIsPentachord: true, guclu: 22, seyir: SEYIR.FROM_ABOVE, approachFrom: 5, character: 'Geniş artık ikili adımı - yakıcı, hasret dolu ve mistik.' },
         { id: 'kurdi', name: 'Kürdî', lower: 'Kürdî', lowerIsPentachord: false, upper: 'Bûselik', upperIsPentachord: true, guclu: 22, seyir: SEYIR.FROM_BELOW, approachFrom: 4, character: 'Karanlık, derin ve Batı Frigyen dizisine en yakın duyum.' },
         { id: 'buselik', name: 'Bûselik', lower: 'Bûselik', lowerIsPentachord: true, upper: 'Kürdî', upperIsPentachord: false, guclu: 31, seyir: SEYIR.ASCENDING, approachFrom: -5, character: 'Koma sapması olmayan duru minör tını - güçlü ve kararlı.' },
-        { id: 'nihavend', name: 'Nihavend', lower: 'Bûselik', lowerIsPentachord: true, upper: 'Kürdî', upperIsPack: false, guclu: 31, seyir: SEYIR.DESCENDING, approachFrom: -5, character: 'Bûselik ile aynı sesleri içerir ancak İNİCİ seyriyle tamamen farklı bir his verir.' },
+        { id: 'nihavend', name: 'Nihavend', lower: 'Bûselik', lowerIsPentachord: true, upper: 'Kürdî', upperIsPentachord: false, guclu: 31, seyir: SEYIR.DESCENDING, approachFrom: -5, character: 'Bûselik ile aynı sesleri içerir ancak İNİCİ seyriyle tamamen farklı bir his verir.' },
         { id: 'huseyni', name: 'Hüseynî', lower: 'Hüseynî', lowerIsPentachord: true, upper: 'Uşşak', upperIsPentachord: false, guclu: 31, seyir: SEYIR.FROM_ABOVE, approachFrom: 7, character: 'Yükseklerde yaşayan, parlak ve yiğit halk türküsü tınısı.' },
         { id: 'karcigar', name: 'Karcığar', lower: 'Uşşak', lowerIsPentachord: false, upper: 'Hicaz', upperIsPentachord: true, guclu: 22, seyir: SEYIR.FROM_ABOVE, approachFrom: 7, character: 'Pestte Uşşak hüznü, tizlerde Hicaz ateşi - büyüleyici kontrast.' },
         { id: 'nikriz', name: 'Nikriz', lower: 'Nikriz', lowerIsPentachord: true, upper: 'Rast', upperIsPentachord: false, guclu: 31, seyir: SEYIR.FROM_ABOVE, approachFrom: 9, character: 'Önce tam ton, sonra Hicaz adımı - canlı, kıvrak ve hareketli.' },
         { id: 'suzinak', name: 'Sûzinâk', lower: 'Rast', lowerIsPentachord: true, upper: 'Hicaz', upperIsPentachord: false, guclu: 31, seyir: SEYIR.FROM_ABOVE, approachFrom: 9, character: 'Pestte Rast zarafeti, tizlerde Hicaz sıcaklığı.' },
         { id: 'cargah', name: 'Çargâh', lower: 'Çargâh', lowerIsPentachord: true, upper: 'Çargâh', upperIsPentachord: false, guclu: 31, seyir: SEYIR.ASCENDING, approachFrom: -4, character: 'Teorik ana makam (Do Majör dizisi) - aydınlık ve sert.' },
-        { id: 'saba', name: 'Sabâ', lower: 'Sabâ', lowerIsPentachord: false, upper: 'Hicaz', upperIsPentachord: true, guclu: 18, seyir: SEYIR.ASCENDING, approachFrom: 8, character: 'Eksik dörtlüsüyle tanımsız bir derinlik; içe işleyen eşsiz tasavvufi lezzet.' }
+        { id: 'saba', name: 'Sabâ', lower: 'Sabâ', lowerIsPentachord: false, upper: 'Hicaz', upperIsPentachord: true, guclu: 18, seyir: SEYIR.ASCENDING, approachFrom: 8, character: 'Eksik dörtlüsüyle tanımsız bir derinlik; içe işleyen eşsiz tasavvufi lezzet.' },
+        { id: 'segah', name: 'Segâh', lower: 'Segâh', lowerIsPentachord: true, upper: 'Rast', upperIsPentachord: false, guclu: 23, seyir: SEYIR.ASCENDING, approachFrom: 5, character: 'Türk musikisinin en karakteristik ve mistik makamı - koma bemollü Segâh perdesinde derin huzur ve teslimiyet.' },
+        { id: 'gulizar', name: 'Gülizâr', lower: 'Hüseynî', lowerIsPentachord: true, upper: 'Rast', upperIsPentachord: false, guclu: 22, seyir: SEYIR.FROM_ABOVE, approachFrom: 8, character: 'Uşşak, Hüseynî ve Rast çeşnilerinin harmanlandığı, gül bahçesi zarafetinde klasik mürekkep makam.' },
+        { id: 'zavil', name: 'Zavil', lower: 'Rast', lowerIsPentachord: true, upper: 'Çargâh', upperIsPentachord: false, guclu: 31, seyir: SEYIR.FROM_ABOVE, approachFrom: 9, character: 'Rast makamının asil neşesi ile Çargâhın berrak aydınlığını birleştiren, coşkulu ve ferah makam.' },
+        { id: 'evic', name: 'Eviç', lower: 'Segâh', lowerIsPentachord: true, upper: 'Hicaz', upperIsPentachord: false, guclu: 31, seyir: SEYIR.DESCENDING, approachFrom: 5, character: 'Tizlerde Eviç perdesinden süzülen, Segâh ve Hicaz çeşnileriyle bezeli asil, vakur ve derin klasik makam.' }
     ];
 
     function findMakam(idOrName) {
