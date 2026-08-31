@@ -366,6 +366,7 @@
         const startBeat = options.startBeat ?? 0.0;
         const cycles = Math.max(1, options.cycles ?? 4);
         const density = Math.max(0.1, Math.min(0.9, options.density ?? 0.34));
+        const freedom = Math.max(0.0, Math.min(1.0, options.freedom ?? 0.35));
         const seed = options.seed ?? 1;
         const formType = options.formType || 'standard';
         const range = options.range ?? { lowestComma: -9, highestComma: 62 };
@@ -386,7 +387,10 @@
 
             const slots = [];
             for (let i = 0; i < cycle16; ++i) {
-                const share = (usul.onsetShare && i < usul.onsetShare.length) ? usul.onsetShare[i] : (i % 4 === 0 ? 0.2 : 0.05);
+                let share = (usul.onsetShare && i < usul.onsetShare.length) ? usul.onsetShare[i] : (i % 4 === 0 ? 0.2 : 0.05);
+                if (freedom > 0.45 && (i % 2 !== 0)) {
+                    share += (freedom * 0.04);
+                }
                 if (share * cycle16 * density > rng.unit()) {
                     slots.push(i);
                 }
@@ -421,22 +425,28 @@
 
             for (let s = 0; s < n; ++s) {
                 if (s === n - 1) {
-                    here = target;
-                } else if (phrase.isFinal && s === n - 2 && approachRung >= 0 && Math.abs(approachRung - here) <= 2) {
+                    if (phrase.isFinal || freedom < 0.75 || rng.unit() > (freedom * 0.25)) {
+                        here = target;
+                    }
+                } else if (phrase.isFinal && s === n - 2 && approachRung >= 0 && Math.abs(approachRung - here) <= 3) {
                     here = approachRung;
                 } else if (s > 0) {
                     const toward = target > here ? 1 : (target < here ? -1 : 0);
                     const stepsLeft = (n - 1 - s) - (phrase.isFinal ? 1 : 0);
                     const remaining = Math.abs(target - here);
-                    const mustMarch = (toward !== 0) && (remaining >= stepsLeft);
+                    const mustMarch = (toward !== 0) && (remaining >= stepsLeft) && (freedom < 0.6 || phrase.isFinal);
 
                     let step = 0;
                     if (mustMarch) {
                         step = toward;
                     } else {
-                        const lean = phrase.isFinal ? 0.95 : 0.68;
+                        const lean = phrase.isFinal ? 0.96 : Math.max(0.42, 0.92 - (freedom * 0.50));
                         step = (rng.unit() < lean && toward !== 0) ? toward : (rng.unit() < 0.5 ? 1 : -1);
-                        if (rng.unit() < 0.18) step *= 2;
+
+                        const leapChance = 0.05 + (freedom * 0.32);
+                        if (rng.unit() < leapChance) {
+                            step *= (rng.unit() < (freedom * 0.45) ? 3 : 2);
+                        }
                     }
                     here = Math.max(0, Math.min(rungs.length - 1, here + step));
                 }
@@ -448,17 +458,36 @@
                 if (lengthBeats <= 0.0) continue;
 
                 const restsHere = usul.strong && usul.strong.includes(pos);
-                const sounding = place(durakMidi, rungs[here]);
+                let noteCommas = rungs[here];
+
+                // Chromatic passing nuance at high freedom
+                if (freedom > 0.65 && !phrase.isFinal && rng.unit() < (freedom * 0.12)) {
+                    const inflection = rng.unit() < 0.5 ? 1 : -1;
+                    noteCommas += inflection;
+                }
+
+                const sounding = place(durakMidi, noteCommas);
+
+                // Tasteful ornament assignment based on freedom
+                let ornament = null;
+                if (!phrase.isFinal && lengthBeats >= 0.5) {
+                    const ornRoll = rng.unit();
+                    const ornThreshold = 0.08 + (freedom * 0.38);
+                    if (ornRoll < ornThreshold) {
+                        const types = ['grace', 'mordent', 'slide', 'turn'];
+                        ornament = types[Math.floor(rng.unit() * types.length)];
+                    }
+                }
 
                 out.push({
                     pitch: sounding.note,
                     detuneCents: sounding.detuneCents,
-                    commas: rungs[here],
+                    commas: noteCommas,
                     startBeat: atBeat,
                     lengthBeats: lengthBeats,
                     velocity: restsHere ? 0.86 : 0.66,
                     locked: false,
-                    ornament: null,
+                    ornament: ornament,
                     section: phrase.section
                 });
             }
@@ -2375,6 +2404,7 @@
 
             // Persisted UI State
             this.melodyDensity = 0.34;
+            this.melodyFreedom = 0.35;
             this.formType = 'standard';
             this.drumDensity = 0.65;
             this.drumEnsemble = 'orchestra';
@@ -2495,8 +2525,15 @@
                         </select>
                     </div>
                     <div class="control-row">
-                        <label>Yoğunluk: <span id="densityVal">${this.melodyDensity}</span></label>
+                        <label>Nota Yoğunluğu: <span id="densityVal">${this.melodyDensity}</span></label>
                         <input type="range" id="melodyDensity" min="0.15" max="0.75" step="0.05" value="${this.melodyDensity}">
+                    </div>
+                    <div class="control-row">
+                        <label>Makam Sadakati & Özgürlük: <span id="freedomVal">%35 (Dengeli Klasik)</span></label>
+                        <input type="range" id="melodyFreedom" min="0" max="100" step="5" value="${Math.round((this.melodyFreedom ?? 0.35) * 100)}">
+                        <div style="font-size: 9.5px; color: var(--text-muted); margin-top: 2px;">
+                            🏛️ %0: Kati Geleneksel | 🎼 %35: Dengeli | ✨ %70: Zengin Geçki | 🎨 %100: Avangart
+                        </div>
                     </div>
                     <div class="btn-group">
                         <button class="btn btn-primary" id="btnGenMelody">✨ Tüm Melodiyi Oluştur</button>
@@ -2508,6 +2545,8 @@
 
             const dSlider = gen.querySelector('#melodyDensity');
             const dVal = gen.querySelector('#densityVal');
+            const fSlider = gen.querySelector('#melodyFreedom');
+            const fVal = gen.querySelector('#freedomVal');
             const formSel = gen.querySelector('#formTypeSelect');
             const btnGen = gen.querySelector('#btnGenMelody');
             const btnRand = gen.querySelector('#btnRandomMelody');
@@ -2518,6 +2557,23 @@
                     if (dVal) dVal.textContent = e.target.value;
                 };
             }
+            if (fSlider) {
+                const updateFreedomLabel = (v) => {
+                    let desc = 'Dengeli Klasik';
+                    if (v <= 15) desc = 'Kati Geleneksel';
+                    else if (v <= 45) desc = 'Dengeli Klasik';
+                    else if (v <= 75) desc = 'Zengin Geçkili';
+                    else desc = 'Serbest & Yenilikçi';
+                    if (fVal) fVal.textContent = `%${v} (${desc})`;
+                };
+                updateFreedomLabel(Math.round((this.melodyFreedom ?? 0.35) * 100));
+
+                fSlider.oninput = (e) => {
+                    const val = parseInt(e.target.value, 10);
+                    this.melodyFreedom = val / 100.0;
+                    updateFreedomLabel(val);
+                };
+            }
             if (formSel) {
                 formSel.onchange = (e) => {
                     this.formType = e.target.value;
@@ -2526,12 +2582,12 @@
             if (btnRand && this.onGenerateMelody) {
                 btnRand.onclick = () => {
                     const hasSel = this.selectedNotes && this.selectedNotes.size > 0;
-                    this.onGenerateMelody(this.melodyDensity, Math.floor(Math.random() * 1000000) + 1, this.formType, hasSel);
+                    this.onGenerateMelody(this.melodyDensity, Math.floor(Math.random() * 1000000) + 1, this.formType, hasSel, this.melodyFreedom);
                 };
             }
             if (btnGen && this.onGenerateMelody) {
                 btnGen.onclick = () => {
-                    this.onGenerateMelody(this.melodyDensity, Math.floor(Math.random() * 1000000) + 1, this.formType, false);
+                    this.onGenerateMelody(this.melodyDensity, Math.floor(Math.random() * 1000000) + 1, this.formType, false, this.melodyFreedom);
                 };
             }
         }
@@ -3066,9 +3122,10 @@
                 }
             };
 
-            this.candidatePanel.onGenerateMelody = (density, seed, formType, onlySelection) => {
+            this.candidatePanel.onGenerateMelody = (density, seed, formType, onlySelection, freedom) => {
                 this.history.pushState(this.song);
                 this.formType = formType || 'standard';
+                const fVal = freedom !== undefined ? freedom : (this.candidatePanel.melodyFreedom ?? 0.35);
 
                 if (onlySelection && this.pianoRoll.selectedNotes && this.pianoRoll.selectedNotes.size > 0) {
                     const selNotes = Array.from(this.pianoRoll.selectedNotes);
@@ -3096,7 +3153,9 @@
                         startBeat: startBeat,
                         cycles: rangeCycles,
                         density: density || this.candidatePanel.melodyDensity || 0.34,
-                        seed: seed
+                        freedom: fVal,
+                        seed: seed,
+                        formType: this.formType
                     });
 
                     const addedSel = new Set();
@@ -3116,11 +3175,15 @@
                         durakMidiNote: this.durakMidi,
                         cycles: this.cycles,
                         density: density || this.candidatePanel.melodyDensity || 0.34,
+                        freedom: fVal,
                         seed: seed,
                         formType: this.formType
                     });
                 }
 
+                this.pianoRoll.render();
+                this.candidatePanel.setSong(this.song);
+                this.audio.setSongData(this.song);
                 this.setActiveLayer('melody');
                 this.updateUI();
             };
@@ -3389,9 +3452,10 @@
             }
 
             const randSeed = Math.floor(Math.random() * 1000000) + 1;
-            this.song.melody = generateMakamMelody({ makam: this.currentMakam, usul: this.currentUsul, durakMidiNote: this.durakMidi, cycles: this.cycles, density: 0.36, seed: randSeed, formType: this.formType });
+            const freedom = this.candidatePanel ? (this.candidatePanel.melodyFreedom ?? 0.35) : 0.35;
+            this.song.melody = generateMakamMelody({ makam: this.currentMakam, usul: this.currentUsul, durakMidiNote: this.durakMidi, cycles: this.cycles, density: this.candidatePanel?.melodyDensity || 0.36, freedom: freedom, seed: randSeed, formType: this.formType });
             this.song.bass = generateMakamBass({ kind: BASS_KIND.ON_THE_USUL, makam: this.currentMakam, usul: this.currentUsul, durakMidiNote: this.durakMidi, cycles: this.cycles, melody: this.song.melody, seed: randSeed + 1 });
-            this.song.drums = generateUsulDrums({ usul: this.currentUsul, groove: GROOVE_KIND.ORCHESTRA, density: 0.65, cycles: this.cycles, seed: randSeed + 2 });
+            this.song.drums = generateUsulDrums({ usul: this.currentUsul, groove: GROOVE_KIND.ORCHESTRA, density: this.candidatePanel?.drumDensity || 0.65, cycles: this.cycles, seed: randSeed + 2 });
 
             this.history.pushState(this.song);
             this.updateUI();

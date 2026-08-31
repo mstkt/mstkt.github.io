@@ -152,6 +152,7 @@ export function generateMakamMelody(options = {}) {
     const startBeat = options.startBeat ?? 0.0;
     const cycles = Math.max(1, options.cycles ?? 4);
     const density = Math.max(0.1, Math.min(0.9, options.density ?? 0.34));
+    const freedom = Math.max(0.0, Math.min(1.0, options.freedom ?? 0.35));
     const seed = options.seed ?? 1;
     const range = options.range ?? { lowestComma: -9, highestComma: 62 };
 
@@ -173,9 +174,13 @@ export function generateMakamMelody(options = {}) {
         // Select rhythmic slot onsets based on measured Usul statistics
         const slots = [];
         for (let i = 0; i < cycle16; ++i) {
-            const share = (usul.onsetShare && i < usul.onsetShare.length)
+            let share = (usul.onsetShare && i < usul.onsetShare.length)
                 ? usul.onsetShare[i]
                 : (i % 4 === 0 ? 0.2 : 0.05);
+
+            if (freedom > 0.45 && (i % 2 !== 0)) {
+                share += (freedom * 0.04);
+            }
 
             if (share * cycle16 * density > rng.unit()) {
                 slots.push(i);
@@ -221,23 +226,26 @@ export function generateMakamMelody(options = {}) {
 
         for (let s = 0; s < n; ++s) {
             if (s === n - 1) {
-                here = target; // Arrival at destination
-            } else if (phrase.isFinal && s === n - 2 && approachRung >= 0 && Math.abs(approachRung - here) <= 2) {
-                here = approachRung; // Measured cadence approach degree
+                if (phrase.isFinal || freedom < 0.75 || rng.unit() > (freedom * 0.25)) {
+                    here = target;
+                }
+            } else if (phrase.isFinal && s === n - 2 && approachRung >= 0 && Math.abs(approachRung - here) <= 3) {
+                here = approachRung;
             } else if (s > 0) {
                 const toward = target > here ? 1 : (target < here ? -1 : 0);
                 const stepsLeft = (n - 1 - s) - (phrase.isFinal ? 1 : 0);
                 const remaining = Math.abs(target - here);
-                const mustMarch = (toward !== 0) && (remaining >= stepsLeft);
+                const mustMarch = (toward !== 0) && (remaining >= stepsLeft) && (freedom < 0.6 || phrase.isFinal);
 
                 let step = 0;
                 if (mustMarch) {
                     step = toward;
                 } else {
-                    const lean = phrase.isFinal ? 0.95 : 0.68;
+                    const lean = phrase.isFinal ? 0.96 : Math.max(0.42, 0.92 - (freedom * 0.50));
                     step = (rng.unit() < lean && toward !== 0) ? toward : (rng.unit() < 0.5 ? 1 : -1);
-                    if (rng.unit() < 0.18) {
-                        step *= 2; // Occasional small skip
+                    const leapChance = 0.05 + (freedom * 0.32);
+                    if (rng.unit() < leapChance) {
+                        step *= (rng.unit() < (freedom * 0.45) ? 3 : 2);
                     }
                 }
 
@@ -252,20 +260,36 @@ export function generateMakamMelody(options = {}) {
             if (lengthBeats <= 0.0) continue;
 
             const restsHere = usul.strong && usul.strong.includes(pos);
-            const sounding = place(durakMidi, rungs[here]);
+            let noteCommas = rungs[here];
+
+            if (freedom > 0.65 && !phrase.isFinal && rng.unit() < (freedom * 0.12)) {
+                noteCommas += (rng.unit() < 0.5 ? 1 : -1);
+            }
+
+            const sounding = place(durakMidi, noteCommas);
+
+            let ornament = null;
+            if (!phrase.isFinal && lengthBeats >= 0.5) {
+                const ornRoll = rng.unit();
+                const ornThreshold = 0.08 + (freedom * 0.38);
+                if (ornRoll < ornThreshold) {
+                    const types = ['grace', 'mordent', 'slide', 'turn'];
+                    ornament = types[Math.floor(rng.unit() * types.length)];
+                }
+            }
 
             out.push({
                 pitch: sounding.note,
                 detuneCents: sounding.detuneCents,
-                commas: rungs[here],
+                commas: noteCommas,
                 startBeat: atBeat,
                 lengthBeats: lengthBeats,
                 velocity: restsHere ? 0.86 : 0.66,
-                locked: false
+                locked: false,
+                ornament: ornament
             });
         }
     }
-
     return out;
 }
 
