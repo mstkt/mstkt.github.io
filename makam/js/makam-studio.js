@@ -293,68 +293,103 @@
         return best;
     }
 
-    function phrasePlan(makam, phraseCount = 4, formType = 'standard') {
+    function phrasePlan(makam, phraseCount = 4, formType = 'standard', contourType = 'auto', rng = null) {
         const out = [];
         const count = Math.max(1, phraseCount);
         const durak = 0;
-        const guclu = makam.guclu || 31;
+        const guclu = makam.guclu || 22;
         const top = 53;
+        const rawDegs = getMakamDegrees(makam);
+        const step2 = rawDegs[1] || 5;
+        const step3 = rawDegs[2] || 13;
+        const stepUpper = rawDegs[rawDegs.length - 2] || 44;
 
-        let at = durak;
-        switch (makam.seyir) {
-            case SEYIR.ASCENDING:  at = durak; break;
-            case SEYIR.DESCENDING: at = top;   break;
-            case SEYIR.FROM_ABOVE: at = guclu; break;
-            case SEYIR.FROM_BELOW: at = durak; break;
-            default:               at = durak; break;
+        if (!rng) rng = new XorShiftRng(Math.floor(Math.random() * 1000000) + 1);
+
+        let effectiveContour = contourType || 'auto';
+        if (effectiveContour === 'auto') {
+            const roll = rng.unit();
+            if (makam.seyir === SEYIR.ASCENDING) {
+                if (roll < 0.35) effectiveContour = 'climb';
+                else if (roll < 0.65) effectiveContour = 'call_response';
+                else if (roll < 0.85) effectiveContour = 'wave';
+                else effectiveContour = 'folk';
+            } else if (makam.seyir === SEYIR.DESCENDING) {
+                if (roll < 0.45) effectiveContour = 'cascade';
+                else if (roll < 0.75) effectiveContour = 'wave';
+                else effectiveContour = 'call_response';
+            } else {
+                if (roll < 0.30) effectiveContour = 'wave';
+                else if (roll < 0.55) effectiveContour = 'call_response';
+                else if (roll < 0.80) effectiveContour = 'climb';
+                else effectiveContour = 'cascade';
+            }
         }
 
-        if (formType === 'sarki' && count >= 4) {
-            const zeminEnd = Math.floor(count * 0.4);
-            const meyanEnd = Math.floor(count * 0.75);
-
-            for (let i = 0; i < count; ++i) {
-                const isFinal = (i === count - 1);
-                let target;
-                let section = 'Zemin';
-
-                if (isFinal) {
-                    target = durak;
-                    section = 'Karar';
-                } else if (i < zeminEnd) {
-                    target = guclu;
-                    section = 'Zemin';
-                } else if (i < meyanEnd) {
-                    target = top;
-                    section = 'Meyan';
-                } else {
-                    target = guclu;
-                    section = 'Teslim';
-                }
-                out.push({ fromComma: at, toComma: target, isFinal, section });
-                at = target;
-            }
+        let at = durak;
+        if (effectiveContour === 'cascade' || makam.seyir === SEYIR.DESCENDING) {
+            at = (rng.unit() < 0.5) ? top : stepUpper;
+        } else if (effectiveContour === 'wave' || makam.seyir === SEYIR.FROM_ABOVE) {
+            at = (rng.unit() < 0.6) ? guclu : (rng.unit() < 0.5 ? step3 : durak);
         } else {
-            for (let i = 0; i < count; ++i) {
-                const isFinal = (i === count - 1);
-                let target;
-                if (isFinal) {
-                    target = durak;
+            at = (rng.unit() < 0.7) ? durak : (rng.unit() < 0.5 ? step2 : -5);
+        }
+
+        for (let i = 0; i < count; ++i) {
+            const isFinal = (i === count - 1);
+            let target;
+            let section = isFinal ? 'Karar' : 'Seyir';
+
+            if (isFinal) {
+                target = durak;
+            } else if (formType === 'sarki') {
+                if (i === 0) {
+                    target = (makam.seyir === SEYIR.DESCENDING) ? guclu : (rng.unit() < 0.5 ? guclu : step3);
+                    section = 'Zemin';
+                } else if (i === Math.floor(count * 0.5) || i === Math.floor(count * 0.6)) {
+                    target = (rng.unit() < 0.7) ? top : stepUpper;
+                    section = 'Meyan';
                 } else if (i === count - 2) {
-                    target = guclu;
+                    target = (rng.unit() < 0.6) ? guclu : step2;
+                    section = 'Teslim';
                 } else {
-                    const exploreHigh = (makam.seyir === SEYIR.ASCENDING || makam.seyir === SEYIR.FROM_BELOW) ? (i % 2 === 1) : (i % 2 === 0);
-                    if (i === 0 && makam.seyir === SEYIR.ASCENDING) {
-                        target = guclu;
-                    } else if (exploreHigh) {
-                        target = top;
-                    } else {
-                        target = guclu;
-                    }
+                    target = (rng.unit() < 0.5) ? guclu : step3;
+                    section = 'Zemin';
                 }
-                out.push({ fromComma: at, toComma: target, isFinal, section: isFinal ? 'Karar' : 'Seyir' });
-                at = target;
+            } else {
+                switch (effectiveContour) {
+                    case 'wave':
+                        if (i % 2 === 0) target = guclu;
+                        else target = (rng.unit() < 0.5) ? Math.min(top, guclu + 9) : Math.max(0, guclu - 9);
+                        break;
+                    case 'climb':
+                        if (i === 0) target = step3;
+                        else if (i === count - 2) target = top;
+                        else target = guclu;
+                        break;
+                    case 'cascade':
+                        if (i === 0) target = stepUpper;
+                        else if (i === 1) target = guclu;
+                        else if (i === count - 2) target = step2;
+                        else target = durak;
+                        break;
+                    case 'call_response':
+                        if (i === 0) target = guclu;
+                        else if (i === 1) target = (rng.unit() < 0.5) ? durak : step3;
+                        else if (i === count - 2) target = top;
+                        else target = guclu;
+                        break;
+                    case 'folk':
+                        if (i === count - 2) target = guclu;
+                        else target = (rng.unit() < 0.6) ? step2 : durak;
+                        break;
+                    default:
+                        target = (i === count - 2) ? guclu : (rng.unit() < 0.5 ? guclu : step3);
+                        break;
+                }
             }
+            out.push({ fromComma: at, toComma: target, isFinal, section, contour: effectiveContour });
+            at = target;
         }
         return out;
     }
@@ -367,7 +402,8 @@
         const cycles = Math.max(1, options.cycles ?? 4);
         const density = Math.max(0.1, Math.min(0.9, options.density ?? 0.34));
         const freedom = Math.max(0.0, Math.min(1.0, options.freedom ?? 0.35));
-        const seed = options.seed ?? 1;
+        const contourType = options.contourType || 'auto';
+        const seed = options.seed ?? (Math.floor(Math.random() * 1000000) + 1);
         const formType = options.formType || 'standard';
         const range = options.range ?? { lowestComma: -9, highestComma: 62 };
 
@@ -375,21 +411,27 @@
         const cycle16 = usul.cycleSixteenths || 16;
         const cycleBeats = cycle16 / 4.0;
         const rng = new XorShiftRng(seed);
-        const plan = phrasePlan(makam, cycles, formType);
+        const plan = phrasePlan(makam, cycles, formType, contourType, rng);
         const out = [];
 
         let here = nearestRung(rungs, plan[0].fromComma);
+        let previousMotifSteps = null;
 
         for (let p = 0; p < plan.length; ++p) {
             const phrase = plan[p];
             const barStart = startBeat + (p * cycleBeats);
             const target = nearestRung(rungs, phrase.toComma);
 
+            // Generate or sequence rhythmic slots
             const slots = [];
             for (let i = 0; i < cycle16; ++i) {
-                let share = (usul.onsetShare && i < usul.onsetShare.length) ? usul.onsetShare[i] : (i % 4 === 0 ? 0.2 : 0.05);
-                if (freedom > 0.45 && (i % 2 !== 0)) {
-                    share += (freedom * 0.04);
+                let share = (usul.onsetShare && i < usul.onsetShare.length) ? usul.onsetShare[i] : (i % 4 === 0 ? 0.22 : 0.05);
+                if (freedom > 0.40 && (i % 2 !== 0)) {
+                    share += (freedom * 0.05);
+                }
+                // Add natural syncopations and swing
+                if (i % 4 === 2 && rng.unit() < 0.35) {
+                    share += 0.08;
                 }
                 if (share * cycle16 * density > rng.unit()) {
                     slots.push(i);
@@ -401,7 +443,7 @@
             }
 
             const dist = Math.abs(target - here);
-            const needed = dist + (phrase.isFinal ? 2 : 1);
+            const needed = Math.min(cycle16, dist + (phrase.isFinal ? 2 : 1));
 
             if (slots.length < needed) {
                 const byWeight = [];
@@ -422,40 +464,66 @@
 
             const approachRung = phrase.isFinal ? nearestRung(rungs, phrase.toComma + (makam.approachFrom || 0)) : -1;
             const n = slots.length;
+            const currentMotifSteps = [];
+
+            // Check if measure 1 sequences measure 0's motif
+            const doMotifSequence = (p === 1 && previousMotifSteps && previousMotifSteps.length > 2 && rng.unit() < 0.65);
 
             for (let s = 0; s < n; ++s) {
                 if (s === n - 1) {
-                    if (phrase.isFinal || freedom < 0.75 || rng.unit() > (freedom * 0.25)) {
+                    if (phrase.isFinal || freedom < 0.70 || rng.unit() > (freedom * 0.30)) {
                         here = target;
                     }
                 } else if (phrase.isFinal && s === n - 2 && approachRung >= 0 && Math.abs(approachRung - here) <= 3) {
                     here = approachRung;
+                } else if (doMotifSequence && s < previousMotifSteps.length) {
+                    // Sequence: repeat the motif transposition with variation
+                    const relativeStep = previousMotifSteps[s];
+                    here = Math.max(0, Math.min(rungs.length - 1, here + relativeStep));
                 } else if (s > 0) {
                     const toward = target > here ? 1 : (target < here ? -1 : 0);
                     const stepsLeft = (n - 1 - s) - (phrase.isFinal ? 1 : 0);
                     const remaining = Math.abs(target - here);
-                    const mustMarch = (toward !== 0) && (remaining >= stepsLeft) && (freedom < 0.6 || phrase.isFinal);
+                    const mustMarch = (toward !== 0) && (remaining >= stepsLeft) && (freedom < 0.55 || phrase.isFinal);
 
                     let step = 0;
                     if (mustMarch) {
                         step = toward;
                     } else {
-                        const lean = phrase.isFinal ? 0.96 : Math.max(0.42, 0.92 - (freedom * 0.50));
-                        step = (rng.unit() < lean && toward !== 0) ? toward : (rng.unit() < 0.5 ? 1 : -1);
+                        const roll = rng.unit();
+                        if (roll < 0.22 && !phrase.isFinal) {
+                            // Note repetition / meşk reiteration
+                            step = 0;
+                        } else if (roll < 0.40 && !phrase.isFinal) {
+                            // Auxiliary wave / turn (opposite of toward, then returns)
+                            step = (toward !== 0) ? -toward : (rng.unit() < 0.5 ? 1 : -1);
+                        } else {
+                            // Stepwise in primary direction
+                            const lean = phrase.isFinal ? 0.95 : Math.max(0.40, 0.88 - (freedom * 0.45));
+                            step = (rng.unit() < lean && toward !== 0) ? toward : (rng.unit() < 0.5 ? 1 : -1);
 
-                        const leapChance = 0.05 + (freedom * 0.32);
-                        if (rng.unit() < leapChance) {
-                            step *= (rng.unit() < (freedom * 0.45) ? 3 : 2);
+                            const leapChance = 0.08 + (freedom * 0.30);
+                            if (rng.unit() < leapChance) {
+                                step *= (rng.unit() < (freedom * 0.40) ? 3 : 2);
+                            }
                         }
                     }
+                    currentMotifSteps.push(step);
                     here = Math.max(0, Math.min(rungs.length - 1, here + step));
+                } else {
+                    currentMotifSteps.push(0);
                 }
 
                 const pos = slots[s];
                 const atBeat = barStart + (pos / 4.0);
                 const until = (s + 1 < n) ? (slots[s + 1] / 4.0) : cycleBeats;
-                const lengthBeats = until - (pos / 4.0);
+                let lengthBeats = until - (pos / 4.0);
                 if (lengthBeats <= 0.0) continue;
+
+                // Natural phrase breathing: slight musical pause on weak beat phrase ends
+                if (!phrase.isFinal && s === n - 1 && lengthBeats > 0.5 && rng.unit() < 0.45) {
+                    lengthBeats = Math.max(0.25, lengthBeats - 0.25);
+                }
 
                 const restsHere = usul.strong && usul.strong.includes(pos);
                 let noteCommas = rungs[here];
@@ -485,12 +553,14 @@
                     commas: noteCommas,
                     startBeat: atBeat,
                     lengthBeats: lengthBeats,
-                    velocity: restsHere ? 0.86 : 0.66,
+                    velocity: restsHere ? 0.88 : (0.64 + (rng.unit() * 0.08)),
                     locked: false,
                     ornament: ornament,
                     section: phrase.section
                 });
             }
+
+            if (p === 0) previousMotifSteps = currentMotifSteps;
         }
         return out;
     }
@@ -2494,6 +2564,7 @@
             // Persisted UI State
             this.melodyDensity = 0.34;
             this.melodyFreedom = 0.35;
+            this.contourType = 'auto';
             this.formType = 'standard';
             this.drumDensity = 0.65;
             this.drumEnsemble = 'orchestra';
@@ -2607,6 +2678,17 @@
                 ${isSelectionActive ? `<div style="padding: 6px 10px; background: rgba(0, 210, 255, 0.15); border-radius: 4px; font-size: 11px; margin-bottom: 8px; color: var(--accent-cyan); font-weight: bold;">🎯 ${this.selectedNotes.size} adet nota seçildi. Yalnızca seçili bölge/ölçü yenilenecektir.</div>` : ''}
                 <div class="gen-controls">
                     <div class="control-row">
+                        <label>Seyir Eğrisi & Tavır:</label>
+                        <select id="contourSelect" class="form-select">
+                            <option value="auto" ${this.contourType === 'auto' ? 'selected' : ''}>🎲 Doğal Çeşitlilik (Rastgele Farklı Seyirler)</option>
+                            <option value="wave" ${this.contourType === 'wave' ? 'selected' : ''}>🌊 Dalgalı Meşk (Güçlü Etrafında Salınım)</option>
+                            <option value="climb" ${this.contourType === 'climb' ? 'selected' : ''}>🧗‍♂️ Zirveli Meyan (Tırmanış & Meyan Açılımı)</option>
+                            <option value="cascade" ${this.contourType === 'cascade' ? 'selected' : ''}>🪂 Süzülen Şelale (Tizlerden Aşağı İniş)</option>
+                            <option value="call_response" ${this.contourType === 'call_response' ? 'selected' : ''}>🔄 Soru - Cevap (Tematik Motif Tekrarı)</option>
+                            <option value="folk" ${this.contourType === 'folk' ? 'selected' : ''}>🎯 Karar Odaklı / Türkü Tavrı</option>
+                        </select>
+                    </div>
+                    <div class="control-row">
                         <label>Form Mimarisi:</label>
                         <select id="formTypeSelect" class="form-select">
                             <option value="standard" ${this.formType === 'standard' ? 'selected' : ''}>Döngüsel Seyir (Standart)</option>
@@ -2637,6 +2719,7 @@
             const fSlider = gen.querySelector('#melodyFreedom');
             const fVal = gen.querySelector('#freedomVal');
             const formSel = gen.querySelector('#formTypeSelect');
+            const contourSel = gen.querySelector('#contourSelect');
             const btnGen = gen.querySelector('#btnGenMelody');
             const btnRand = gen.querySelector('#btnRandomMelody');
 
@@ -2668,15 +2751,20 @@
                     this.formType = e.target.value;
                 };
             }
+            if (contourSel) {
+                contourSel.onchange = (e) => {
+                    this.contourType = e.target.value;
+                };
+            }
             if (btnRand && this.onGenerateMelody) {
                 btnRand.onclick = () => {
                     const hasSel = this.selectedNotes && this.selectedNotes.size > 0;
-                    this.onGenerateMelody(this.melodyDensity, Math.floor(Math.random() * 1000000) + 1, this.formType, hasSel, this.melodyFreedom);
+                    this.onGenerateMelody(this.melodyDensity, Math.floor(Math.random() * 1000000) + 1, this.formType, hasSel, this.melodyFreedom, this.contourType);
                 };
             }
             if (btnGen && this.onGenerateMelody) {
                 btnGen.onclick = () => {
-                    this.onGenerateMelody(this.melodyDensity, Math.floor(Math.random() * 1000000) + 1, this.formType, false, this.melodyFreedom);
+                    this.onGenerateMelody(this.melodyDensity, Math.floor(Math.random() * 1000000) + 1, this.formType, false, this.melodyFreedom, this.contourType);
                 };
             }
         }
@@ -3212,10 +3300,11 @@
                 }
             };
 
-            this.candidatePanel.onGenerateMelody = (density, seed, formType, onlySelection, freedom) => {
+            this.candidatePanel.onGenerateMelody = (density, seed, formType, onlySelection, freedom, contourType) => {
                 this.history.pushState(this.song);
                 this.formType = formType || 'standard';
                 const fVal = freedom !== undefined ? freedom : (this.candidatePanel.melodyFreedom ?? 0.35);
+                const cVal = contourType || this.candidatePanel.contourType || 'auto';
 
                 if (onlySelection && this.pianoRoll.selectedNotes && this.pianoRoll.selectedNotes.size > 0) {
                     const selNotes = Array.from(this.pianoRoll.selectedNotes);
@@ -3244,6 +3333,7 @@
                         cycles: rangeCycles,
                         density: density || this.candidatePanel.melodyDensity || 0.34,
                         freedom: fVal,
+                        contourType: cVal,
                         seed: seed,
                         formType: this.formType
                     });
@@ -3266,6 +3356,7 @@
                         cycles: this.cycles,
                         density: density || this.candidatePanel.melodyDensity || 0.34,
                         freedom: fVal,
+                        contourType: cVal,
                         seed: seed,
                         formType: this.formType
                     });
@@ -3543,7 +3634,8 @@
 
             const randSeed = Math.floor(Math.random() * 1000000) + 1;
             const freedom = this.candidatePanel ? (this.candidatePanel.melodyFreedom ?? 0.35) : 0.35;
-            this.song.melody = generateMakamMelody({ makam: this.currentMakam, usul: this.currentUsul, durakMidiNote: this.durakMidi, cycles: this.cycles, density: this.candidatePanel?.melodyDensity || 0.36, freedom: freedom, seed: randSeed, formType: this.formType });
+            const contourType = this.candidatePanel ? (this.candidatePanel.contourType || 'auto') : 'auto';
+            this.song.melody = generateMakamMelody({ makam: this.currentMakam, usul: this.currentUsul, durakMidiNote: this.durakMidi, cycles: this.cycles, density: this.candidatePanel?.melodyDensity || 0.36, freedom: freedom, contourType: contourType, seed: randSeed, formType: this.formType });
             this.song.bass = generateMakamBass({ kind: BASS_KIND.ON_THE_USUL, makam: this.currentMakam, usul: this.currentUsul, durakMidiNote: this.durakMidi, cycles: this.cycles, melody: this.song.melody, seed: randSeed + 1 });
             this.song.drums = generateUsulDrums({ usul: this.currentUsul, groove: GROOVE_KIND.ORCHESTRA, density: this.candidatePanel?.drumDensity || 0.65, cycles: this.cycles, seed: randSeed + 2 });
 

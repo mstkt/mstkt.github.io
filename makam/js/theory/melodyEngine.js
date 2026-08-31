@@ -83,68 +83,107 @@ export function nearestRung(rungs, comma) {
  * @param {number} phraseCount - number of cycles/bars
  * @returns {Array<{ fromComma: number, toComma: number, isFinal: boolean }>}
  */
-export function phrasePlan(makam, phraseCount = 4) {
+export function phrasePlan(makam, phraseCount = 4, formType = 'standard', contourType = 'auto', rng = null) {
     const out = [];
     const count = Math.max(1, phraseCount);
     const durak = 0;
-    const guclu = makam.guclu || KOMMA.FIFTH;
-    const top = KOMMA.PER_OCTAVE;
+    const guclu = makam.guclu || 22;
+    const top = 53;
+    const rawDegs = getMakamDegrees(makam);
+    const step2 = rawDegs[1] || 5;
+    const step3 = rawDegs[2] || 13;
+    const stepUpper = rawDegs[rawDegs.length - 2] || 44;
 
-    // Entry degree based on Seyir
+    if (!rng) rng = new XorShiftRng(Math.floor(Math.random() * 1000000) + 1);
+
+    let effectiveContour = contourType || 'auto';
+    if (effectiveContour === 'auto') {
+        const roll = rng.unit();
+        if (makam.seyir === SEYIR.ASCENDING) {
+            if (roll < 0.35) effectiveContour = 'climb';
+            else if (roll < 0.65) effectiveContour = 'call_response';
+            else if (roll < 0.85) effectiveContour = 'wave';
+            else effectiveContour = 'folk';
+        } else if (makam.seyir === SEYIR.DESCENDING) {
+            if (roll < 0.45) effectiveContour = 'cascade';
+            else if (roll < 0.75) effectiveContour = 'wave';
+            else effectiveContour = 'call_response';
+        } else {
+            if (roll < 0.30) effectiveContour = 'wave';
+            else if (roll < 0.55) effectiveContour = 'call_response';
+            else if (roll < 0.80) effectiveContour = 'climb';
+            else effectiveContour = 'cascade';
+        }
+    }
+
     let at = durak;
-    switch (makam.seyir) {
-        case SEYIR.ASCENDING:  at = durak; break;
-        case SEYIR.DESCENDING: at = top;   break;
-        case SEYIR.FROM_ABOVE: at = guclu; break;
-        case SEYIR.FROM_BELOW: at = durak; break;
-        default:               at = durak; break;
+    if (effectiveContour === 'cascade' || makam.seyir === SEYIR.DESCENDING) {
+        at = (rng.unit() < 0.5) ? top : stepUpper;
+    } else if (effectiveContour === 'wave' || makam.seyir === SEYIR.FROM_ABOVE) {
+        at = (rng.unit() < 0.6) ? guclu : (rng.unit() < 0.5 ? step3 : durak);
+    } else {
+        at = (rng.unit() < 0.7) ? durak : (rng.unit() < 0.5 ? step2 : -5);
     }
 
     for (let i = 0; i < count; ++i) {
         const isFinal = (i === count - 1);
         let target;
+        let section = isFinal ? 'Karar' : 'Seyir';
 
         if (isFinal) {
-            target = durak; // Tam Karar (Final cadence on Durak)
-        } else if (i === count - 2) {
-            target = guclu; // Yarım Karar (Half cadence on Güçlü right before final)
-        } else {
-            // Intermediate exploration around Güçlü and Tiz
-            const exploreHigh = (makam.seyir === SEYIR.ASCENDING || makam.seyir === SEYIR.FROM_BELOW)
-                ? (i % 2 === 1)
-                : (i % 2 === 0);
-
-            if (i === 0 && makam.seyir === SEYIR.ASCENDING) {
-                target = guclu;
-            } else if (exploreHigh) {
-                target = top;
+            target = durak;
+        } else if (formType === 'sarki') {
+            if (i === 0) {
+                target = (makam.seyir === SEYIR.DESCENDING) ? guclu : (rng.unit() < 0.5 ? guclu : step3);
+                section = 'Zemin';
+            } else if (i === Math.floor(count * 0.5) || i === Math.floor(count * 0.6)) {
+                target = (rng.unit() < 0.7) ? top : stepUpper;
+                section = 'Meyan';
+            } else if (i === count - 2) {
+                target = (rng.unit() < 0.6) ? guclu : step2;
+                section = 'Teslim';
             } else {
-                target = guclu;
+                target = (rng.unit() < 0.5) ? guclu : step3;
+                section = 'Zemin';
+            }
+        } else {
+            switch (effectiveContour) {
+                case 'wave':
+                    if (i % 2 === 0) target = guclu;
+                    else target = (rng.unit() < 0.5) ? Math.min(top, guclu + 9) : Math.max(0, guclu - 9);
+                    break;
+                case 'climb':
+                    if (i === 0) target = step3;
+                    else if (i === count - 2) target = top;
+                    else target = guclu;
+                    break;
+                case 'cascade':
+                    if (i === 0) target = stepUpper;
+                    else if (i === 1) target = guclu;
+                    else if (i === count - 2) target = step2;
+                    else target = durak;
+                    break;
+                case 'call_response':
+                    if (i === 0) target = guclu;
+                    else if (i === 1) target = (rng.unit() < 0.5) ? durak : step3;
+                    else if (i === count - 2) target = top;
+                    else target = guclu;
+                    break;
+                case 'folk':
+                    if (i === count - 2) target = guclu;
+                    else target = (rng.unit() < 0.6) ? step2 : durak;
+                    break;
+                default:
+                    target = (i === count - 2) ? guclu : (rng.unit() < 0.5 ? guclu : step3);
+                    break;
             }
         }
-
-        out.push({ fromComma: at, toComma: target, isFinal });
+        out.push({ fromComma: at, toComma: target, isFinal, section, contour: effectiveContour });
         at = target;
     }
-
     return out;
 }
 
-/**
- * Generates a full Makam melody.
- *
- * @param {object} options
- * @param {string|object} options.makam - Makam object or ID
- * @param {string|object} options.usul - Usul object or ID
- * @param {number} [options.durakMidiNote=62] - e.g. 62 (D4 / Dugah)
- * @param {number} [options.startBeat=0]
- * @param {number} [options.cycles=4] - number of usul cycles
- * @param {number} [options.density=0.34] - note density (0.1 to 0.9)
- * @param {number} [options.seed=1]
- * @param {{ lowestComma: number, highestComma: number }} [options.range]
- * @param {Array<object>} [options.lockedNotes=[]] - existing notes to preserve
- * @returns {Array<{ pitch: number, detuneCents: number, startBeat: number, lengthBeats: number, velocity: number, locked: boolean }>}
- */
 export function generateMakamMelody(options = {}) {
     const makam = typeof options.makam === 'string' ? findMakam(options.makam) : (options.makam || findMakam('hicaz'));
     const usul = typeof options.usul === 'string' ? findUsul(options.usul) : (options.usul || findUsul('sofyan'));
@@ -153,35 +192,35 @@ export function generateMakamMelody(options = {}) {
     const cycles = Math.max(1, options.cycles ?? 4);
     const density = Math.max(0.1, Math.min(0.9, options.density ?? 0.34));
     const freedom = Math.max(0.0, Math.min(1.0, options.freedom ?? 0.35));
-    const seed = options.seed ?? 1;
+    const contourType = options.contourType || 'auto';
+    const seed = options.seed ?? (Math.floor(Math.random() * 1000000) + 1);
+    const formType = options.formType || 'standard';
     const range = options.range ?? { lowestComma: -9, highestComma: 62 };
 
     const rungs = buildLadder(makam, range);
     const cycle16 = usul.cycleSixteenths || 16;
     const cycleBeats = cycle16 / 4.0;
-
     const rng = new XorShiftRng(seed);
-    const plan = phrasePlan(makam, cycles);
+    const plan = phrasePlan(makam, cycles, formType, contourType, rng);
     const out = [];
 
     let here = nearestRung(rungs, plan[0].fromComma);
+    let previousMotifSteps = null;
 
     for (let p = 0; p < plan.length; ++p) {
         const phrase = plan[p];
         const barStart = startBeat + (p * cycleBeats);
         const target = nearestRung(rungs, phrase.toComma);
 
-        // Select rhythmic slot onsets based on measured Usul statistics
         const slots = [];
         for (let i = 0; i < cycle16; ++i) {
-            let share = (usul.onsetShare && i < usul.onsetShare.length)
-                ? usul.onsetShare[i]
-                : (i % 4 === 0 ? 0.2 : 0.05);
-
-            if (freedom > 0.45 && (i % 2 !== 0)) {
-                share += (freedom * 0.04);
+            let share = (usul.onsetShare && i < usul.onsetShare.length) ? usul.onsetShare[i] : (i % 4 === 0 ? 0.22 : 0.05);
+            if (freedom > 0.40 && (i % 2 !== 0)) {
+                share += (freedom * 0.05);
             }
-
+            if (i % 4 === 2 && rng.unit() < 0.35) {
+                share += 0.08;
+            }
             if (share * cycle16 * density > rng.unit()) {
                 slots.push(i);
             }
@@ -191,73 +230,82 @@ export function generateMakamMelody(options = {}) {
             slots.push(usul.startsOn || 0);
         }
 
-        // Ensure enough steps to walk the distance without jumping
         const dist = Math.abs(target - here);
-        const needed = dist + (phrase.isFinal ? 2 : 1);
+        const needed = Math.min(cycle16, dist + (phrase.isFinal ? 2 : 1));
 
         if (slots.length < needed) {
             const byWeight = [];
             for (let i = 0; i < cycle16; ++i) {
-                if (!slots.includes(i)) {
-                    byWeight.push(i);
-                }
+                if (!slots.includes(i)) byWeight.push(i);
             }
-
             byWeight.sort((a, b) => {
                 const sa = (usul.onsetShare && a < usul.onsetShare.length) ? usul.onsetShare[a] : 0;
                 const sb = (usul.onsetShare && b < usul.onsetShare.length) ? usul.onsetShare[b] : 0;
                 return sb - sa;
             });
-
             for (const i of byWeight) {
                 if (slots.length >= needed) break;
                 slots.push(i);
             }
-
             slots.sort((a, b) => a - b);
         }
 
-        // Approach note calculation for final phrase
-        const approachRung = phrase.isFinal
-            ? nearestRung(rungs, phrase.toComma + (makam.approachFrom || 0))
-            : -1;
-
+        const approachRung = phrase.isFinal ? nearestRung(rungs, phrase.toComma + (makam.approachFrom || 0)) : -1;
         const n = slots.length;
+        const currentMotifSteps = [];
+
+        const doMotifSequence = (p === 1 && previousMotifSteps && previousMotifSteps.length > 2 && rng.unit() < 0.65);
 
         for (let s = 0; s < n; ++s) {
             if (s === n - 1) {
-                if (phrase.isFinal || freedom < 0.75 || rng.unit() > (freedom * 0.25)) {
+                if (phrase.isFinal || freedom < 0.70 || rng.unit() > (freedom * 0.30)) {
                     here = target;
                 }
             } else if (phrase.isFinal && s === n - 2 && approachRung >= 0 && Math.abs(approachRung - here) <= 3) {
                 here = approachRung;
+            } else if (doMotifSequence && s < previousMotifSteps.length) {
+                const relativeStep = previousMotifSteps[s];
+                here = Math.max(0, Math.min(rungs.length - 1, here + relativeStep));
             } else if (s > 0) {
                 const toward = target > here ? 1 : (target < here ? -1 : 0);
                 const stepsLeft = (n - 1 - s) - (phrase.isFinal ? 1 : 0);
                 const remaining = Math.abs(target - here);
-                const mustMarch = (toward !== 0) && (remaining >= stepsLeft) && (freedom < 0.6 || phrase.isFinal);
+                const mustMarch = (toward !== 0) && (remaining >= stepsLeft) && (freedom < 0.55 || phrase.isFinal);
 
                 let step = 0;
                 if (mustMarch) {
                     step = toward;
                 } else {
-                    const lean = phrase.isFinal ? 0.96 : Math.max(0.42, 0.92 - (freedom * 0.50));
-                    step = (rng.unit() < lean && toward !== 0) ? toward : (rng.unit() < 0.5 ? 1 : -1);
-                    const leapChance = 0.05 + (freedom * 0.32);
-                    if (rng.unit() < leapChance) {
-                        step *= (rng.unit() < (freedom * 0.45) ? 3 : 2);
+                    const roll = rng.unit();
+                    if (roll < 0.22 && !phrase.isFinal) {
+                        step = 0;
+                    } else if (roll < 0.40 && !phrase.isFinal) {
+                        step = (toward !== 0) ? -toward : (rng.unit() < 0.5 ? 1 : -1);
+                    } else {
+                        const lean = phrase.isFinal ? 0.95 : Math.max(0.40, 0.88 - (freedom * 0.45));
+                        step = (rng.unit() < lean && toward !== 0) ? toward : (rng.unit() < 0.5 ? 1 : -1);
+
+                        const leapChance = 0.08 + (freedom * 0.30);
+                        if (rng.unit() < leapChance) {
+                            step *= (rng.unit() < (freedom * 0.40) ? 3 : 2);
+                        }
                     }
                 }
-
+                currentMotifSteps.push(step);
                 here = Math.max(0, Math.min(rungs.length - 1, here + step));
+            } else {
+                currentMotifSteps.push(0);
             }
 
             const pos = slots[s];
             const atBeat = barStart + (pos / 4.0);
             const until = (s + 1 < n) ? (slots[s + 1] / 4.0) : cycleBeats;
-            const lengthBeats = until - (pos / 4.0);
-
+            let lengthBeats = until - (pos / 4.0);
             if (lengthBeats <= 0.0) continue;
+
+            if (!phrase.isFinal && s === n - 1 && lengthBeats > 0.5 && rng.unit() < 0.45) {
+                lengthBeats = Math.max(0.25, lengthBeats - 0.25);
+            }
 
             const restsHere = usul.strong && usul.strong.includes(pos);
             let noteCommas = rungs[here];
@@ -284,11 +332,14 @@ export function generateMakamMelody(options = {}) {
                 commas: noteCommas,
                 startBeat: atBeat,
                 lengthBeats: lengthBeats,
-                velocity: restsHere ? 0.86 : 0.66,
+                velocity: restsHere ? 0.88 : (0.64 + (rng.unit() * 0.08)),
                 locked: false,
-                ornament: ornament
+                ornament: ornament,
+                section: phrase.section
             });
         }
+
+        if (p === 0) previousMotifSteps = currentMotifSteps;
     }
     return out;
 }
