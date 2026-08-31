@@ -810,3 +810,40 @@ input[type="range"]::-moz-range-thumb {
         height: 14px;
     }
 }
+
+/* ============================================================================
+   Review Items (Makam Studio Theme)
+============================================================================ */
+.review-item {
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    line-height: 1.45;
+    margin-bottom: 6px;
+    border: 1px solid transparent;
+}
+.review-danger {
+    background: rgba(255, 71, 87, 0.15);
+    border-color: rgba(255, 71, 87, 0.35);
+    border-left: 4px solid #ff4757;
+    color: #ff6b81;
+}
+.review-warning {
+    background: rgba(255, 193, 7, 0.15);
+    border-color: rgba(255, 193, 7, 0.35);
+    border-left: 4px solid #ffc107;
+    color: #ffd166;
+}
+.review-info {
+    background: rgba(0, 210, 255, 0.12);
+    border-color: rgba(0, 210, 255, 0.3);
+    border-left: 4px solid var(--accent-cyan);
+    color: #70e0ff;
+}
+.review-success {
+    background: rgba(56, 239, 125, 0.12);
+    border-color: rgba(56, 239, 125, 0.3);
+    border-left: 4px solid #38ef7d;
+    color: #38ef7d;
+}
+

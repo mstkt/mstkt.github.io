@@ -498,7 +498,10 @@
     // ============================================================================
     // 5. MAKAM REVIEWER
     // ============================================================================
-    function reviewMakamMelody(melody, makam, durakMidi = 62) {
+    function reviewMakamMelody(melody, makamInput, durakMidi = 62, usulInput = 'sofyan') {
+        const makam = typeof makamInput === 'string' ? findMakam(makamInput) : (makamInput || findMakam('hicaz'));
+        const usul = typeof usulInput === 'string' ? findUsul(usulInput) : (usulInput || findUsul('sofyan'));
+        const cycleBeats = getUsulBeats(usul) || 4;
         const issues = [];
         let score = 100;
 
@@ -506,40 +509,119 @@
             return { score: 100, status: 'Boş', issues: [{ type: 'info', text: 'İncelemek için melodi ekleyin veya üretin.' }] };
         }
 
+        const notes = [...melody].sort((a, b) => a.startBeat - b.startBeat);
         const guclu = makam.guclu || 22;
-        const firstNote = melody[0];
-        const lastNote = melody[melody.length - 1];
+        const rawDegrees = getMakamDegrees(makam);
+        const makamDegrees = rawDegrees.map(d => ((d % 53) + 53) % 53);
 
-        const firstComma = firstNote.commas !== undefined ? firstNote.commas : 0;
+        // 1. MAKAMDAN SAPMA / YABANCI PERDE DENETİMİ (Out-of-Scale Pitch Detection)
+        const outOfScaleNotes = [];
+        for (const n of notes) {
+            let noteComma = n.commas;
+            if (noteComma === undefined) {
+                noteComma = Math.round((n.pitch - durakMidi) * (53 / 12));
+            }
+            const normDegree = ((noteComma % 53) + 53) % 53;
+
+            const isScaleDegree = makamDegrees.some(d => {
+                const diff = Math.abs(d - normDegree);
+                return diff <= 2 || diff >= 51;
+            });
+
+            if (!isScaleDegree) {
+                const measureNum = Math.floor(n.startBeat / cycleBeats) + 1;
+                const pName = getPerdeName(noteComma);
+                outOfScaleNotes.push({ measure: measureNum, perde: pName, pitch: n.pitch, comma: noteComma });
+            }
+        }
+
+        if (outOfScaleNotes.length > 0) {
+            const sample = outOfScaleNotes.slice(0, 3).map(o => `Ölçü ${o.measure}: ${o.perde} (${o.comma}k)`).join(', ');
+            issues.push({
+                type: 'danger',
+                text: `🚨 <strong>Makam Dışı Perde:</strong> ${outOfScaleNotes.length} adet yabancı/uyumsuz nota tespit edildi: [${sample}${outOfScaleNotes.length > 3 ? '...' : ''}]. ${makam.name} dizisinde bu basamak yer almaz.`
+            });
+            score -= Math.min(50, outOfScaleNotes.length * 20);
+        }
+
+        // 2. AŞIRI VE UYUMSUZ MELODİK SIÇRAMALAR (Large & Disjunct Leaps)
+        const leaps = [];
+        for (let i = 1; i < notes.length; ++i) {
+            const prev = notes[i - 1];
+            const curr = notes[i];
+            const semitoneDiff = Math.abs(curr.pitch - prev.pitch);
+            if (semitoneDiff >= 7) {
+                const measureNum = Math.floor(curr.startBeat / cycleBeats) + 1;
+                leaps.push({ measure: measureNum, diff: semitoneDiff, from: prev.pitch, to: curr.pitch });
+            }
+        }
+
+        if (leaps.length > 0) {
+            const leapDesc = leaps.slice(0, 2).map(l => `Ölçü ${l.measure}'de ${l.diff} yarım tonluk atlama`).join(', ');
+            issues.push({
+                type: 'warning',
+                text: `⚠️ <strong>Sert Melodik Sıçrama:</strong> ${leaps.length} adet geniş aralık sıçraması var (${leapDesc}). Türk musikisi nağmeleri basamak basamak (adım adım) yürür.`
+            });
+            score -= Math.min(30, leaps.length * 12);
+        }
+
+        // 3. SEYİR GİRİŞ TAVRI (Seyir Başlangıç Uyumu)
+        const firstNote = notes[0];
+        const firstComma = firstNote.commas !== undefined ? firstNote.commas : Math.round((firstNote.pitch - durakMidi) * (53 / 12));
+
         if (makam.seyir === SEYIR.ASCENDING && firstComma > 18) {
-            issues.push({ type: 'warning', text: `Çıkıcı olan ${makam.name} makamının durak civarından başlaması önerilir (Şu an ${firstComma}k).` });
-            score -= 10;
-        } else if (makam.seyir === SEYIR.FROM_ABOVE && Math.abs(firstComma - guclu) > 10) {
-            issues.push({ type: 'info', text: `İnici-Çıkıcı olan ${makam.name} genellikle Güçlü perdesi (${guclu}k) civarından giriş yapar.` });
+            issues.push({
+                type: 'warning',
+                text: `📌 <strong>Çıkıcı Seyir Kuralı:</strong> ${makam.name} makamına Durak perdesi (Dügâh / Rast) civarından başlanmalıdır (Şu an ${getPerdeName(firstComma)} / ${firstComma}k).`
+            });
+            score -= 15;
+        } else if (makam.seyir === SEYIR.DESCENDING && firstComma < 22) {
+            issues.push({
+                type: 'warning',
+                text: `📌 <strong>İnici Seyir Kuralı:</strong> ${makam.name} makamına Tiz Durak veya Gerdâniye/Muhayyer civarından girilmelidir (Şu an ${getPerdeName(firstComma)} / ${firstComma}k).`
+            });
+            score -= 15;
+        } else if (makam.seyir === SEYIR.FROM_ABOVE && Math.abs(firstComma - guclu) > 12) {
+            issues.push({
+                type: 'info',
+                text: `💡 <strong>İnici-Çıkıcı Seyir:</strong> ${makam.name} genellikle Güçlü perdesi (${getPerdeName(guclu)} / ${guclu}k) civarından sergilenmeye başlar.`
+            });
+            score -= 8;
+        }
+
+        // 4. TAM KARAR BİTİŞİ (Final Tonic Cadence on Durak)
+        const lastNote = notes[notes.length - 1];
+        const lastComma = lastNote.commas !== undefined ? lastNote.commas : Math.round((lastNote.pitch - durakMidi) * (53 / 12));
+        const normalizedLast = ((lastComma % 53) + 53) % 53;
+
+        if (normalizedLast !== 0 && normalizedLast !== 53) {
+            issues.push({
+                type: 'danger',
+                text: `🛑 <strong>Karar Eksikliği:</strong> Eser makamın Durağında (Karar = 0k) sonlanmalıdır. Melodiniz ${getPerdeName(lastComma)} (${lastComma}k) üzerinde asılı kaldı.`
+            });
+            score -= 30;
+        }
+
+        // 5. MEYAN (TİZ BÖLGE) ZİYARETİ
+        const maxComma = Math.max(...notes.map(n => n.commas ?? Math.round((n.pitch - durakMidi) * (53 / 12))));
+        if (notes.length >= 8 && maxComma < guclu) {
+            issues.push({
+                type: 'info',
+                text: `ℹ️ <strong>Meyan Eksik:</strong> Melodi Güçlü perdesinin (${getPerdeName(guclu)}) üzerine çıkmadı; esere meyan zenginliği katmak için tiz perdeleri kullanabilirsiniz.`
+            });
             score -= 5;
         }
 
-        const lastComma = lastNote.commas !== undefined ? lastNote.commas : 0;
-        if (lastComma !== 0) {
-            issues.push({ type: 'danger', text: `Eser makamın Durağında (Karar = 0k) sonlanmalı. Şu an ${lastComma}k üzerinde bitti.` });
-            score -= 25;
-        }
+        score = Math.max(10, Math.min(100, score));
+        let status = 'Mükemmel Seyir';
+        if (score < 50) status = 'Kritik Seyir Hataları Mevcut';
+        else if (score < 75) status = 'Geliştirilmeli / Kural Dışı';
+        else if (score < 90) status = 'İyi Seyir Uyumu';
 
-        let largeLeaps = 0;
-        for (let i = 1; i < melody.length; ++i) {
-            const diff = Math.abs(melody[i].pitch - melody[i - 1].pitch);
-            if (diff >= 7) largeLeaps++;
-        }
-        if (largeLeaps > 2) {
-            issues.push({ type: 'warning', text: `Makam musikisi adım adım yürür; melodinizde ${largeLeaps} adet geniş atlama tespit edildi.` });
-            score -= (largeLeaps * 5);
-        }
-
-        score = Math.max(20, Math.min(100, score));
         return {
             score,
-            status: score >= 85 ? 'Mükemmel Seyir' : (score >= 70 ? 'İyi Uyum' : 'Geliştirilmeli'),
-            issues: issues.length > 0 ? issues : [{ type: 'success', text: 'Melodi makamın seyir kurallarına ve tam kararına tam uyumludur!' }]
+            status,
+            issues: issues.length > 0 ? issues : [{ type: 'success', text: 'Melodi makamın seyir kurallarına, perdelerine ve tam kararına tam uyumludur!' }]
         };
     }
 
@@ -2004,12 +2086,14 @@
                         if (this.onNoteChanged) this.onNoteChanged();
                         if (this.onAuditionDrum) this.onAuditionDrum(pitch);
                     } else if (beat >= 0 && pitch >= this.minMidi && pitch <= this.maxMidi) {
-                        const newNote = { pitch, detuneCents: 0, startBeat: beat, lengthBeats: 0.5, velocity: 0.8, locked: false, ornament: null };
+                        const noteCommas = Math.round((pitch - this.durakMidi) * (53 / 12));
+                        const sounding = place(this.durakMidi, noteCommas);
+                        const newNote = { pitch, detuneCents: sounding.detuneCents, commas: noteCommas, startBeat: beat, lengthBeats: 0.5, velocity: 0.8, locked: false, ornament: null };
                         this.getActiveNotes().push(newNote);
                         this.selectedNotes.add(newNote);
                         this.notifySelection();
                         if (this.onNoteChanged) this.onNoteChanged();
-                        if (this.onAuditionNote) this.onAuditionNote(pitch, 0);
+                        if (this.onAuditionNote) this.onAuditionNote(pitch, sounding.detuneCents);
                     }
                 }
             }
@@ -2080,7 +2164,12 @@
                     if (this.currentLayer === 'drums') {
                         note.pitch = getClosestDrumPitch(this.dragStart.pitch + deltaPitch);
                     } else {
-                        note.pitch = Math.max(this.minMidi, Math.min(this.maxMidi, this.dragStart.pitch + deltaPitch));
+                        const newPitch = Math.max(this.minMidi, Math.min(this.maxMidi, this.dragStart.pitch + deltaPitch));
+                        note.pitch = newPitch;
+                        const noteCommas = Math.round((newPitch - this.durakMidi) * (53 / 12));
+                        const sounding = place(this.durakMidi, noteCommas);
+                        note.commas = noteCommas;
+                        note.detuneCents = sounding.detuneCents;
                     }
                 }
                 this.render();
@@ -2593,17 +2682,18 @@
         }
 
         renderReviewTab(content) {
-            const rev = reviewMakamMelody(this.song.melody, this.makam, this.durakMidi);
+            const rev = reviewMakamMelody(this.song.melody, this.makam, this.durakMidi, this.usul);
+            const badgeColor = rev.score >= 85 ? '#38ef7d' : (rev.score >= 65 ? '#ffc107' : '#ff4757');
 
             const scoreCard = document.createElement('div');
             scoreCard.className = 'panel-section';
             scoreCard.innerHTML = `
                 <div class="makam-title-row">
                     <h3>🧠 Akıllı Seyir Denetçisi</h3>
-                    <span class="badge ${rev.score >= 80 ? 'badge-fit' : 'badge-micro'}">%${rev.score} Uyumluluk</span>
+                    <span class="badge" style="background: ${badgeColor}; color: #000; font-weight: bold; padding: 3px 8px; border-radius: 12px; font-size: 11px;">%${rev.score} Uyumluluk</span>
                 </div>
-                <p class="text-muted">Makamın seyir adımları, meyan zirvesi, atlamalar ve karar inişi otomatik olarak denetlenir.</p>
-                <div class="review-status-bar" style="margin-top: 10px; font-weight: bold; color: ${rev.score >= 80 ? '#38ef7d' : '#ffc107'};">
+                <p class="text-muted">Makamın seyir adımları, yabancı perde tespiti, atlamalar ve karar inişi anlık olarak denetlenir.</p>
+                <div class="review-status-bar" style="margin-top: 10px; font-weight: bold; color: ${badgeColor}; font-size: 13px;">
                     Sonuç: ${rev.status}
                 </div>
             `;
